@@ -15,7 +15,7 @@ export default function Nav() {
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 16 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 16, textDecoration: 'none', color: 'var(--text-1)' }}>
           <div style={{
             width: 30, height: 30, background: 'var(--accent-dim)',
             border: '1px solid var(--accent-border)', borderRadius: 7,
@@ -28,17 +28,9 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="nav-desktop">
-          {[['Features', '/features'], ['Pricing', '/pricing'], ['Contact', '/contact']].map(([label, href]) => (
-            <Link key={href} href={href} style={{
-              fontSize: 14, fontWeight: 500, color: 'var(--text-2)',
-              padding: '6px 14px', borderRadius: 6, transition: 'color 150ms',
-            }}
-              onMouseEnter={e => { e.target.style.color = 'var(--text-1)'; e.target.style.background = 'var(--bg-surface-2)'; }}
-              onMouseLeave={e => { e.target.style.color = 'var(--text-2)'; e.target.style.background = 'transparent'; }}
-            >
-              {label}
-            </Link>
-          ))}
+          <Link href="/features" className="nav-link">Features</Link>
+          <Link href="/pricing" className="nav-link">Pricing</Link>
+          <Link href="/contact" className="nav-link">Contact</Link>
         </div>
 
         {/* CTA */}
@@ -47,8 +39,8 @@ export default function Nav() {
           <Link href="/pricing" className="btn-primary" style={{ padding: '8px 16px', fontSize: 13 }}>Get License</Link>
           <button
             onClick={() => setOpen(!open)}
-            style={{ background: 'none', border: 'none', color: 'var(--text-2)', display: 'none' }}
             className="nav-hamburger"
+            style={{ background: 'none', border: 'none', color: 'var(--text-2)', display: 'none', cursor: 'pointer', padding: 4 }}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -57,20 +49,17 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div style={{
-          borderTop: '1px solid var(--border)', background: 'var(--bg-surface)',
-          padding: '16px 32px 24px',
-        }}>
+        <div style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-surface)', padding: '16px 32px 24px' }}>
           {[['Home', '/'], ['Features', '/features'], ['Pricing', '/pricing'], ['Contact', '/contact']].map(([label, href]) => (
             <Link key={href} href={href} onClick={() => setOpen(false)} style={{
               display: 'block', padding: '12px 0', fontSize: 15, fontWeight: 500,
-              color: 'var(--text-2)', borderBottom: '1px solid var(--border)',
+              color: 'var(--text-2)', borderBottom: '1px solid var(--border)', textDecoration: 'none',
             }}>
               {label}
             </Link>
           ))}
-          <div style={{ marginTop: 20, display: 'flex', gap: 10 }}>
-            <Link href="/pricing" className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}>Get License</Link>
+          <div style={{ marginTop: 20 }}>
+            <Link href="/pricing" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Get License</Link>
           </div>
         </div>
       )}

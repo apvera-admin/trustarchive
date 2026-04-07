@@ -8,7 +8,7 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 40 }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 15, marginBottom: 12 }}>
+            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 15, marginBottom: 12, textDecoration: 'none', color: 'var(--text-1)' }}>
               <div style={{
                 width: 28, height: 28, background: 'var(--accent-dim)',
                 border: '1px solid var(--accent-border)', borderRadius: 6,
@@ -26,34 +26,25 @@ export default function Footer() {
           {/* Product */}
           <div>
             <h4 style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-2)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Product</h4>
-            {[['Features', '/features'], ['Pricing', '/pricing'], ['How It Works', '/#how'], ['Download', '/pricing']].map(([label, href]) => (
-              <Link key={label} href={href} style={{ display: 'block', fontSize: 13, color: 'var(--text-3)', marginBottom: 10, transition: 'color 150ms' }}
-                onMouseEnter={e => e.target.style.color = 'var(--text-1)'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-3)'}
-              >{label}</Link>
-            ))}
+            <Link href="/features" className="footer-link">Features</Link>
+            <Link href="/pricing" className="footer-link">Pricing</Link>
+            <Link href="/#how" className="footer-link">How It Works</Link>
+            <Link href="/pricing" className="footer-link">Download</Link>
           </div>
 
           {/* Legal */}
           <div>
             <h4 style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-2)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Legal</h4>
-            {[['Terms', '/terms'], ['Privacy Policy', '/privacy'], ['License Agreement', '/license']].map(([label, href]) => (
-              <Link key={label} href={href} style={{ display: 'block', fontSize: 13, color: 'var(--text-3)', marginBottom: 10, transition: 'color 150ms' }}
-                onMouseEnter={e => e.target.style.color = 'var(--text-1)'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-3)'}
-              >{label}</Link>
-            ))}
+            <Link href="/terms" className="footer-link">Terms</Link>
+            <Link href="/privacy" className="footer-link">Privacy Policy</Link>
+            <Link href="/license" className="footer-link">License Agreement</Link>
           </div>
 
           {/* Contact */}
           <div>
             <h4 style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-2)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Contact</h4>
-            {[['Contact Form', '/contact'], ['Email Us', '/contact']].map(([label, href]) => (
-              <Link key={label} href={href} style={{ display: 'block', fontSize: 13, color: 'var(--text-3)', marginBottom: 10, transition: 'color 150ms' }}
-                onMouseEnter={e => e.target.style.color = 'var(--text-1)'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-3)'}
-              >{label}</Link>
-            ))}
+            <Link href="/contact" className="footer-link">Contact Form</Link>
+            <Link href="/contact" className="footer-link">Email Us</Link>
           </div>
         </div>
 
