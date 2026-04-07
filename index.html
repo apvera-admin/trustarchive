@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrustArchive — Private Trust Administration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-base:      #09090e;
+    --bg-surface:   #111116;
+    --bg-surface-2: #18181f;
+    --bg-surface-3: #21212a;
+    --border:       rgba(255,255,255,0.07);
+    --border-md:    rgba(255,255,255,0.11);
+    --accent:       #2DD4BF;
+    --accent-hover: #22b8a4;
+    --accent-dim:   rgba(45,212,191,0.12);
+    --accent-border:rgba(45,212,191,0.28);
+    --text-1:       #eeeef2;
+    --text-2:       #8e8ea8;
+    --text-3:       #52526a;
+    --success:      #22c55e;
+    --danger:       #ef4444;
+    --warn:         #f59e0b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-1);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── UTILITIES ─── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .accent { color: var(--accent); }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    color: var(--accent); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .tag svg { width: 12px; height: 12px; }
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-2); margin-bottom: 12px;
+  }
+  .divider { height: 1px; background: var(--border); margin: 0; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #07100f;
+    font-size: 14px; font-weight: 700; border: none;
+    border-radius: 8px; padding: 12px 24px; cursor: pointer;
+    text-decoration: none; transition: background 150ms;
+    white-space: nowrap;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--text-1);
+    font-size: 14px; font-weight: 500;
+    border: 1px solid var(--border-md); border-radius: 8px;
+    padding: 12px 24px; cursor: pointer; text-decoration: none;
+    transition: background 150ms, border-color 150ms;
+    white-space: nowrap;
+  }
+  .btn-secondary:hover { background: var(--bg-surface-2); border-color: rgba(255,255,255,0.18); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    border-bottom: 1px solid var(--border);
+    background: rgba(9,9,14,0.85); backdrop-filter: blur(12px);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; max-width: 1100px; margin: 0 auto; padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 700; color: var(--text-1);
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 30px; height: 30px; background: var(--accent-dim);
+    border: 1px solid var(--accent-border); border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .nav-logo-icon svg { width: 16px; height: 16px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--text-2);
+    text-decoration: none; padding: 6px 14px; border-radius: 6px;
+    transition: color 150ms, background 150ms;
+  }
+  .nav-links a:hover { color: var(--text-1); background: var(--bg-surface-2); }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 140px 0 100px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .hero-badge { margin-bottom: 24px; }
+  .hero h1 {
+    font-size: 46px; font-weight: 800; line-height: 1.1;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 17px; color: var(--text-2); line-height: 1.7;
+    margin-bottom: 36px; max-width: 440px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .hero-trust {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-3); margin-top: 20px;
+  }
+  .hero-trust span { width: 6px; height: 6px; background: var(--success); border-radius: 50%; display: inline-block; }
+
+  /* App mockup */
+  .app-mockup {
+    background: var(--bg-surface); border: 1px solid var(--border-md);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+  }
+  .mockup-bar {
+    background: var(--bg-surface-2); padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-title {
+    font-size: 12px; font-weight: 600; color: var(--text-2);
+    margin-left: 6px;
+  }
+  .mockup-body { display: flex; }
+  .mockup-sidebar {
+    width: 150px; background: var(--bg-surface-2); border-right: 1px solid var(--border);
+    padding: 12px 8px; flex-shrink: 0;
+  }
+  .mockup-nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: 6px;
+    font-size: 11px; color: var(--text-3); margin-bottom: 2px;
+  }
+  .mockup-nav-item.active { background: var(--accent-dim); color: var(--accent); }
+  .mockup-nav-item svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .mockup-content { flex: 1; padding: 16px; }
+  .mockup-section-title { font-size: 14px; font-weight: 700; color: var(--text-1); margin-bottom: 12px; }
+  .mockup-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .mockup-card {
+    background: var(--bg-surface-3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .mockup-card-label { font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+  .mockup-card-value { font-size: 18px; font-weight: 700; color: var(--text-1); margin-top: 2px; }
+  .mockup-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 0; border-bottom: 1px solid var(--border);
+    font-size: 10px; color: var(--text-2);
+  }
+  .mockup-row:last-child { border-bottom: none; }
+  .mockup-status {
+    font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 4px;
+  }
+  .mockup-status.ok { background: rgba(34,197,94,0.12); color: var(--success); }
+  .mockup-status.exported { background: var(--bg-surface-3); color: var(--text-3); }
+  .mockup-encrypt {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; color: var(--accent); margin-top: 12px;
+    padding: 6px 10px; background: var(--accent-dim);
+    border: 1px solid var(--accent-border); border-radius: 6px;
+  }
+  .mockup-encrypt svg { width: 10px; height: 10px; }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .trust-bar-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--text-2);
+  }
+  .trust-item svg { width: 16px; height: 16px; color: var(--accent); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 0; }
+
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-header h2 {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .section-header p { font-size: 16px; color: var(--text-2); max-width: 520px; margin: 0 auto; }
+
+  /* ─── FEATURES GRID ─── */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden;
+  }
+  .feature-card {
+    background: var(--bg-surface); padding: 32px 28px;
+  }
+  .feature-icon {
+    width: 40px; height: 40px; background: var(--accent-dim);
+    border: 1px solid var(--accent-border); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .feature-icon svg { width: 18px; height: 18px; }
+  .feature-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+  /* ─── SPLIT SECTIONS ─── */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .split.reverse { direction: rtl; }
+  .split.reverse > * { direction: ltr; }
+  .split-text h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.15; }
+  .split-text p { font-size: 15px; color: var(--text-2); line-height: 1.7; margin-bottom: 24px; }
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .check-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text-2);
+  }
+  .check-list li svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+  /* Panel for split sections */
+  .info-panel {
+    background: var(--bg-surface); border: 1px solid var(--border-md);
+    border-radius: 14px; padding: 28px; overflow: hidden;
+  }
+  .info-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .info-panel-title { font-size: 13px; font-weight: 700; color: var(--text-1); }
+  .info-panel-badge {
+    font-size: 10px; font-weight: 600; color: var(--accent);
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .audit-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .audit-row:last-child { border-bottom: none; }
+  .audit-icon {
+    width: 28px; height: 28px; background: var(--bg-surface-3);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    color: var(--text-2); flex-shrink: 0;
+  }
+  .audit-icon svg { width: 13px; height: 13px; }
+  .audit-user { font-weight: 600; color: var(--text-1); }
+  .audit-action { color: var(--text-2); flex: 1; }
+  .audit-time { color: var(--text-3); font-size: 11px; white-space: nowrap; }
+  .panel-hash {
+    margin-top: 16px; padding: 10px 12px;
+    background: var(--bg-surface-3); border-radius: 6px;
+    font-size: 10px; font-family: 'Courier New', monospace;
+    color: var(--text-3); word-break: break-all;
+  }
+
+  /* AI panel */
+  .chat-panel {
+    background: var(--bg-surface); border: 1px solid var(--border-md);
+    border-radius: 14px; overflow: hidden;
+  }
+  .chat-header {
+    background: var(--bg-surface-2); padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .chat-header-left { display: flex; align-items: center; gap: 8px; }
+  .chat-header-title { font-size: 12px; font-weight: 600; color: var(--text-1); }
+  .chat-status { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--success); }
+  .chat-status span { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+  .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .chat-msg {
+    max-width: 80%; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5;
+  }
+  .chat-msg.user {
+    background: var(--bg-surface-3); border: 1px solid var(--border);
+    color: var(--text-1); align-self: flex-start; border-radius: 4px 10px 10px 10px;
+  }
+  .chat-msg.ai {
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    color: var(--text-1); align-self: flex-end; border-radius: 10px 4px 10px 10px;
+    font-weight: 500;
+  }
+  .chat-footer {
+    padding: 10px 16px 14px;
+    font-size: 10px; color: var(--text-3); text-align: center;
+  }
+  .chat-footer svg { width: 10px; height: 10px; vertical-align: middle; margin-right: 4px; }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .step {
+    background: var(--bg-surface); padding: 28px 24px;
+    position: relative;
+  }
+  .step-num {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.08em; margin-bottom: 16px;
+  }
+  .step-icon {
+    width: 36px; height: 36px; background: var(--bg-surface-3);
+    border: 1px solid var(--border-md); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-2); margin-bottom: 14px;
+  }
+  .step-icon svg { width: 16px; height: 16px; }
+  .step h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .step p { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+
+  /* ─── NOT FOR EVERYONE ─── */
+  .nfe-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; }
+  .nfe-divider { background: var(--border); }
+  .nfe-col { padding: 0 48px; }
+  .nfe-col:first-child { padding-left: 0; }
+  .nfe-col:last-child { padding-right: 0; }
+  .nfe-col-title { font-size: 13px; font-weight: 700; margin-bottom: 24px; }
+  .nfe-col-title.negative { color: var(--text-2); }
+  .nfe-col-title.positive { color: var(--accent); }
+  .nfe-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-2); margin-bottom: 16px; line-height: 1.5; }
+  .nfe-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+  .nfe-item.negative svg { color: var(--text-3); }
+  .nfe-item.positive svg { color: var(--accent); }
+  .nfe-footer { text-align: center; margin-top: 56px; border-top: 1px solid var(--border); padding-top: 40px; }
+  .nfe-footer p { font-size: 17px; font-weight: 600; color: var(--text-2); }
+  .nfe-footer strong { color: var(--text-1); }
+  .nfe-footer .accent { color: var(--accent); }
+
+  /* ─── PRICING ─── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pricing-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 24px;
+  }
+  .pricing-card.featured {
+    border-color: var(--accent-border); background: var(--bg-surface);
+    position: relative;
+  }
+  .pricing-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #07100f;
+    font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 99px;
+    white-space: nowrap;
+  }
+  .pricing-tier { font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 8px; }
+  .pricing-price { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .pricing-price span { font-size: 14px; font-weight: 500; color: var(--text-2); }
+  .pricing-desc { font-size: 13px; color: var(--text-2); margin-bottom: 24px; line-height: 1.5; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-2); }
+  .pricing-features li svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+  .pricing-cta { display: block; width: 100%; text-align: center; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 150ms; }
+  .pricing-cta.primary { background: var(--accent); color: #07100f; }
+  .pricing-cta.primary:hover { background: var(--accent-hover); }
+  .pricing-cta.secondary { background: transparent; border: 1px solid var(--border-md); color: var(--text-1); }
+  .pricing-cta.secondary:hover { background: var(--bg-surface-2); }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    text-align: center; padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cta-section h2 { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.15; }
+  .cta-section p { font-size: 16px; color: var(--text-2); margin-bottom: 36px; }
+  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .cta-note { font-size: 12px; color: var(--text-3); margin-top: 16px; }
+
+  /* ─── FOOTER ─── */
+  footer { border-top: 1px solid var(--border); padding: 48px 0; }
+  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .footer-brand p { font-size: 13px; color: var(--text-3); margin-top: 12px; line-height: 1.6; max-width: 220px; }
+  .footer-col h4 { font-size: 12px; font-weight: 700; color: var(--text-2); margin-bottom: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .footer-col a { display: block; font-size: 13px; color: var(--text-3); text-decoration: none; margin-bottom: 10px; transition: color 150ms; }
+  .footer-col a:hover { color: var(--text-1); }
+  .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { font-size: 12px; color: var(--text-3); }
+
+  /* ─── SVG ICONS (inline) ─── */
+  .icon { display: inline-flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      TrustArchive
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn-secondary" style="padding: 9px 18px; font-size: 13px;">View Demo</a>
+      <a href="#pricing" class="btn-primary" style="padding: 9px 18px; font-size: 13px;">Get License</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Fully Local · No Cloud
+        </span>
+      </div>
+      <h1>Private Trust Administration.<br><span>Fully Local.</span><br>Permanently Recorded.</h1>
+      <p class="hero-sub">Fiduciary software that runs entirely on your machine. No cloud. No data exposure. Complete control over your trust data, accounting, and audit trail.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Get License
+        </a>
+        <a href="#how" class="btn-secondary">View Demo →</a>
+      </div>
+      <div class="hero-trust">
+        <span></span>
+        No accounts required · No internet connection needed · Instant activation
+      </div>
+    </div>
+
+    <!-- App Mockup -->
+    <div class="hero-right">
+      <div class="app-mockup">
+        <div class="mockup-bar">
+          <div class="mockup-dot" style="background:#ef4444"></div>
+          <div class="mockup-dot" style="background:#f59e0b"></div>
+          <div class="mockup-dot" style="background:#22c55e"></div>
+          <span class="mockup-title">TrustArchive — TMA Legacy Trust</span>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-sidebar">
+            <div class="mockup-nav-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Overview
+            </div>
+            <div class="mockup-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Documents
+            </div>
+            <div class="mockup-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Beneficiaries
+            </div>
+            <div class="mockup-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Assets
+            </div>
+            <div class="mockup-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              Ledger
+            </div>
+            <div class="mockup-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Obligations
+            </div>
+          </div>
+          <div class="mockup-content">
+            <div class="mockup-section-title">Trust Overview</div>
+            <div class="mockup-cards">
+              <div class="mockup-card">
+                <div class="mockup-card-label">Beneficiaries</div>
+                <div class="mockup-card-value">3</div>
+              </div>
+              <div class="mockup-card">
+                <div class="mockup-card-label">Net Trust Value</div>
+                <div class="mockup-card-value" style="font-size:14px;color:#2DD4BF">$2.4M</div>
+              </div>
+            </div>
+            <div class="mockup-row">
+              <span>Annual Accounting Due</span>
+              <span class="mockup-status ok">On Track</span>
+            </div>
+            <div class="mockup-row">
+              <span>Q4 Distribution Report</span>
+              <span class="mockup-status exported">Exported</span>
+            </div>
+            <div class="mockup-row">
+              <span>Trust Agreement Updated</span>
+              <span class="mockup-status ok">Current</span>
+            </div>
+            <div class="mockup-encrypt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Encrypted & Local — No External Calls
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        SQLCipher Encrypted at Rest
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        No Internet Required
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Cryptographic Audit Trail
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Double-Entry Fiduciary Accounting
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Runs on Windows & macOS
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Core System</div>
+      <h2>A Complete Fiduciary System.<br>Not Just Software.</h2>
+      <p>Every module a trustee needs to administer a trust correctly — from document storage to fiduciary accounting — built into one private, offline application.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3>Document Archive</h3>
+        <p>Store, organize, and generate trust documents. Full version history with cryptographic sealing on each file.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Fiduciary Accounting</h3>
+        <p>Full double-entry bookkeeping for trust accounting. Principal and income tracking, journal entries, and financial reports.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Beneficiaries</h3>
+        <p>Manage beneficiary records, distribution history, and per-beneficiary reporting with complete privacy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Rules Engine</h3>
+        <p>Define and enforce trust compliance rules. Automated alerts for distribution caps, deadlines, and accounting obligations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Local AI Assistant</h3>
+        <p>Query your trust data in plain language. Runs entirely on-device — no API calls, no data leaves your machine.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Audit Trail</h3>
+        <p>Every action logged, timestamped, and cryptographically sealed. A defensible record for fiduciary accountability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="split">
+      <div class="split-text">
+        <div class="section-label">AI Assistant</div>
+        <h2>Private AI That Actually Knows Your Data</h2>
+        <p>Unlike cloud-based AI tools, the TrustArchive assistant runs locally and queries your encrypted trust data directly. No API calls. No external processing. No data ever leaves your machine.</p>
+        <ul class="check-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Ask questions in plain language about your trust</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Get instant answers on distributions, balances, and compliance</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Runs on-device — sensitive data never touches a server</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Works fully offline, no internet required</li>
+        </ul>
+      </div>
+      <div class="chat-panel">
+        <div class="chat-header">
+          <div class="chat-header-left">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="chat-header-title">Agent Assistant</span>
+          </div>
+          <div class="chat-status"><span></span> Local AI Active</div>
+        </div>
+        <div class="chat-body">
+          <div class="chat-msg user">"How much has been distributed this year?"</div>
+          <div class="chat-msg ai">$58,240 has been distributed year-to-date across 3 beneficiaries. The largest was $32,000 to the primary income beneficiary in March.</div>
+          <div class="chat-msg user">"Are we compliant with distribution requirements?"</div>
+          <div class="chat-msg ai">Yes. All mandatory distribution rules are currently satisfied. The annual accounting deadline is in 47 days.</div>
+          <div class="chat-msg user">"What is the current cost basis of the Riverside property?"</div>
+          <div class="chat-msg ai">The Riverside property was acquired on 04/12/2019 at a cost basis of $1,240,000. Current estimated value is $1,680,000.</div>
+        </div>
+        <div class="chat-footer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Querying encrypted local database · No external calls
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT TRAIL SECTION -->
+<section style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="split reverse">
+      <div class="split-text">
+        <div class="section-label">Audit Trail</div>
+        <h2>A Defensible Record of Every Action</h2>
+        <p>Every action in TrustArchive is logged, timestamped, and cryptographically sealed. The audit trail is immutable and verifiable — built for trustees who need to demonstrate fiduciary accountability.</p>
+        <ul class="check-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Every user action recorded with timestamp and operator identity</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Cryptographically sealed — entries cannot be altered</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Export to CSV for court or compliance review</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Filter by user, date range, or action type</li>
+        </ul>
+      </div>
+      <div class="info-panel">
+        <div class="info-panel-header">
+          <span class="info-panel-title">Audit Trail Log</span>
+          <span class="info-panel-badge">Cryptographically Sealed</span>
+        </div>
+        <div class="audit-row">
+          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div style="flex:1"><div class="audit-user">John W.</div><div class="audit-action">Updated Beneficiary Record</div></div>
+          <div class="audit-time">2:41 PM</div>
+        </div>
+        <div class="audit-row">
+          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+          <div style="flex:1"><div class="audit-user">John W.</div><div class="audit-action">Edited Trust Agreement — Smith Family Trust</div></div>
+          <div class="audit-time">2:05 PM</div>
+        </div>
+        <div class="audit-row">
+          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/></svg></div>
+          <div style="flex:1"><div class="audit-user">Lisa M.</div><div class="audit-action">Made Distribution to Beneficiary</div></div>
+          <div class="audit-time">12:06 PM</div>
+        </div>
+        <div class="audit-row">
+          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div style="flex:1"><div class="audit-user">Lisa M.</div><div class="audit-action">Accessed Trust Vault · Localized, Encrypted</div></div>
+          <div class="audit-time">11:42 AM</div>
+        </div>
+        <div class="audit-row">
+          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div style="flex:1"><div class="audit-user">John W.</div><div class="audit-action">Set Rule: Annual Accounting Deadline</div></div>
+          <div class="audit-time">Yesterday</div>
+        </div>
+        <div class="panel-hash">SHA-256: 40909f16c8a6a6f4e6aa1e2c12475656731d...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY SECTION -->
+<section style="border-top: 1px solid var(--border); background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Privacy & Security</div>
+      <h2>Your Data Should Not Live in the Cloud</h2>
+      <p>Most "secure" trust software still stores your data on remote servers. Even with SOC 2 compliance and encryption, your information is transmitted over the internet and accessible through third-party infrastructure.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div class="info-panel" style="border-color: rgba(239,68,68,0.2);">
+        <div style="font-size:13px; font-weight:700; color:#ef4444; margin-bottom:20px; display:flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Typical Cloud Trust Software
+        </div>
+        <ul class="check-list">
+          <li style="color:var(--text-2)"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Stored on third-party infrastructure</li>
+          <li style="color:var(--text-2)"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Transmitted over the internet</li>
+          <li style="color:var(--text-2)"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Accessible through APIs and integrations</li>
+          <li style="color:var(--text-2)"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Subscription-dependent access to your own records</li>
+        </ul>
+      </div>
+      <div class="info-panel" style="border-color: var(--accent-border);">
+        <div style="font-size:13px; font-weight:700; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          TrustArchive
+        </div>
+        <ul class="check-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Runs entirely on your local machine</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> No internet connection required after install</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Fully encrypted at rest using SQLCipher</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Your data never leaves your control — ever</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px; font-size:16px; font-weight:600; color:var(--text-2);">
+      This isn't "secure cloud software." <strong style="color:var(--text-1)">This is <span class="accent">true data ownership.</span></strong>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">How It Works</div>
+      <h2>Simple. Self-Contained. Under Your Control.</h2>
+      <p>No accounts. No cloud setup. No external dependencies. TrustArchive runs entirely offline after a one-time install.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <h3>Purchase Your License</h3>
+        <p>Secure your license key and receive immediate download access. No account creation required.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3>Download & Install</h3>
+        <p>Install TrustArchive on Windows or macOS. No setup servers. No cloud configuration. No dependencies.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Activate Locally</h3>
+        <p>Enter your license key. Your system activates instantly — no internet required after this step.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Run Fully Local</h3>
+        <p>Your trust data, accounting, documents, and AI all run securely on your machine. Permanently and privately.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:24px; font-size:13px; color:var(--text-3);">Runs entirely offline after install.</div>
+  </div>
+</section>
+
+<!-- NOT BUILT FOR EVERYONE -->
+<section style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <h2>Not Built for Everyone</h2>
+      <p>TrustArchive is designed for a specific type of trustee. If that's not you, we'd rather you know upfront.</p>
+    </div>
+    <div class="nfe-grid">
+      <div class="nfe-col">
+        <div class="nfe-col-title negative">TrustArchive is not designed for:</div>
+        <div class="nfe-item negative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Firms that require cloud access or real-time remote collaboration
+        </div>
+        <div class="nfe-item negative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Teams dependent on third-party integrations and API syncing
+        </div>
+        <div class="nfe-item negative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Users looking for a lightweight or convenience-first tool
+        </div>
+      </div>
+      <div class="nfe-divider"></div>
+      <div class="nfe-col">
+        <div class="nfe-col-title positive">Built for trustees who prioritize:</div>
+        <div class="nfe-item positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Complete control over sensitive trust and beneficiary data
+        </div>
+        <div class="nfe-item positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Local-first, air-gapped, offline operation
+        </div>
+        <div class="nfe-item positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Accurate, auditable fiduciary recordkeeping
+        </div>
+        <div class="nfe-item positive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Defensible audit trails for fiduciary accountability
+        </div>
+      </div>
+    </div>
+    <div class="nfe-footer">
+      <p>This is not built for convenience. <span class="accent"><strong>It's built for control.</strong></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="border-top: 1px solid var(--border); background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2>Choose Your Level of Access</h2>
+      <p>No subscriptions tied to usage. No hidden fees. No cloud infrastructure costs passed to you.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">Individual</div>
+        <div class="pricing-price">$2,500 <span>/ year</span></div>
+        <div class="pricing-desc">For single trustees managing one or more trusts.</div>
+        <ul class="pricing-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full system access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Local AI assistant</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multi-operator access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Fiduciary accounting & reporting</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Document archive & audit trail</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Runs fully local — no cloud</li>
+        </ul>
+        <a href="#" class="pricing-cta secondary">Get License</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Common</div>
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-price">$5,000 <span>/ year</span></div>
+        <div class="pricing-desc">For attorneys and professionals managing multiple trusts.</div>
+        <ul class="pricing-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Everything in Individual</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multi-trust management</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multi-operator access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Advanced reporting</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
+        </ul>
+        <a href="#" class="pricing-cta primary">Get License</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Perpetual</div>
+        <div class="pricing-price">$20,000</div>
+        <div class="pricing-desc">One-time purchase with full ownership of the software.</div>
+        <ul class="pricing-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Lifetime access to current version</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 1 year of updates & support included</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Optional renewal for continued updates</li>
+        </ul>
+        <a href="#" class="pricing-cta secondary">Contact / Purchase</a>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px; font-size:13px; color:var(--text-3);">
+      No accounts. No cloud. No external dependencies.<br>
+      <em style="color:var(--text-3);">Designed for low-volume, high-trust use.</em>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2>Take Full Control of Your<br>Trust Infrastructure</h2>
+    <p>No cloud. No exposure. No compromises.<br>Your data stays on your machine — permanently and privately.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary" style="padding: 14px 32px; font-size: 15px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Get License
+      </a>
+      <a href="#" class="btn-secondary" style="padding: 14px 32px; font-size: 15px;">Contact Us</a>
+    </div>
+    <div class="cta-note">No accounts required · Instant activation · Your data never leaves your machine</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          TrustArchive
+        </a>
+        <p>Private fiduciary system. Fully local. Permanently recorded.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Download</a>
+        <a href="#">How It Works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">License Agreement</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="#">Email</a>
+        <a href="#">Contact Form</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TrustArchive. All rights reserved.</p>
+      <p style="color:var(--text-3); font-size:11px;">No cloud · No accounts · Your data stays local</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
