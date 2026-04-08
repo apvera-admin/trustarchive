@@ -1,104 +1,14 @@
 import Link from 'next/link';
-import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock } from 'lucide-react';
+import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, AlertCircle } from 'lucide-react';
 
 export const metadata = {
   title: 'Features — TrustArchive',
-  description: 'Every module a trustee needs: document archive, fiduciary accounting, beneficiary management, rules engine, local AI, and cryptographic audit trail.',
+  description: 'Every module a trustee needs: fiduciary accounting, document archive, beneficiary management, rules engine, local AI with RAG, and cryptographic audit trail.',
 };
-
-const features = [
-  {
-    icon: <FileText size={20} />,
-    label: 'Document Archive',
-    title: 'Store, Generate & Seal Trust Documents',
-    desc: 'A secure document vault for every file associated with your trust. Upload existing documents, generate new ones from templates, and every file is cryptographically sealed at rest using SQLCipher encryption.',
-    points: [
-      'Upload and organize trust deeds, amendments, correspondence, and financial statements',
-      'Generate Certifications of Trust, distribution letters, and accounting reports',
-      'Version history with tamper-evident sealing on each document',
-      'Tag and categorize documents for fast retrieval',
-      'Export documents as PDF at any time',
-    ],
-    panel: <DocumentPanel />,
-  },
-  {
-    icon: <BookOpen size={20} />,
-    label: 'Fiduciary Accounting',
-    title: 'Double-Entry Trust Accounting Built for Fiduciaries',
-    desc: 'Not general-purpose bookkeeping — this is purpose-built for trust accounting. Separate principal and income accounts, journal entries, distributions, and financial reports that meet fiduciary standards.',
-    points: [
-      'Full double-entry bookkeeping with trust-specific chart of accounts',
-      'Separate principal and income tracking per trust law requirements',
-      'Record journal entries, distributions, and asset acquisitions',
-      'Generate balance sheets, income statements, and distribution reports',
-      'Import transactions via CSV from bank or brokerage exports',
-    ],
-    panel: <LedgerPanel />,
-    flip: true,
-  },
-  {
-    icon: <Users size={20} />,
-    label: 'Beneficiaries',
-    title: 'Complete Beneficiary Management',
-    desc: 'Maintain detailed records for every beneficiary with full distribution history, contact information, and per-beneficiary reporting — all stored locally and encrypted.',
-    points: [
-      'Track multiple beneficiaries with role designations (income, remainder, contingent)',
-      'Full distribution history per beneficiary with timestamps',
-      'Generate per-beneficiary accounting statements',
-      'Store sensitive beneficiary data (SSN, banking details) with field-level encryption',
-      'Multi-operator access with role-based permissions',
-    ],
-    panel: <BeneficiaryPanel />,
-  },
-  {
-    icon: <CheckSquare size={20} />,
-    label: 'Rules Engine',
-    title: 'Automated Compliance and Obligation Tracking',
-    desc: 'Define the rules your trust must follow and let TrustArchive track and alert you when action is required. Annual accounting deadlines, distribution caps, required notices — all monitored automatically.',
-    points: [
-      'Create compliance rules from built-in templates or from scratch',
-      'Set recurring obligation schedules (annual, quarterly, on-event)',
-      'Alerts and dashboard indicators for upcoming and overdue items',
-      'Distribution cap enforcement with automatic flagging',
-      'Full rule history with enable/disable audit trail',
-    ],
-    panel: <RulesPanel />,
-    flip: true,
-  },
-  {
-    icon: <Bot size={20} />,
-    label: 'Local AI Assistant',
-    title: 'Ask Questions in Plain Language — Privately',
-    desc: 'The Agent Assistant is a local AI that queries your encrypted trust data on-device. No API calls to OpenAI, Anthropic, or anyone else. Your questions and answers never leave your machine.',
-    points: [
-      'Query distributions, balances, documents, and compliance status in plain English',
-      'Runs entirely on your local hardware — no internet required',
-      'No data sent to any external server, ever',
-      'Context-aware: understands your trust structure, beneficiaries, and accounts',
-      'Works offline after initial model download',
-    ],
-    panel: <AIPanel />,
-  },
-  {
-    icon: <Shield size={20} />,
-    label: 'Audit Trail',
-    title: 'Cryptographically Sealed, Immutable Record',
-    desc: 'Every action taken in TrustArchive — every login, document access, transaction, and rule change — is logged, timestamped, and cryptographically sealed. The audit log cannot be altered after the fact.',
-    points: [
-      'Immutable log of every user action with timestamp and operator identity',
-      'Cryptographic hash chain — any tampering is immediately detectable',
-      'Filter by user, date range, or action type',
-      'Export to CSV for court filings, mediations, or beneficiary accounting',
-      'Full-session audit logs including login and lock events',
-    ],
-    panel: <AuditPanel />,
-    flip: true,
-  },
-];
 
 export default function FeaturesPage() {
   return (
-    <>
+    <div>
       {/* Page Hero */}
       <div style={{ paddingTop: 60 }}>
         <div className="page-hero">
@@ -106,31 +16,218 @@ export default function FeaturesPage() {
             <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
               <Shield size={11} /> Complete Feature Set
             </span>
-            <h1>Everything a Trustee Needs.<br /><span className="accent">Nothing You Don't.</span></h1>
+            <h1>Everything a Trustee Needs.<br /><span className="accent">Nothing You Don&apos;t.</span></h1>
             <p>Six integrated modules designed specifically for private trust administration. No bloat, no SaaS features, no cloud dependency.</p>
           </div>
         </div>
       </div>
 
-      {/* Feature Details */}
-      <div className="container">
-        {features.map(({ icon, label, title, desc, points, panel, flip }, i) => (
-          <div key={label} className={`feature-detail${flip ? ' flip' : ''}`}>
-            <div>
-              <div className="feature-detail-label">
-                <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}>{icon}</div>
-                <span>{label}</span>
+      {/* Module overview grid */}
+      <section className="section section-bordered">
+        <div className="container">
+          <div className="features-grid">
+            {[
+              { icon: <FileText size={18} />, title: 'Document Archive', desc: 'Upload, organize, and generate trust documents. Bidirectional entity linking connects documents to assets, beneficiaries, and obligations. Cryptographic sealing on every file.' },
+              { icon: <BookOpen size={18} />, title: 'Fiduciary Accounting', desc: 'Full double-entry bookkeeping with principal and income separation. Bank statement import via CSV, OFX, QFX, and QBO. Auto-allocation rules engine with staging inbox and approval workflow.' },
+              { icon: <Users size={18} />, title: 'Beneficiary Management', desc: 'Complete beneficiary profiles with full distribution history, payment method tracking, and per-beneficiary reporting. Role designations for income, remainder, and contingent beneficiaries.' },
+              { icon: <CheckSquare size={18} />, title: 'Rules Engine', desc: '21 seed templates covering common trust compliance scenarios. Event-condition-action pattern with approval workflows, recurring obligation schedules, and overdue alerts.' },
+              { icon: <Bot size={18} />, title: 'Local AI Assistant', desc: 'Ollama-powered inference running entirely on your device. 12 read-only tools that query your ledger, assets, beneficiaries, and obligations. Document Intelligence via RAG searches across uploaded trust documents.' },
+              { icon: <Shield size={18} />, title: 'Audit Trail', desc: 'Every action logged, timestamped, and cryptographically sealed in an immutable hash chain. Export to CSV for court filings, mediations, or beneficiary accounting.' },
+            ].map(({ icon, title, desc }) => (
+              <div key={title} className="feature-card">
+                <div className="feature-icon">{icon}</div>
+                <h3>{title}</h3>
+                <p>{desc}</p>
               </div>
-              <h2>{title}</h2>
-              <p>{desc}</p>
-              <ul className="check-list">
-                {points.map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
-              </ul>
-            </div>
-            <div>{panel}</div>
+            ))}
           </div>
-        ))}
+        </div>
+      </section>
+
+      {/* Fiduciary Accounting deep-dive */}
+      <div className="container">
+        <div className="feature-detail">
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><BookOpen size={18} /></div>
+              <span>Fiduciary Accounting</span>
+            </div>
+            <h2>Trust Accounting Built for Fiduciaries, Not Adapted from General Bookkeeping</h2>
+            <p>Most accounting software treats trust accounting as a footnote. TrustArchive is built from the ground up around principal and income separation, fiduciary-standard chart of accounts, and reports that a court or co-trustee can actually read.</p>
+            <ul className="check-list">
+              {[
+                'Separate principal and income pools with dual-balance tracking',
+                'Bank statement import: CSV, OFX, QFX, QBO with auto-allocation rules',
+                'Staging inbox: review, allocate, and approve imported transactions before posting',
+                'Entity interest tracking with basis ledger — LLC, LP, corporation ownership',
+                'Precious metals, cryptocurrency, and pegged currency asset types',
+                'Distribution approval workflow for co-trustee or attorney sign-off',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><LedgerPanel /></div>
+        </div>
+
+        {/* Multi-trust deep-dive */}
+        <div className="feature-detail flip">
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><Briefcase size={18} /></div>
+              <span>Multi-Trust &amp; Operator Profiles</span>
+            </div>
+            <h2>One Application. Multiple Trusts. Role-Based Access for Every Operator.</h2>
+            <p>TrustArchive supports managing a full portfolio of trusts from a single encrypted database. Each trust is fully isolated. Each operator sees only what their role permits.</p>
+            <ul className="check-list">
+              {[
+                'Trust switcher and portfolio dashboard across all trusts',
+                'Operator roles: trustee, co-trustee, grantor, attorney, beneficiary',
+                'Per-trust permission flags: read, write, export, manage users',
+                'All data scoped by trust — no cross-contamination between trust files',
+                'PIN-based operator authentication after master password unlock',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><MultiTrustPanel /></div>
+        </div>
+
+        {/* Rules Engine deep-dive */}
+        <div className="feature-detail">
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><CheckSquare size={18} /></div>
+              <span>Rules Engine</span>
+            </div>
+            <h2>Codify Your Trust Instrument Into Enforceable Rules</h2>
+            <p>The Rules Engine lets trustees translate trust instrument provisions into active compliance logic. Set distribution caps, recurring accounting deadlines, required beneficiary notices, and approval gates — then let TrustArchive track them.</p>
+            <ul className="check-list">
+              {[
+                '21 seed templates covering the most common trust compliance scenarios',
+                'Event-condition-action pattern: define what triggers a rule and what happens',
+                'Approval workflows: require co-trustee or attorney sign-off before actions post',
+                'Recurring obligation schedules: annual, quarterly, monthly, or on-event',
+                'Full rule history with enable/disable audit trail',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><RulesPanel /></div>
+        </div>
+
+        {/* AI Assistant deep-dive */}
+        <div className="feature-detail flip">
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><Bot size={18} /></div>
+              <span>Local AI Assistant</span>
+            </div>
+            <h2>Private AI That Queries Your Encrypted Data — On Device, Offline</h2>
+            <p>The Agent Assistant runs entirely on your local hardware using Ollama. No API calls to OpenAI, Anthropic, or any external server. Document Intelligence adds RAG search across your uploaded trust documents using local embeddings.</p>
+            <ul className="check-list">
+              {[
+                'Ollama-powered inference — default model Qwen 2.5 7B, runs on standard hardware',
+                '12 read-only tools: query ledger balances, distributions, assets, obligations, beneficiaries',
+                'Document Intelligence: semantic search across uploaded trust documents via local embeddings',
+                'Three-layer memory: conversation history, trust context, and cross-session recall',
+                'Works completely offline after initial model download',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><AIPanel /></div>
+        </div>
+
+        {/* Document Archive deep-dive */}
+        <div className="feature-detail">
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><FileText size={18} /></div>
+              <span>Document Archive &amp; Generation</span>
+            </div>
+            <h2>Store, Generate, and Seal Every Trust Document</h2>
+            <p>A centralized document vault with bidirectional links to every entity in your trust. Generate formal documents from 20 built-in templates, export to PDF or DOCX, and every file is cryptographically sealed at rest.</p>
+            <ul className="check-list">
+              {[
+                'Upload and organize trust deeds, amendments, correspondence, and financial statements',
+                '20 seed templates: certifications of trust, distribution letters, accounting reports, and more',
+                'Bidirectional entity linking — connect documents to assets, beneficiaries, and obligations',
+                'Folder hierarchy plus tags for flexible organization',
+                'PDF and DOCX export for any generated document',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><DocumentPanel /></div>
+        </div>
+
+        {/* Audit Trail deep-dive */}
+        <div className="feature-detail flip" style={{ borderBottom: 'none' }}>
+          <div>
+            <div className="feature-detail-label">
+              <div className="feature-icon" style={{ width: 32, height: 32, borderRadius: 8 }}><Shield size={18} /></div>
+              <span>Audit Trail</span>
+            </div>
+            <h2>Cryptographically Sealed, Immutable Record</h2>
+            <p>Every action taken in TrustArchive — every login, document access, transaction, and rule change — is logged, timestamped, and cryptographically sealed. The audit log cannot be altered after the fact.</p>
+            <ul className="check-list">
+              {[
+                'Immutable log of every user action with timestamp and operator identity',
+                'Cryptographic hash chain — any tampering is immediately detectable',
+                'Filter by user, date range, or action type',
+                'Export to CSV for court filings, mediations, or beneficiary accounting',
+                'Full-session audit logs including login and lock events',
+              ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
+            </ul>
+          </div>
+          <div><AuditPanel /></div>
+        </div>
       </div>
+
+      {/* Roadmap callout */}
+      <section className="section section-bordered section-alt">
+        <div className="container">
+          <div className="section-header">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 16 }}>
+              <AlertCircle size={18} color="var(--warn)" />
+              <span className="section-label" style={{ marginBottom: 0 }}>Active Roadmap</span>
+            </div>
+            <h2>More Coming. No Extra Charge.</h2>
+            <p>Every roadmap feature ships to your plan tier at no additional cost. No surprise upsells, no feature unlocks to purchase.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, maxWidth: 800, margin: '0 auto' }}>
+            <ul className="check-list">
+              {[
+                'ACTEC Formal Account report',
+                'Tax prep summary for K-1 prep',
+                'Distribution approval workflow',
+                'Lot-level securities tracking',
+                'PDF bank statement OCR',
+                'Administration task management',
+              ].map(item => (
+                <li key={item} style={{ color: 'var(--text-2)' }}>
+                  <Check size={14} style={{ color: 'var(--warn)', flexShrink: 0, marginTop: 2 }} /> {item}
+                </li>
+              ))}
+            </ul>
+            <ul className="check-list">
+              {[
+                'State court accounting formats (CA, NY, TX, NV)',
+                'eSignature integration (opt-in)',
+                'Consolidated cross-trust reporting (Family Office)',
+                'Investment performance TWR / IRR (Family Office)',
+                'Property management module',
+                'Alternative asset tracking',
+              ].map(item => (
+                <li key={item} style={{ color: 'var(--text-2)' }}>
+                  <Check size={14} style={{ color: 'var(--warn)', flexShrink: 0, marginTop: 2 }} /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p style={{ fontSize: 13, color: 'var(--text-3)', textAlign: 'center', marginTop: 32 }}>
+            Roadmap features are included in your plan tier when they ship. Family Office features are exclusive to the Family Office plan.<br />
+            <Link href="/pricing" style={{ color: 'var(--accent)' }}>See which features are on which plan →</Link>
+          </p>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="cta-section">
@@ -138,12 +235,12 @@ export default function FeaturesPage() {
           <h2>Ready to Take Control<br />of Your Trust?</h2>
           <p>No cloud. No accounts. No compromises.</p>
           <div className="cta-actions">
-            <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> Get License</Link>
+            <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> View Plans &amp; Pricing</Link>
             <Link href="/contact" className="btn-secondary lg">Ask a Question</Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -180,9 +277,9 @@ function LedgerPanel() {
         <span style={{ fontSize: 11, color: 'var(--text-2)' }}>Double-entry</span>
       </div>
       {[
-        { account: 'Principal Balance', value: '$2,180,000', trend: '+' },
-        { account: 'Income Balance', value: '$58,240', trend: '+' },
-        { account: 'Net Trust Value', value: '$2,238,240', trend: '+' },
+        { account: 'Principal Balance', value: '$2,180,000' },
+        { account: 'Income Balance', value: '$58,240' },
+        { account: 'Net Trust Value', value: '$2,238,240' },
       ].map(({ account, value }) => (
         <div key={account} className="audit-row">
           <div className="audit-content">
@@ -208,27 +305,31 @@ function LedgerPanel() {
   );
 }
 
-function BeneficiaryPanel() {
+function MultiTrustPanel() {
   return (
     <div className="feature-panel">
       <div className="feature-panel-header">
-        <span className="feature-panel-title">Beneficiaries</span>
-        <span style={{ fontSize: 11, color: 'var(--text-2)' }}>3 registered</span>
+        <span className="feature-panel-title">Trust Portfolio</span>
+        <span style={{ fontSize: 11, color: 'var(--text-2)' }}>3 trusts</span>
       </div>
       {[
-        { name: 'Margaret T.', role: 'Primary Income Beneficiary', dist: '$32,000 YTD' },
-        { name: 'Robert T.', role: 'Remainder Beneficiary', dist: '$18,240 YTD' },
-        { name: 'Sarah T.', role: 'Contingent Beneficiary', dist: '$8,000 YTD' },
-      ].map(({ name, role, dist }) => (
+        { name: 'TMA Legacy Trust', type: 'Irrevocable', role: 'Trustee' },
+        { name: 'Henderson Family Trust', type: 'Revocable', role: 'Co-Trustee' },
+        { name: 'Riverside Land Trust', type: 'Land Trust', role: 'Trustee' },
+      ].map(({ name, type, role }) => (
         <div key={name} className="audit-row">
-          <div className="audit-icon"><Users size={12} /></div>
+          <div className="audit-icon"><Briefcase size={12} /></div>
           <div className="audit-content">
             <div className="audit-user" style={{ fontSize: 12 }}>{name}</div>
-            <div className="audit-action" style={{ fontSize: 11 }}>{role}</div>
+            <div className="audit-action" style={{ fontSize: 11 }}>{type}</div>
           </div>
-          <div style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 600 }}>{dist}</div>
+          <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--accent)', background: 'var(--accent-dim)', padding: '2px 8px', borderRadius: 4, whiteSpace: 'nowrap' }}>{role}</span>
         </div>
       ))}
+      <div style={{ marginTop: 12, padding: '8px 12px', background: 'var(--bg-surface-3)', borderRadius: 6, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', flexShrink: 0 }} />
+        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>Lisa M. · Attorney · Read + Export access</span>
+      </div>
     </div>
   );
 }
@@ -237,7 +338,7 @@ function RulesPanel() {
   return (
     <div className="feature-panel">
       <div className="feature-panel-header">
-        <span className="feature-panel-title">Obligations & Rules</span>
+        <span className="feature-panel-title">Obligations &amp; Rules</span>
         <span style={{ fontSize: 10, color: 'var(--success)', background: 'rgba(34,197,94,0.12)', padding: '2px 8px', borderRadius: 4 }}>All on track</span>
       </div>
       {[
@@ -267,12 +368,12 @@ function AIPanel() {
         <div className="chat-status"><span className="chat-status-dot" />Local AI Active</div>
       </div>
       <div className="chat-body">
-        <div className="chat-msg user">"What's the total income earned this year?"</div>
-        <div className="chat-msg ai">Total income earned year-to-date is $86,400, consisting of $62,000 in dividends, $18,400 in interest, and $6,000 in rental income from the Riverside property.</div>
-        <div className="chat-msg user">"When is the next required distribution?"</div>
-        <div className="chat-msg ai">The next mandatory income distribution is due by June 30. Based on current income balance, the minimum required distribution is $12,800.</div>
+        <div className="chat-msg user">&quot;What&apos;s the total income earned this year?&quot;</div>
+        <div className="chat-msg ai">Total income earned year-to-date is $86,400 — $62,000 in dividends, $18,400 in interest, and $6,000 in rental income from the Riverside property.</div>
+        <div className="chat-msg user">&quot;Find the trust deed in my documents&quot;</div>
+        <div className="chat-msg ai">Found it — TMA Legacy Trust Deed, uploaded March 19, 2026. It&apos;s also linked to the Henderson Family Trust asset record.</div>
       </div>
-      <div className="chat-footer"><Lock size={10} />No external calls · Fully local</div>
+      <div className="chat-footer"><Lock size={10} />No external calls · Fully local · RAG search active</div>
     </div>
   );
 }
