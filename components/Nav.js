@@ -30,6 +30,7 @@ export default function Nav() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="nav-desktop">
           <Link href="/features" className="nav-link">Features</Link>
           <Link href="/pricing" className="nav-link">Pricing</Link>
+          <Link href="/use-cases" className="nav-link">Use Cases</Link>
           <Link href="/security" className="nav-link">Security</Link>
         </div>
 
