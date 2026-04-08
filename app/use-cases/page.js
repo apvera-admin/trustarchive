@@ -148,7 +148,7 @@ export default function UseCasesPage() {
                 }}
               >
                 {tag}
-              </link>
+              </Link>
             ))}
           </div>
         </div>
