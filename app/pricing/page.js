@@ -230,7 +230,7 @@ export default function PricingPage() {
 
       {/* Pricing cards */}
       <section className="section">
-        <div className="container">
+        <div className="pricing-wide">
           <div className="pricing-grid-5">
             {plans.map(({ tier, price, period, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
