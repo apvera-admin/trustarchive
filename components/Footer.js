@@ -30,6 +30,7 @@ export default function Footer() {
             <Link href="/use-cases" className="footer-link">Use Cases</Link>
             <Link href="/pricing" className="footer-link">Pricing</Link>
             <Link href="/security" className="footer-link">Security</Link>
+            <Link href="/blog" className="footer-link">Blog</Link>
             <Link href="/#how" className="footer-link">How It Works</Link>
             <Link href="/pricing" className="footer-link">Download</Link>
           </div>
