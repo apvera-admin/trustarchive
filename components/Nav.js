@@ -31,6 +31,7 @@ export default function Nav() {
           <Link href="/features" className="nav-link">Features</Link>
           <Link href="/pricing" className="nav-link">Pricing</Link>
           <Link href="/use-cases" className="nav-link">Use Cases</Link>
+          <Link href="/blog" className="nav-link">Blog</Link>
           <Link href="/security" className="nav-link">Security</Link>
         </div>
 
