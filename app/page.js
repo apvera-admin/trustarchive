@@ -336,7 +336,7 @@ export default function HomePage() {
 
       {/* ── PRICING PREVIEW ── */}
       <section className="section section-bordered section-alt">
-        <div className="container">
+        <div className="pricing-wide">
           <div className="section-header">
             <span className="section-label">Pricing</span>
             <h2>Five Tiers. One Application.</h2>
