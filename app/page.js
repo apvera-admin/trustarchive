@@ -6,8 +6,16 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
+  const pricingTiers = [
+    { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Solo', price: '$1,500', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Professional', price: '$2,500', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', gold: false, featured: true, badge: 'Most Popular' },
+    { tier: 'Practice', price: '$4,900', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Family Office', price: '$9,600', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true, featured: false, badge: null },
+  ];
+
   return (
-    <>
+    <div>
       {/* ── HERO ── */}
       <section style={{ paddingTop: 60 }}>
         <div className="container">
@@ -39,7 +47,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* App Mockup */}
             <div className="app-mockup">
               <div className="mockup-bar">
                 <span className="mockup-dot" style={{ background: '#ef4444' }} />
@@ -173,12 +180,10 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="chat-body">
-                <div className="chat-msg user">"How much has been distributed this year?"</div>
+                <div className="chat-msg user">&quot;How much has been distributed this year?&quot;</div>
                 <div className="chat-msg ai">$58,240 has been distributed year-to-date across 3 beneficiaries. The largest was $32,000 to the primary income beneficiary in March.</div>
-                <div className="chat-msg user">"Are we compliant with distribution requirements?"</div>
+                <div className="chat-msg user">&quot;Are we compliant with distribution requirements?&quot;</div>
                 <div className="chat-msg ai">Yes. All mandatory distribution rules are currently satisfied. The annual accounting deadline is in 47 days.</div>
-                <div className="chat-msg user">"What is the current cost basis of the Riverside property?"</div>
-                <div className="chat-msg ai">Acquired 04/12/2019 at a cost basis of $1,240,000. Current estimated value is $1,680,000.</div>
               </div>
               <div className="chat-footer">
                 <Lock size={10} /> Querying encrypted local database · No external calls
@@ -214,7 +219,7 @@ export default function HomePage() {
               </div>
               {[
                 { icon: <Users size={13} />, user: 'John W.', action: 'Updated Beneficiary Record', time: '2:41 PM' },
-                { icon: <FileText size={13} />, user: 'John W.', action: 'Edited Trust Agreement — Smith Family Trust', time: '2:05 PM' },
+                { icon: <FileText size={13} />, user: 'John W.', action: 'Edited Trust Agreement', time: '2:05 PM' },
                 { icon: <BookOpen size={13} />, user: 'Lisa M.', action: 'Made Distribution to Beneficiary', time: '12:06 PM' },
                 { icon: <Lock size={13} />, user: 'Lisa M.', action: 'Accessed Trust Vault · Encrypted', time: '11:42 AM' },
                 { icon: <CheckSquare size={13} />, user: 'John W.', action: 'Set Rule: Annual Accounting Deadline', time: 'Yesterday' },
@@ -240,7 +245,7 @@ export default function HomePage() {
           <div className="section-header">
             <span className="section-label">Privacy &amp; Security</span>
             <h2>Your Data Should Not Live in the Cloud</h2>
-            <p>Most "secure" trust software still stores your data on remote servers. Even with SOC 2 compliance, your information is transmitted over the internet and accessible through third-party infrastructure.</p>
+            <p>Most &quot;secure&quot; trust software still stores your data on remote servers. Even with SOC 2 compliance, your information is transmitted over the internet and accessible through third-party infrastructure.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
             <div className="info-panel" style={{ borderColor: 'rgba(239,68,68,0.2)' }}>
@@ -248,12 +253,7 @@ export default function HomePage() {
                 <X size={14} /> Typical Cloud Trust Software
               </div>
               <ul className="check-list">
-                {[
-                  'Stored on third-party infrastructure',
-                  'Transmitted over the internet',
-                  'Accessible through APIs and integrations',
-                  'Subscription-dependent access to your own records',
-                ].map(item => (
+                {['Stored on third-party infrastructure', 'Transmitted over the internet', 'Accessible through APIs and integrations', 'Subscription-dependent access to your own records'].map(item => (
                   <li key={item}><X size={15} style={{ color: 'var(--danger)' }} /> {item}</li>
                 ))}
               </ul>
@@ -263,19 +263,14 @@ export default function HomePage() {
                 <Shield size={14} /> TrustArchive
               </div>
               <ul className="check-list">
-                {[
-                  'Runs entirely on your local machine',
-                  'No internet connection required after install',
-                  'Fully encrypted at rest using SQLCipher',
-                  'Your data never leaves your control — ever',
-                ].map(item => (
+                {['Runs entirely on your local machine', 'No internet connection required after install', 'Fully encrypted at rest using SQLCipher', 'Your data never leaves your control — ever'].map(item => (
                   <li key={item}><Check size={15} /> {item}</li>
                 ))}
               </ul>
             </div>
           </div>
           <p className="text-center mt-8" style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-2)' }}>
-            This isn't "secure cloud software." <strong style={{ color: 'var(--text-1)' }}>This is <span className="accent">true data ownership.</span></strong>
+            This isn&apos;t &quot;secure cloud software.&quot; <strong style={{ color: 'var(--text-1)' }}>This is <span className="accent">true data ownership.</span></strong>
           </p>
         </div>
       </section>
@@ -303,7 +298,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <p className="small-note">Runs entirely offline after install · Windows & macOS · No accounts required</p>
+          <p className="small-note">Runs entirely offline after install · Windows &amp; macOS · No accounts required</p>
         </div>
       </section>
 
@@ -312,16 +307,12 @@ export default function HomePage() {
         <div className="container">
           <div className="section-header">
             <h2>Not Built for Everyone</h2>
-            <p>TrustArchive is designed for a specific type of trustee. If that's not you, we'd rather you know upfront.</p>
+            <p>TrustArchive is designed for a specific type of trustee. If that&apos;s not you, we&apos;d rather you know upfront.</p>
           </div>
           <div className="compare-grid">
             <div className="compare-col">
               <div className="compare-col-title" style={{ color: 'var(--text-2)' }}>TrustArchive is not designed for:</div>
-              {[
-                'Firms that require cloud access or real-time remote collaboration',
-                'Teams dependent on third-party integrations and API syncing',
-                'Users looking for a lightweight or convenience-first tool',
-              ].map(item => (
+              {['Firms that require cloud access or real-time remote collaboration', 'Teams dependent on third-party integrations and API syncing', 'Users looking for a lightweight or convenience-first tool'].map(item => (
                 <div key={item} className="compare-item negative">
                   <X size={15} style={{ color: 'var(--text-3)' }} /> {item}
                 </div>
@@ -330,12 +321,7 @@ export default function HomePage() {
             <div className="compare-divider" />
             <div className="compare-col">
               <div className="compare-col-title" style={{ color: 'var(--accent)' }}>Built for trustees who prioritize:</div>
-              {[
-                'Complete control over sensitive trust and beneficiary data',
-                'Local-first, air-gapped, offline operation',
-                'Accurate, auditable fiduciary recordkeeping',
-                'Defensible audit trails for fiduciary accountability',
-              ].map(item => (
+              {['Complete control over sensitive trust and beneficiary data', 'Local-first, air-gapped, offline operation', 'Accurate, auditable fiduciary recordkeeping', 'Defensible audit trails for fiduciary accountability'].map(item => (
                 <div key={item} className="compare-item positive">
                   <Check size={15} style={{ color: 'var(--accent)' }} /> {item}
                 </div>
@@ -343,7 +329,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="nfe-footer">
-            <p>This is not built for convenience. <span className="accent"><strong>It's built for control.</strong></span></p>
+            <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
           </div>
         </div>
       </section>
@@ -353,68 +339,22 @@ export default function HomePage() {
         <div className="container">
           <div className="section-header">
             <span className="section-label">Pricing</span>
-            <h2>Simple, Transparent Licensing</h2>
-            <p>No subscriptions tied to usage. No hidden fees. No cloud infrastructure costs passed to you.</p>
-          </div>
-          <div className="pricing-grid">
-            <PricingCard
-              tier="Individual"
-              price="$2,500"
-              period="/ year"
-              desc="For single trustees managing one or more trusts."
-              features={['Full system access', 'Local AI assistant', 'Multi-operator access', 'Fiduciary accounting & reporting', 'Document archive & audit trail', 'Runs fully local — no cloud']}
-              ctaLabel="Get License"
-              ctaClass="secondary"
-            />
-            <PricingCard
-              tier="Professional"
-              price="$5,000"
-              period="/ year"
-              desc="For attorneys and professionals managing multiple trusts."
-              features={['Everything in Individual', 'Multi-trust management', 'Multi-operator access', 'Advanced reporting', 'Priority support']}
-              ctaLabel="Get License"
-              ctaClass="primary"
-              featured
-              badge="Most Common"
-            />
-            <PricingCard
-              tier="Perpetual"
-              price="$20,000"
-              period=""
-              desc="One-time purchase with full ownership of the software."
-              features={['Lifetime access to current version', '1 year of updates & support included', 'Optional renewal for continued updates']}
-              ctaLabel="Contact / Purchase"
-              ctaClass="secondary"
-            />
-          </div>
-          <p className="small-note">No accounts. No cloud. No external dependencies.<br /><em>Designed for low-volume, high-trust use.</em></p>
-        </div>
-      </section>
-{/* ── PRICING PREVIEW ── */}
-      <section className="section section-bordered section-alt">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">Pricing</span>
             <h2>Five Tiers. One Application.</h2>
             <p>From individual trustees to family offices. 30-day free trial on every plan.</p>
           </div>
           <div className="pricing-grid-5">
-            {[
-              { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary' },
-              { tier: 'Solo', price: '$1,500', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary' },
-              { tier: 'Professional', price: '$2,500', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', featured: true, badge: 'Most Popular' },
-              { tier: 'Practice', price: '$4,900', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary' },
-              { tier: 'Family Office', price: '$9,600', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true },
-            ].map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
-              <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
+            {pricingTiers.map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
+              <div key={tier} className={'pricing-card' + (featured ? ' featured' : '') + (gold ? ' pricing-card-fo' : '')}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
                 <div className="pricing-price">{price}<span> / yr</span></div>
                 <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 12 }}>{limit}</div>
                 <ul className="pricing-features">
-                  {points.map(p => <li key={p}><Check size={13} /> {p}</li>)}
+                  {points.map(p => (
+                    <li key={p}><Check size={13} /> {p}</li>
+                  ))}
                 </ul>
-                <Link href="/pricing" className={`pricing-cta ${ctaClass}`}>See plan details</Link>
+                <Link href="/pricing" className={'pricing-cta ' + ctaClass}>See plan details</Link>
               </div>
             ))}
           </div>
@@ -423,6 +363,7 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
       {/* ── CTA ── */}
       <section className="cta-section">
         <div className="container">
@@ -435,6 +376,6 @@ export default function HomePage() {
           <p className="cta-note">No accounts required · Instant activation · Your data never leaves your machine</p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
