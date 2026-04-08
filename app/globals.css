@@ -282,3 +282,36 @@ img { max-width: 100%; }
 .footer-link:hover { color: var(--text-1); }
 .nav-link { font-size: 14px; font-weight: 500; color: var(--text-2); padding: 6px 14px; border-radius: 6px; transition: color 150ms, background 150ms; text-decoration: none; }
 .nav-link:hover { color: var(--text-1); background: var(--bg-surface-2); }
+{/* ── PRICING PREVIEW ── */}
+      <section className="section section-bordered section-alt">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">Pricing</span>
+            <h2>Five Tiers. One Application.</h2>
+            <p>From individual trustees to family offices. 30-day free trial on every plan.</p>
+          </div>
+          <div className="pricing-grid-5">
+            {[
+              { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary' },
+              { tier: 'Solo', price: '$1,500', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary' },
+              { tier: 'Professional', price: '$2,500', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', featured: true, badge: 'Most Popular' },
+              { tier: 'Practice', price: '$4,900', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary' },
+              { tier: 'Family Office', price: '$9,600', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true },
+            ].map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
+              <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
+                {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
+                <div className="pricing-tier">{tier}</div>
+                <div className="pricing-price">{price}<span> / yr</span></div>
+                <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 12 }}>{limit}</div>
+                <ul className="pricing-features">
+                  {points.map(p => <li key={p}><Check size={13} /> {p}</li>)}
+                </ul>
+                <Link href="/pricing" className={`pricing-cta ${ctaClass}`}>See plan details</Link>
+              </div>
+            ))}
+          </div>
+          <p className="small-note" style={{ marginTop: 20 }}>
+            30-day free trial on all plans · Annual billing · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
+          </p>
+        </div>
+      </section>
