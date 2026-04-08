@@ -132,7 +132,7 @@ export default function UseCasesPage() {
         <div className="container">
           <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
             {personas.map(({ slug, tag }) => (
-              
+              <Link
                 key={slug}
                 href={'#' + slug}
                 style={{
@@ -148,7 +148,7 @@ export default function UseCasesPage() {
                 }}
               >
                 {tag}
-              </a>
+              </link>
             ))}
           </div>
         </div>
