@@ -89,7 +89,7 @@ export default function ContactPage() {
                 <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: 36 }}>
                   <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 28 }}>Send us a message</h3>
                   <form onSubmit={handleSubmit}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                    <div className="form-row-2">
                       <div className="form-group">
                         <label className="form-label">Name</label>
                         <input

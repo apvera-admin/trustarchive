@@ -191,7 +191,7 @@ export default function FeaturesPage() {
             <p>Every roadmap feature ships to your plan tier at no additional cost. No surprise upsells, no feature unlocks to purchase.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, maxWidth: 800, margin: '0 auto' }}>
+          <div className="roadmap-cols">
             <ul className="check-list">
               {[
                 'ACTEC Formal Account report',

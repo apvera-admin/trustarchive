@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer style={{ borderTop: '1px solid var(--border)', padding: '48px 0 32px' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 40 }}>
+        <div className="footer-grid">
           {/* Brand */}
           <div>
             <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 15, marginBottom: 12, textDecoration: 'none', color: 'var(--text-1)' }}>
@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="footer-bottom">
           <p style={{ fontSize: 12, color: 'var(--text-3)' }}>© 2026 TrustArchive. All rights reserved.</p>
           <p style={{ fontSize: 11, color: 'var(--text-3)' }}>No cloud · No accounts · Your data stays local</p>
         </div>

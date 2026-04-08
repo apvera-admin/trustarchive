@@ -247,7 +247,7 @@ export default function HomePage() {
             <h2>Your Data Should Not Live in the Cloud</h2>
             <p>Most &quot;secure&quot; trust software still stores your data on remote servers. Even with SOC 2 compliance, your information is transmitted over the internet and accessible through third-party infrastructure.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+          <div className="privacy-compare">
             <div className="info-panel" style={{ borderColor: 'rgba(239,68,68,0.2)' }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--danger)', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <X size={14} /> Typical Cloud Trust Software
