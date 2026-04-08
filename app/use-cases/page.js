@@ -127,7 +127,7 @@ export default function UseCasesPage() {
             {personas.map(({ tag, planHref }, i) => (
               
                 key={tag}
-                href={'#' + tag.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '')}
+                href={'#' + tag.toLowerCase().replace(/\s+/g, '-').split('/').join('')}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -153,7 +153,7 @@ export default function UseCasesPage() {
       {personas.map(({ tag, icon, headline, subheadline, body, scenario, howItHelps, plan, planDesc, planHref, gold }, index) => (
         <section
           key={tag}
-          id={tag.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '')}
+          id={tag.toLowerCase().replace(/\s+/g, '-').split('/').join('')}
           className={'section section-bordered' + (index % 2 === 1 ? ' section-alt' : '')}
         >
           <div className="container">
