@@ -306,3 +306,4 @@ img { max-width: 100%; }
 @media (max-width: 1100px) { .pricing-grid-5 { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .pricing-grid-5 { grid-template-columns: 1fr; } }
 .pricing-card-fo { border-color: rgba(212,160,23,0.4) !important; }
+.pricing-wide { max-width: 1380px; margin: 0 auto; padding: 0 24px; }
