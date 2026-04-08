@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Shield, Users, Briefcase, BookOpen, Check, FileText, CheckSquare, Bot, Lock } from 'lucide-react';
+import { Shield, Users, Briefcase, BookOpen, Check } from 'lucide-react';
 
 export const metadata = {
   title: 'Who Uses TrustArchive — Use Cases',
@@ -8,6 +8,7 @@ export const metadata = {
 
 const personas = [
   {
+    slug: 'individual-trustee',
     tag: 'Individual Trustee',
     icon: <Users size={22} />,
     headline: 'You Are the Trustee.',
@@ -15,7 +16,7 @@ const personas = [
     body: 'A parent, sibling, or spouse named as trustee often has no accounting background and no appetite for expensive professional software. But the obligation is real — distributions must be recorded, documents must be kept, and accountability must be demonstrable.',
     scenario: {
       title: 'Scenario',
-      text: 'Margaret was named sole trustee of her late mother\'s irrevocable trust. The trust has three adult beneficiaries, a rental property, investment accounts, and annual distribution requirements. Her attorney told her to "keep good records." She needed software that would actually help her do that — without sending her family\'s financial data to a cloud server she\'d never agreed to.',
+      text: 'Margaret was named sole trustee of her late mother\'s irrevocable trust. The trust has three adult beneficiaries, a rental property, investment accounts, and annual distribution requirements. Her attorney told her to keep good records. She needed software that would actually help her do that — without sending her family\'s financial data to a cloud server she\'d never agreed to.',
     },
     howItHelps: [
       'Single encrypted database on her laptop — no accounts, no cloud',
@@ -28,16 +29,18 @@ const personas = [
     plan: 'Individual',
     planDesc: '$699/year · 1 trust',
     planHref: '/pricing',
+    gold: false,
   },
   {
+    slug: 'estate-attorney',
     tag: 'Estate Attorney',
     icon: <Briefcase size={22} />,
     headline: 'You Administer Trusts for Clients.',
     subheadline: 'And You Need Software That Matches the Standard of Care You Provide.',
-    body: 'An estate attorney or CPA serving as professional trustee or trust advisor manages sensitive financial and family information across multiple client files. Generic accounting software was not built for trust law. Cloud-based tools create liability questions your clients didn\'t sign up for.',
+    body: 'An estate attorney or CPA serving as professional trustee or trust advisor manages sensitive financial and family information across multiple client files. Generic accounting software was not built for trust law. Cloud-based tools create liability questions your clients did not sign up for.',
     scenario: {
       title: 'Scenario',
-      text: 'David is an estate planning attorney who serves as trustee or co-trustee for fourteen client trusts. He needed to move off a spreadsheet-based system that couldn\'t produce formal accountings, and he wasn\'t willing to put client financial data into a SaaS platform his engagement letters hadn\'t disclosed. He needed something that could produce court-ready reports and keep every client\'s data completely isolated.',
+      text: 'David is an estate planning attorney who serves as trustee or co-trustee for fourteen client trusts. He needed to move off a spreadsheet-based system that could not produce formal accountings, and he was not willing to put client financial data into a SaaS platform his engagement letters had not disclosed. He needed something that could produce court-ready reports and keep every client\'s data completely isolated.',
     },
     howItHelps: [
       'Multi-trust portfolio — each client trust fully isolated in its own data scope',
@@ -50,8 +53,10 @@ const personas = [
     plan: 'Professional',
     planDesc: '$2,500/year · up to 25 trusts',
     planHref: '/pricing',
+    gold: false,
   },
   {
+    slug: 'trust-company',
     tag: 'Trust Company / Firm',
     icon: <BookOpen size={22} />,
     headline: 'You Run a Trust Practice.',
@@ -59,7 +64,7 @@ const personas = [
     body: 'A trust company, corporate trustee, or large estate law firm administering dozens to hundreds of trusts needs software that scales without sending every client\'s data to a vendor\'s cloud infrastructure. The Practice tier removes all trust limits while keeping every file local and encrypted.',
     scenario: {
       title: 'Scenario',
-      text: 'Carson & Associates manages trust administration for 60 active trusts across a team of four attorneys and two paralegals. They needed a system with proper role separation, a defensible audit trail for each file, and the ability to produce state-specific court accounting formats. They also needed to be able to tell clients with confidence that their data never left the firm\'s machines.',
+      text: 'Carson and Associates manages trust administration for 60 active trusts across a team of four attorneys and two paralegals. They needed a system with proper role separation, a defensible audit trail for each file, and the ability to produce state-specific court accounting formats. They also needed to be able to tell clients with confidence that their data never left the firm\'s machines.',
     },
     howItHelps: [
       'Unlimited trusts — no per-trust pricing, no tier upgrades as caseload grows',
@@ -72,16 +77,18 @@ const personas = [
     plan: 'Practice',
     planDesc: '$4,900/year · unlimited trusts',
     planHref: '/pricing',
+    gold: false,
   },
   {
+    slug: 'family-office',
     tag: 'Family Office',
     icon: <Shield size={22} />,
     headline: 'You Manage Wealth Across an Entire Family.',
     subheadline: 'Multiple Trusts. Multiple Branches. One Consolidated View.',
-    body: 'A family office managing wealth across multiple family branches needs more than per-trust administration. The investment performance, distribution history, and net worth picture spans many entities. The Family Office tier adds consolidated cross-trust analytics — built for the controller or CFO who needs the full picture in one place.',
+    body: 'A family office managing wealth across multiple family branches needs more than per-trust administration. The investment performance, distribution history, and net worth picture spans many entities. The Family Office tier adds consolidated cross-trust analytics built for the controller or CFO who needs the full picture in one place.',
     scenario: {
       title: 'Scenario',
-      text: 'The Whitmore family has eight trusts across three generations — an irrevocable dynasty trust, several testamentary trusts for adult children, and two special needs trusts for grandchildren. Their family office controller needed one system that could show total family net worth, aggregate distribution history, and investment performance across all trusts, while keeping each trust\'s records isolated for beneficiary accounting purposes.',
+      text: 'The Whitmore family has eight trusts across three generations — an irrevocable dynasty trust, several testamentary trusts for adult children, and two special needs trusts for grandchildren. Their family office controller needed one system that could show total family net worth, aggregate distribution history, and investment performance across all trusts, while keeping each trust\'s records isolated for individual beneficiary accounting purposes.',
     },
     howItHelps: [
       'Consolidated cross-trust reporting — family-wide net worth and distribution view (Family Office tier)',
@@ -101,7 +108,7 @@ const personas = [
 const notForSection = [
   'Cloud-first teams that require real-time remote collaboration',
   'Organizations that need brokerage API integrations and live price feeds',
-  'Users managing statutory trust structures governed by the Uniform Trust Code with state-specific automated compliance',
+  'Users managing statutory trust structures with state-specific automated compliance requirements',
   'Tax preparation firms looking for a W-2 or 1040 filing tool',
 ];
 
@@ -124,14 +131,13 @@ export default function UseCasesPage() {
       <section style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
         <div className="container">
           <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
-            {personas.map(({ tag, planHref }, i) => (
+            {personas.map(({ slug, tag }) => (
               
-                key={tag}
-                href={'#' + tag.toLowerCase().replace(/\s+/g, '-').split('/').join('')}
+                key={slug}
+                href={'#' + slug}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 8,
                   padding: '16px 24px',
                   fontSize: 13,
                   fontWeight: 500,
@@ -139,7 +145,6 @@ export default function UseCasesPage() {
                   borderRight: '1px solid var(--border)',
                   whiteSpace: 'nowrap',
                   textDecoration: 'none',
-                  transition: 'color 150ms, background 150ms',
                 }}
               >
                 {tag}
@@ -150,15 +155,14 @@ export default function UseCasesPage() {
       </section>
 
       {/* Persona sections */}
-      {personas.map(({ tag, icon, headline, subheadline, body, scenario, howItHelps, plan, planDesc, planHref, gold }, index) => (
+      {personas.map(({ slug, tag, icon, headline, subheadline, body, scenario, howItHelps, plan, planDesc, planHref, gold }, index) => (
         <section
-          key={tag}
-          id={tag.toLowerCase().replace(/\s+/g, '-').split('/').join('')}
+          key={slug}
+          id={slug}
           className={'section section-bordered' + (index % 2 === 1 ? ' section-alt' : '')}
         >
           <div className="container">
 
-            {/* Persona header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 40 }}>
               <div style={{
                 width: 48, height: 48,
@@ -187,7 +191,6 @@ export default function UseCasesPage() {
                 <p style={{ fontSize: 16, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 24, fontWeight: 500 }}>{subheadline}</p>
                 <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 32 }}>{body}</p>
 
-                {/* Scenario */}
                 <div style={{
                   background: 'var(--bg-surface-2)',
                   border: '1px solid var(--border-md)',
@@ -196,10 +199,9 @@ export default function UseCasesPage() {
                   marginBottom: 32,
                 }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{scenario.title}</div>
-                  <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.75, margin: 0, fontStyle: 'italic' }}>&ldquo;{scenario.text}&rdquo;</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.75, margin: 0, fontStyle: 'italic' }}>{scenario.text}</p>
                 </div>
 
-                {/* Plan callout */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -211,18 +213,16 @@ export default function UseCasesPage() {
                 }}>
                   <div>
                     <div style={{ fontSize: 12, fontWeight: 700, color: gold ? '#D4A017' : 'var(--accent)', marginBottom: 2 }}>Recommended plan</div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-1)' }}>{plan} <span style={{ fontWeight: 400, color: 'var(--text-2)', fontSize: 13 }}>— {planDesc}</span></div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-1)' }}>
+                      {plan} <span style={{ fontWeight: 400, color: 'var(--text-2)', fontSize: 13 }}>— {planDesc}</span>
+                    </div>
                   </div>
-                  <Link href={planHref} style={{
-                    fontSize: 13, fontWeight: 600,
-                    color: gold ? '#D4A017' : 'var(--accent)',
-                    textDecoration: 'none',
-                    whiteSpace: 'nowrap',
-                  }}>See plan →</Link>
+                  <Link href={planHref} style={{ fontSize: 13, fontWeight: 600, color: gold ? '#D4A017' : 'var(--accent)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                    See plan &rarr;
+                  </Link>
                 </div>
               </div>
 
-              {/* How it helps */}
               <div>
                 <div style={{
                   background: 'var(--bg-surface)',
@@ -233,7 +233,7 @@ export default function UseCasesPage() {
                   <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>How TrustArchive helps</div>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
                     {howItHelps.map(item => {
-                      const isRoadmap = item.toLowerCase().includes('roadmap') || item.toLowerCase().includes('on roadmap');
+                      const isRoadmap = item.indexOf('roadmap') !== -1;
                       return (
                         <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, lineHeight: 1.6 }}>
                           <Check
@@ -278,7 +278,7 @@ export default function UseCasesPage() {
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {notForSection.map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>
-                    <span style={{ color: 'var(--text-3)', flexShrink: 0, fontSize: 18, lineHeight: 1 }}>×</span>
+                    <span style={{ color: 'var(--text-3)', flexShrink: 0, fontSize: 18, lineHeight: 1 }}>x</span>
                     {item}
                   </li>
                 ))}
@@ -293,7 +293,7 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
+      {/* CTA */}
       <section className="cta-section">
         <div className="container">
           <h2>Recognize Yourself<br />in One of These?</h2>
