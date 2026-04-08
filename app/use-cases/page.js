@@ -130,7 +130,7 @@ export default function UseCasesPage() {
       {/* Quick navigation */}
       <section style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
         <div className="container">
-          <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
+          <div style={{ display: 'flex', gap: 0, overflowX: 'auto', justifyContent: 'center' }}>
             {personas.map(({ slug, tag }) => (
               <Link
                 key={slug}
