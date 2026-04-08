@@ -27,7 +27,7 @@ export default function Footer() {
           <div>
             <h4 style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-2)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Product</h4>
             <Link href="/features" className="footer-link">Features</Link>
-            <Link href="/use-cases" className="nav-link">Use Cases</Link>
+            <Link href="/use-cases" className="footer-link">Use Cases</Link>
             <Link href="/pricing" className="footer-link">Pricing</Link>
             <Link href="/security" className="footer-link">Security</Link>
             <Link href="/#how" className="footer-link">How It Works</Link>
