@@ -7,14 +7,15 @@ export default function Footer() {
     <footer style={{ borderTop: '1px solid var(--border)', padding: '48px 0 32px' }}>
       <div className="container">
         <div className="footer-grid">
-          {/* Brand */}
-<Link href="/" style={{ display: 'inline-flex', marginBottom: 12, textDecoration: 'none' }}>
-  <img
-    src="/logo.svg"
-    alt="TrustArchive"
-    style={{ height: 30, width: 'auto' }}
-  />
-</Link>
+          
+           {/* Brand */}
+           <Link href="/" style={{ display: 'inline-flex', marginBottom: 12, textDecoration: 'none' }}>
+             <img
+               src="/logo.svg"
+              alt="TrustArchive"
+              style={{ height: 30, width: 'auto' }}
+            />
+          </Link>
             <p style={{ fontSize: 13, color: 'var(--text-3)', lineHeight: 1.6, maxWidth: 220 }}>
               Private fiduciary system. Fully local. Permanently recorded.
             </p>
