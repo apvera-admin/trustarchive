@@ -20,7 +20,7 @@ export default function Nav() {
           <img 
             src="/logo.png" 
             alt="TrustArchive" 
-            style={{ height: 34, width: 'auto' }} 
+            style={{ height: 38, width: 'auto', imageRendering: '-webkit-optimize-contrast', }} 
          />
        </Link>
 
