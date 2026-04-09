@@ -11,7 +11,7 @@ export default function Footer() {
               <img
                 src="/logo.svg"
                 alt="TrustArchive"
-                style={{ height: 30, width: 'auto' }}
+                style={{ height: 36, width: 'auto' }}
               />
             </Link>
             <p style={{ fontSize: 13, color: 'var(--text-3)', lineHeight: 1.6, maxWidth: 220 }}>
