@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Shield, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -17,12 +18,15 @@ export default function Nav() {
       
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img 
-            src="/logo.png" 
-            alt="TrustArchive" 
-            style={{ height: 38, width: 'auto', imageRendering: '-webkit-optimize-contrast', }} 
-         />
-       </Link>
+  <Image
+    src="/logo.png"
+    alt="TrustArchive"
+    width={175}
+    height={44}
+    style={{ width: 'auto', height: 36 }}
+    priority
+  />
+</Link>
 
         {/* Desktop links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="nav-desktop">
