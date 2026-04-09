@@ -14,18 +14,10 @@ export default function Nav() {
       WebkitBackdropFilter: 'blur(12px)',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
+      
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-  <img src="/logo.png" alt="TrustArchive" style={{ height: 34, width: 'auto' }} />
-</Link>
-          <div style={{
-            width: 30, height: 30, background: 'var(--accent-dim)',
-            border: '1px solid var(--accent-border)', borderRadius: 7,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)',
-          }}>
-            <Shield size={15} />
-          </div>
-          TrustArchive
+         <img src="/logo.png" alt="TrustArchive" style={{ height: 34, width: 'auto' }} />
         </Link>
 
         {/* Desktop links */}
