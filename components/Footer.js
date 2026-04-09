@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Shield } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,17 +8,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           {/* Brand */}
-          <div>
-            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 15, marginBottom: 12, textDecoration: 'none', color: 'var(--text-1)' }}>
-              <div style={{
-                width: 28, height: 28, background: 'var(--accent-dim)',
-                border: '1px solid var(--accent-border)', borderRadius: 6,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)',
-              }}>
-                <Shield size={14} />
-              </div>
-              TrustArchive
-            </Link>
+<Link href="/" style={{ display: 'inline-flex', marginBottom: 12, textDecoration: 'none' }}>
+  <img
+    src="/logo.svg"
+    alt="TrustArchive"
+    style={{ height: 30, width: 'auto' }}
+  />
+</Link>
             <p style={{ fontSize: 13, color: 'var(--text-3)', lineHeight: 1.6, maxWidth: 220 }}>
               Private fiduciary system. Fully local. Permanently recorded.
             </p>
