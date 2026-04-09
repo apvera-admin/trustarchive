@@ -52,7 +52,7 @@ export default function Nav() {
       {/* Mobile menu */}
       {open && (
         <div style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-surface)', padding: '16px 32px 24px' }}>
-          {[['Home', '/'], ['Features', '/features'], ['Pricing', '/pricing'], ['Contact', '/contact']].map(([label, href]) => (
+          {[['Home', '/'], ['Features', '/features'], ['Use Cases', '/use-cases'], ['Blog', '/blog'], ['Security', '/security'], ['Pricing', '/pricing']].map(([label, href]) => (
             <Link key={href} href={href} onClick={() => setOpen(false)} style={{
               display: 'block', padding: '12px 0', fontSize: 15, fontWeight: 500,
               color: 'var(--text-2)', borderBottom: '1px solid var(--border)', textDecoration: 'none',
