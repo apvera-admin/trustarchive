@@ -17,8 +17,12 @@ export default function Nav() {
       
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-         <img src="/logo.png" alt="TrustArchive" style={{ height: 34, width: 'auto' }} />
-        </Link>
+          <img 
+            src="/logo.png" 
+            alt="TrustArchive" 
+            style={{ height: 34, width: 'auto' }} 
+         />
+       </Link>
 
         {/* Desktop links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="nav-desktop">
