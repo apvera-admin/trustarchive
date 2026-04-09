@@ -21,10 +21,11 @@ export default function Nav() {
   <Image
     src="/logo.png"
     alt="TrustArchive"
-    width={175}
-    height={44}
-    style={{ width: 'auto', height: 36 }}
+    width={312}
+    height={65}
+    unoptimized
     priority
+    style={{ height: 36, width: 'auto' }}
   />
 </Link>
 
