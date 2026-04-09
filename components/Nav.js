@@ -18,13 +18,9 @@ export default function Nav() {
       
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-  <Image
-    src="/logo.png"
+  <img
+    src="/logo.svg"
     alt="TrustArchive"
-    width={312}
-    height={65}
-    unoptimized
-    priority
     style={{ height: 36, width: 'auto' }}
   />
 </Link>
