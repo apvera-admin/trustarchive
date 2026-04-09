@@ -15,7 +15,9 @@ export default function Nav() {
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 700, fontSize: 16, textDecoration: 'none', color: 'var(--text-1)' }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+  <img src="/logo.png" alt="TrustArchive" style={{ height: 34, width: 'auto' }} />
+</Link>
           <div style={{
             width: 30, height: 30, background: 'var(--accent-dim)',
             border: '1px solid var(--accent-border)', borderRadius: 7,
