@@ -186,7 +186,7 @@ export default function UseCasesPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'start' }}>
+            <div className="persona-grid">
               <div>
                 <p style={{ fontSize: 16, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 24, fontWeight: 500 }}>{subheadline}</p>
                 <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 32 }}>{body}</p>

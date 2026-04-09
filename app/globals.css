@@ -307,3 +307,47 @@ img { max-width: 100%; }
 @media (max-width: 700px) { .pricing-grid-5 { grid-template-columns: 1fr; } }
 .pricing-card-fo { border-color: rgba(212,160,23,0.4) !important; }
 .pricing-wide { max-width: 1380px; margin: 0 auto; padding: 0 24px; }
+
+/* ── New layout classes (desktop base) ── */
+.persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+.privacy-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.roadmap-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 800px; margin: 0 auto; }
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .pricing-wide { padding: 0 16px; }
+
+  .hero { grid-template-columns: 1fr; gap: 48px; padding: 80px 0 60px; }
+  .hero h1 { font-size: 32px; }
+  .page-hero { padding: 80px 0 48px; }
+  .page-hero h1 { font-size: 30px; }
+  .section { padding: 60px 0; }
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 26px; }
+  .cta-section { padding: 72px 0; }
+  .cta-section h2 { font-size: 28px; }
+
+  .features-grid { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; gap: 40px; direction: ltr; }
+  .split.reverse { direction: ltr; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-divider { display: none; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .feature-detail { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; }
+  .feature-detail.flip { direction: ltr; }
+  .feature-detail.flip > * { direction: ltr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .pricing-card { padding: 20px 16px; }
+
+  .persona-grid { grid-template-columns: 1fr; gap: 40px; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .privacy-compare { grid-template-columns: 1fr; }
+  .roadmap-cols { grid-template-columns: 1fr; gap: 0; }
+}
