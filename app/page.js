@@ -48,27 +48,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="app-mockup">
-              <div className="mockup-bar">
-                <span className="mockup-dot" style={{ background: '#ef4444' }} />
-                <span className="mockup-dot" style={{ background: '#f59e0b' }} />
-                <span className="mockup-dot" style={{ background: '#22c55e' }} />
-                <span className="mockup-title">TrustArchive — TMA Legacy Trust</span>
-              </div>
-              <div className="mockup-body">
-                <div className="mockup-sidebar">
-                  {[
-                    { icon: <Monitor size={12} />, label: 'Overview', active: true },
-                    { icon: <FileText size={12} />, label: 'Documents' },
-                    { icon: <Users size={12} />, label: 'Beneficiaries' },
-                    { icon: <Briefcase size={12} />, label: 'Assets' },
-                    { icon: <BookOpen size={12} />, label: 'Ledger' },
-                    { icon: <CheckSquare size={12} />, label: 'Obligations' },
-                  ].map(({ icon, label, active }) => (
-                    <div key={label} className={`mockup-nav-item${active ? ' active' : ''}`}>
-                      {icon} {label}
-                    </div>
-                  ))}
             <AppMockup />
       </section>
 
