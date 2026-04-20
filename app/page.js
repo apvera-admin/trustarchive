@@ -49,6 +49,9 @@ export default function HomePage() {
             </div>
 
             <AppMockup />
+
+            </div>
+        </div>
       </section>
 
       {/* ── TRUST BAR ── */}
