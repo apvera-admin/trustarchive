@@ -4,6 +4,7 @@ import {
   Bot, Lock, Wifi, Monitor, CreditCard, Download, Check, X,
   Clock, Database
 } from 'lucide-react';
+import AppMockup from '../components/AppMockup';
 
 export default function HomePage() {
   const pricingTiers = [
@@ -68,39 +69,7 @@ export default function HomePage() {
                       {icon} {label}
                     </div>
                   ))}
-                </div>
-                <div className="mockup-content">
-                  <div className="mockup-section-title">Trust Overview</div>
-                  <div className="mockup-cards">
-                    <div className="mockup-card">
-                      <div className="mockup-card-label">Beneficiaries</div>
-                      <div className="mockup-card-value">3</div>
-                    </div>
-                    <div className="mockup-card">
-                      <div className="mockup-card-label">Net Trust Value</div>
-                      <div className="mockup-card-value" style={{ fontSize: 14, color: 'var(--accent)' }}>$2.4M</div>
-                    </div>
-                  </div>
-                  <div className="mockup-row">
-                    <span>Annual Accounting Due</span>
-                    <span className="mockup-status ok">On Track</span>
-                  </div>
-                  <div className="mockup-row">
-                    <span>Q4 Distribution Report</span>
-                    <span className="mockup-status neutral">Exported</span>
-                  </div>
-                  <div className="mockup-row">
-                    <span>Trust Agreement Updated</span>
-                    <span className="mockup-status ok">Current</span>
-                  </div>
-                  <div className="mockup-encrypt">
-                    <Lock size={10} /> Encrypted &amp; Local — No External Calls
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            <AppMockup />
       </section>
 
       {/* ── TRUST BAR ── */}
