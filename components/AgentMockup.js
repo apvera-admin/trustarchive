@@ -5,11 +5,11 @@ import { Bot, Lock } from 'lucide-react';
 const TEAL = '#2DD4BF';
 
 const CONVO = [
-  { role: 'user',  text: 'How much has been distributed this year?',             delay: 800  },
+  { role: 'user',  text: 'How much has been distributed this year?', delay: 800 },
   { role: 'agent', text: '$58,240 across 3 beneficiaries YTD. Margaret received the largest share — $32,000 in March.', delay: 2400 },
-  { role: 'user',  text: 'Is the K-1 filing on track?',                          delay: 5600 },
+  { role: 'user',  text: 'Is the K-1 filing on track?', delay: 5600 },
   { role: 'agent', text: 'Due April 30 — 9 days from now. I\'d recommend exporting the income summary this week to give your CPA time to review.', delay: 7400 },
-  { role: 'user',  text: 'What\'s the current principal balance?',               delay: 11200 },
+  { role: 'user',  text: 'What\'s the current principal balance?', delay: 11200 },
   { role: 'agent', text: 'Principal balance is $2,180,000 as of today. Income balance is $58,240. Net trust value: $2,238,240.', delay: 13000 },
 ];
 
@@ -31,7 +31,7 @@ export default function AgentMockup() {
   const [visibleCount, setVisibleCount] = useState(0);
   const [typing,       setTyping]       = useState(false);
   const [cycle,        setCycle]        = useState(0);
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     setVisibleCount(0);
@@ -49,7 +49,6 @@ export default function AgentMockup() {
       }, msg.delay));
     });
 
-    // Restart the whole conversation after it finishes
     const lastDelay = CONVO[CONVO.length - 1].delay;
     timers.push(setTimeout(() => setCycle(c => c + 1), lastDelay + 3500));
 
@@ -57,7 +56,9 @@ export default function AgentMockup() {
   }, [cycle]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [visibleCount, typing]);
 
   return (
@@ -81,7 +82,6 @@ export default function AgentMockup() {
         userSelect: 'none',
       }}>
 
-        {/* Header */}
         <div style={{
           background: 'var(--bg-surface-2)',
           padding: '12px 16px',
@@ -93,16 +93,11 @@ export default function AgentMockup() {
             <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)' }}>Agent Assistant</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <div style={{
-              width: 6, height: 6, borderRadius: '50%',
-              background: '#22c55e',
-              boxShadow: '0 0 6px #22c55e',
-            }} />
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
             <span style={{ fontSize: 11, color: '#22c55e' }}>Local AI · Offline</span>
           </div>
         </div>
 
-        {/* Trust context pill */}
         <div style={{
           padding: '8px 16px',
           borderBottom: '1px solid var(--border)',
@@ -115,19 +110,19 @@ export default function AgentMockup() {
           </span>
         </div>
 
-        {/* Messages */}
-        <div style={{
-          padding: '16px',
-          minHeight: 260,
-          maxHeight: 320,
-          overflowY: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10,
-          scrollbarWidth: 'none',
-        }}>
-
-          {/* Static intro message from agent */}
+        <div
+          ref={scrollRef}
+          style={{
+            padding: '16px',
+            minHeight: 260,
+            maxHeight: 320,
+            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            scrollbarWidth: 'none',
+          }}
+        >
           <div style={{ alignSelf: 'flex-start', maxWidth: '88%' }}>
             <div style={{
               padding: '9px 13px',
@@ -141,28 +136,17 @@ export default function AgentMockup() {
           </div>
 
           {CONVO.slice(0, visibleCount).map((msg, i) => (
-            <div
-              key={`${cycle}-${i}`}
-              style={{
-                alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                maxWidth: '88%',
-                animation: 'ta-msg 0.3s ease',
-              }}
-            >
+            <div key={`${cycle}-${i}`} style={{
+              alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              maxWidth: '88%',
+              animation: 'ta-msg 0.3s ease',
+            }}>
               <div style={{
                 padding: '9px 13px',
-                borderRadius: msg.role === 'user'
-                  ? '10px 10px 2px 10px'
-                  : '10px 10px 10px 2px',
-                background: msg.role === 'user'
-                  ? 'rgba(45,212,191,0.12)'
-                  : 'var(--bg-surface-3)',
-                border: msg.role === 'user'
-                  ? '1px solid rgba(45,212,191,0.28)'
-                  : '1px solid var(--border)',
-                fontSize: 13,
-                lineHeight: 1.55,
-                color: 'var(--text-1)',
+                borderRadius: msg.role === 'user' ? '10px 10px 2px 10px' : '10px 10px 10px 2px',
+                background: msg.role === 'user' ? 'rgba(45,212,191,0.12)' : 'var(--bg-surface-3)',
+                border: msg.role === 'user' ? '1px solid rgba(45,212,191,0.28)' : '1px solid var(--border)',
+                fontSize: 13, lineHeight: 1.55, color: 'var(--text-1)',
                 fontWeight: msg.role === 'agent' ? 400 : 500,
               }}>
                 {msg.text}
@@ -182,11 +166,8 @@ export default function AgentMockup() {
               </div>
             </div>
           )}
-
-          <div ref={bottomRef} />
         </div>
 
-        {/* Fake input bar */}
         <div style={{
           padding: '10px 14px',
           borderTop: '1px solid var(--border)',
@@ -196,19 +177,14 @@ export default function AgentMockup() {
             flex: 1,
             background: 'var(--bg-surface-3)',
             border: '1px solid var(--border-md)',
-            borderRadius: 8,
-            padding: '8px 12px',
-            fontSize: 12,
-            color: 'var(--text-3)',
+            borderRadius: 8, padding: '8px 12px',
+            fontSize: 12, color: 'var(--text-3)',
           }}>
             Ask about your trust…
           </div>
           <div style={{
-            width: 30, height: 30,
-            background: TEAL,
-            borderRadius: 7,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            flexShrink: 0,
+            width: 30, height: 30, background: TEAL,
+            borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
           }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5">
               <line x1="22" y1="2" x2="11" y2="13" />
