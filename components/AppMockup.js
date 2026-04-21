@@ -278,6 +278,20 @@ const TITLES = {
 // ── Main export ──────────────────────────────────────────────────────────────
 export default function AppMockup() {
   const [active, setActive] = useState('overview');
+const [paused, setPaused] = useState(false);
+
+const NAV_IDS = NAV.map(n => n.id);
+
+useEffect(() => {
+  if (paused) return;
+  const timer = setInterval(() => {
+    setActive(cur => {
+      const i = NAV_IDS.indexOf(cur);
+      return NAV_IDS[(i + 1) % NAV_IDS.length];
+    });
+  }, 3500);
+  return () => clearInterval(timer);
+}, [paused]);
   const Panel = PANELS[active];
 
   return (
@@ -304,7 +318,7 @@ export default function AppMockup() {
             {NAV.map(({ id, label, icon: Icon }) => (
               <div
                 key={id}
-                onClick={() => setActive(id)}
+                onClick={() => { setActive(id); setPaused(true); }}
                 className={`mockup-nav-item${active === id ? ' active' : ''}`}
                 style={{ cursor: 'pointer' }}
               >
