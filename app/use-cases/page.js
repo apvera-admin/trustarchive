@@ -143,6 +143,7 @@ export default function UseCasesPage() {
                   fontWeight: 500,
                   color: 'var(--text-2)',
                   borderRight: '1px solid var(--border)',
+                  borderLeft: slug === personas[0].slug ? '1px solid var(--border)' : 'none',
                   whiteSpace: 'nowrap',
                   textDecoration: 'none',
                 }}
