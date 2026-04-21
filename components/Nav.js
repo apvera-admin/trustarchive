@@ -1,11 +1,20 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Shield, Menu, X } from 'lucide-react';
-import Image from 'next/image';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const links = [
+    ['Features',  '/features'],
+    ['Pricing',   '/pricing'],
+    ['Use Cases', '/use-cases'],
+    ['Blog',      '/blog'],
+    ['Security',  '/security'],
+  ];
 
   return (
     <nav style={{
@@ -15,26 +24,25 @@ export default function Nav() {
       WebkitBackdropFilter: 'blur(12px)',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
-      
-        {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-  <img
-    src="/logo.svg"
-    alt="TrustArchive"
-    style={{ height: 48, width: 'auto' }}
-  />
-</Link>
 
-        {/* Desktop links */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img src="/logo.svg" alt="TrustArchive" style={{ height: 48, width: 'auto' }} />
+        </Link>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="nav-desktop">
-          <Link href="/features" className="nav-link">Features</Link>
-          <Link href="/pricing" className="nav-link">Pricing</Link>
-          <Link href="/use-cases" className="nav-link">Use Cases</Link>
-          <Link href="/blog" className="nav-link">Blog</Link>
-          <Link href="/security" className="nav-link">Security</Link>
+          {links.map(([label, href]) => {
+            const active = pathname === href;
+            return (
+              <Link key={href} href={href} className="nav-link" style={{
+                color: active ? 'var(--accent)' : 'var(--text-2)',
+                background: active ? 'var(--accent-dim)' : 'transparent',
+              }}>
+                {label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* CTA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Link href="/contact" className="btn-secondary" style={{ padding: '8px 16px', fontSize: 13 }}>Contact</Link>
           <Link href="/pricing" className="btn-primary" style={{ padding: '8px 16px', fontSize: 13 }}>Get License</Link>
@@ -48,13 +56,13 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-surface)', padding: '16px 32px 24px' }}>
-          {[['Home', '/'], ['Features', '/features'], ['Use Cases', '/use-cases'], ['Blog', '/blog'], ['Security', '/security'], ['Pricing', '/pricing']].map(([label, href]) => (
+          {[['Home', '/'], ...links, ['Contact', '/contact']].map(([label, href]) => (
             <Link key={href} href={href} onClick={() => setOpen(false)} style={{
               display: 'block', padding: '12px 0', fontSize: 15, fontWeight: 500,
-              color: 'var(--text-2)', borderBottom: '1px solid var(--border)', textDecoration: 'none',
+              color: pathname === href ? 'var(--accent)' : 'var(--text-2)',
+              borderBottom: '1px solid var(--border)', textDecoration: 'none',
             }}>
               {label}
             </Link>
