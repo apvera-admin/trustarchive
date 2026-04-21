@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, AlertCircle } from 'lucide-react';
+import AgentMockup from '../../components/AgentMockup';
 
 export const metadata = {
   title: 'Features — TrustArchive',
@@ -131,7 +132,7 @@ export default function FeaturesPage() {
               ].map(pt => <li key={pt}><Check size={14} /> {pt}</li>)}
             </ul>
           </div>
-          <div><AIPanel /></div>
+          <div><AgentMockup /></div>
         </div>
 
         {/* Document Archive deep-dive */}
