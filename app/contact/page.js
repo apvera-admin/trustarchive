@@ -7,11 +7,23 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', org: '', reason: 'Purchase a license', message: '' });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In production: wire to your form handler (Formspree, Resend, etc.)
-    setSubmitted(true);
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+    if (res.ok) {
+      setSubmitted(true);
+    } else {
+      alert('Something went wrong. Please email us directly at sales@trustarchive.co');
+    }
+  } catch {
+    alert('Something went wrong. Please email us directly at sales@trustarchive.co');
+  }
+};
 
   return (
     <>
