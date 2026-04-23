@@ -369,19 +369,21 @@ function LeadMagnetForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
-    if (!form.name || !form.email) return;
-    setLoading(true);
-    try {
-      const res = await fetch('/api/whitepaper', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) setSubmitted(true);
-    } catch {}
-    setLoading(false);
-  };
+const handleSubmit = async () => {
+  if (!form.name || !form.email) return;
+  setLoading(true);
+  try {
+    const res = await fetch('/api/whitepaper', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+    if (res.ok) {
+      window.location.href = '/resources?downloaded=true';
+    }
+  } catch {}
+  setLoading(false);
+};
 
   if (submitted) {
     return (
