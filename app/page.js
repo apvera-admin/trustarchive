@@ -320,6 +320,31 @@ export default function HomePage() {
         </div>
       </section>
 
+{/* ── LEAD MAGNET ── */}
+<section style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
+  <div className="container">
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', padding: '72px 0' }}>
+      <div>
+        <span className="tag" style={{ marginBottom: 16, display: 'inline-flex' }}>
+          <FileText size={11} /> Free White Paper
+        </span>
+        <h2 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
+          The Cloud Liability Problem in Trust Administration
+        </h2>
+        <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 24 }}>
+          Why storing client trust data in cloud software creates undisclosed fiduciary exposure — and what professional trustees need to do about it. Written for estate attorneys, trust CPAs, and corporate trustees.
+        </p>
+        <ul className="check-list" style={{ marginBottom: 0 }}>
+          <li><Check size={14} /> The four liability risks most trustees are not managing</li>
+          <li><Check size={14} /> Why SOC 2 compliance does not satisfy your confidentiality duty</li>
+          <li><Check size={14} /> A four-step action framework for professional trustees</li>
+        </ul>
+      </div>
+      <LeadMagnetForm />
+    </div>
+  </div>
+</section>
+
       {/* ── CTA ── */}
       <section className="cta-section">
         <div className="container">
