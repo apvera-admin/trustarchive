@@ -68,7 +68,7 @@ export default function ResourcesPage() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Lock size={12} color="var(--text-3)" />
-                <span style={{ fontSize: 12, color: 'var(--text-3)' }}>No spam. We send the PDF immediately. That is it.</span>
+                <span style={{ fontSize: 12, color: 'var(--text-3)' }}>We send the PDF immediately.</span>
               </div>
             </div>
 
