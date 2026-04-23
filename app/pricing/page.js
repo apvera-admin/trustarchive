@@ -243,6 +243,9 @@ export default function PricingPage() {
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
                 <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
+                See who this plan is for →
+               </Link>
               </div>
             ))}
           </div>
