@@ -180,6 +180,17 @@ export default function FeaturesPage() {
         </div>
       </div>
 
+<section className="section section-bordered" style={{ textAlign: 'center' }}>
+  <div className="container">
+    <p style={{ fontSize: 17, color: 'var(--text-2)', marginBottom: 20 }}>
+      See how individual trustees, estate attorneys, trust companies, and family offices each use TrustArchive.
+    </p>
+    <Link href="/use-cases" className="btn-secondary">
+      See Use Cases by Trustee Type →
+    </Link>
+  </div>
+</section>
+                    
       {/* Roadmap callout */}
       <section className="section section-bordered section-alt">
         <div className="container">
