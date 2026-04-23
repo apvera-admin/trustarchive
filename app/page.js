@@ -287,6 +287,7 @@ export default function HomePage() {
            </Link>
           </div>
         </div>
+       </div>         
       </section>
 
       {/* ── PRICING PREVIEW ── */}
