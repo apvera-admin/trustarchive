@@ -278,6 +278,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+          </div>     
         <div className="nfe-footer">
          <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
          <div style={{ marginTop: 24 }}>
@@ -286,7 +287,7 @@ export default function HomePage() {
        </Link>
      </div>
    </div>
-      </section>
+  </section>
 
       {/* ── PRICING PREVIEW ── */}
       <section className="section section-bordered section-alt">
