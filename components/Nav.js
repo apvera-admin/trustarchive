@@ -11,7 +11,6 @@ export default function Nav() {
   const links = [
     ['Features',  '/features'],
     ['Pricing',   '/pricing'],
-    ['Use Cases', '/use-cases'],
     ['Blog',      '/blog'],
     ['Resources', '/resources'],
     ['Security',  '/security'],
