@@ -285,8 +285,10 @@ export default function HomePage() {
          <Link href="/use-cases" className="btn-secondary">
           See who uses TrustArchive →
        </Link>
-     </div>
-   </div>
+            </div>
+          </div>
+        </div>
+        <div className="nfe-footer">
   </section>
 
       {/* ── PRICING PREVIEW ── */}
