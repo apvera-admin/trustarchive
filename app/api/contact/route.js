@@ -31,7 +31,7 @@ const notionRes = await fetch('https://api.notion.com/v1/pages', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
-    'Notion-Version': '2022-06-01',
+    'Notion-Version': '2026-03-11',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
