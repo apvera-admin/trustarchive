@@ -60,7 +60,6 @@ export async function POST(request) {
           <div style="padding: 20px 40px; border-top: 1px solid #e0e0e8;">
             <p style="font-size: 11px; color: #9b9bb5; line-height: 1.6; margin: 0; text-align: center;">
               You received this because you requested the white paper at trustarchive.co.<br />
-              We will not send you marketing email.
             </p>
           </div>
         </div>
