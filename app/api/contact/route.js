@@ -27,7 +27,7 @@ export async function POST(request) {
     });
 
 // Log to Notion
-await fetch('https://api.notion.com/v1/pages', {
+const notionRes = await fetch('https://api.notion.com/v1/pages', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
@@ -47,6 +47,9 @@ await fetch('https://api.notion.com/v1/pages', {
     },
   }),
 });
+
+const notionData = await notionRes.json();
+console.log('Notion response:', JSON.stringify(notionData));
     
     return Response.json({ success: true });
   } catch (error) {
