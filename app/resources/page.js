@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Shield, Download, Lock, FileText, Users, BookOpen, ArrowRight, Check } from 'lucide-react';
 
@@ -8,7 +8,14 @@ export default function ResourcesPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [autoSubmitted, setAutoSubmitted] = useState(false);
 
+useEffect(() => {
+  if (typeof window !== 'undefined' && window.location.search.includes('downloaded=true')) {
+    setSubmitted(true);
+  }
+}, []);
+  
   const handleSubmit = async () => {
     if (!form.name || !form.email) return;
     setLoading(true);
