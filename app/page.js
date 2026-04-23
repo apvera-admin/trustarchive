@@ -398,7 +398,7 @@ function LeadMagnetForm() {
   return (
     <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '36px' }}>
       <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>Get the Free White Paper</h3>
-      <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20, lineHeight: 1.6 }}>We send the PDF immediately. No marketing emails.</p>
+      <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20, lineHeight: 1.6 }}>We send the PDF immediately.</p>
       <div className="form-group">
         <label className="form-label">Name</label>
         <input className="form-input" type="text" placeholder="Your full name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
