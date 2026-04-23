@@ -8,59 +8,6 @@ import {
 } from 'lucide-react';
 import AppMockup from '../components/AppMockup';
 
-function LeadMagnetForm() {
-  const [form, setForm] = React.useState({ name: '', email: '', firm: '' });
-  const [submitted, setSubmitted] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-
-  const handleSubmit = async () => {
-    if (!form.name || !form.email) return;
-    setLoading(true);
-    try {
-      const res = await fetch('/api/whitepaper', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) setSubmitted(true);
-    } catch {}
-    setLoading(false);
-  };
-
-  if (submitted) {
-    return (
-      <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: '40px', textAlign: 'center' }}>
-        <div style={{ width: 48, height: 48, background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-          <Check size={20} color="var(--accent)" />
-        </div>
-        <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Check Your Inbox</h3>
-        <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>The white paper is on its way. Check your email.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '36px' }}>
-      <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>Get the Free White Paper</h3>
-      <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20, lineHeight: 1.6 }}>We send the PDF immediately. No marketing emails.</p>
-      <div className="form-group">
-        <label className="form-label">Name</label>
-        <input className="form-input" type="text" placeholder="Your full name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
-      </div>
-      <div className="form-group">
-        <label className="form-label">Work Email</label>
-        <input className="form-input" type="email" placeholder="you@yourfirm.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-      </div>
-      <div className="form-group">
-        <label className="form-label">Firm <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>(optional)</span></label>
-        <input className="form-input" type="text" placeholder="Law firm, CPA firm, trust company..." value={form.firm} onChange={e => setForm({ ...form, firm: e.target.value })} />
-      </div>
-      <button onClick={handleSubmit} disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: loading ? 0.7 : 1 }}>
-        <Download size={14} /> {loading ? 'Sending...' : 'Send Me the White Paper'}
-      </button>
-    </div>
-  );
-}
 export default function HomePage() {
   const pricingTiers = [
     { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
@@ -102,10 +49,8 @@ export default function HomePage() {
                 No accounts required · No internet connection needed · Instant activation
               </div>
             </div>
-
             <AppMockup />
-
-            </div>
+          </div>
         </div>
       </section>
 
@@ -333,16 +278,16 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>     
-        <div className="nfe-footer">
-         <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
-         <div style={{ marginTop: 24 }}>
-         <Link href="/use-cases" className="btn-secondary">
-          See who uses TrustArchive →
-           </Link>
+          </div>
+          <div className="nfe-footer">
+            <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
+            <div style={{ marginTop: 24 }}>
+              <Link href="/use-cases" className="btn-secondary">
+                See who uses TrustArchive →
+              </Link>
+            </div>
           </div>
         </div>
-       </div>         
       </section>
 
       {/* ── PRICING PREVIEW ── */}
@@ -366,6 +311,9 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <Link href="/pricing" className={'pricing-cta ' + ctaClass}>See plan details</Link>
+                <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
+                  See who this plan is for →
+                </Link>
               </div>
             ))}
           </div>
@@ -375,30 +323,30 @@ export default function HomePage() {
         </div>
       </section>
 
-{/* ── LEAD MAGNET ── */}
-<section style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
-  <div className="container">
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', padding: '72px 0' }}>
-      <div>
-        <span className="tag" style={{ marginBottom: 16, display: 'inline-flex' }}>
-          <FileText size={11} /> Free White Paper
-        </span>
-        <h2 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
-          The Cloud Liability Problem in Trust Administration
-        </h2>
-        <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 24 }}>
-          Why storing client trust data in cloud software creates undisclosed fiduciary exposure — and what professional trustees need to do about it. Written for estate attorneys, trust CPAs, and corporate trustees.
-        </p>
-        <ul className="check-list" style={{ marginBottom: 0 }}>
-          <li><Check size={14} /> The four liability risks most trustees are not managing</li>
-          <li><Check size={14} /> Why SOC 2 compliance does not satisfy your confidentiality duty</li>
-          <li><Check size={14} /> A four-step action framework for professional trustees</li>
-        </ul>
-      </div>
-      <LeadMagnetForm />
-    </div>
-  </div>
-</section>
+      {/* ── LEAD MAGNET ── */}
+      <section style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', padding: '72px 0' }}>
+            <div>
+              <span className="tag" style={{ marginBottom: 16, display: 'inline-flex' }}>
+                <FileText size={11} /> Free White Paper
+              </span>
+              <h2 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
+                The Cloud Liability Problem in Trust Administration
+              </h2>
+              <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 24 }}>
+                Why storing client trust data in cloud software creates undisclosed fiduciary exposure — and what professional trustees need to do about it. Written for estate attorneys, trust CPAs, and corporate trustees.
+              </p>
+              <ul className="check-list">
+                <li><Check size={14} /> The four liability risks most trustees are not managing</li>
+                <li><Check size={14} /> Why SOC 2 compliance does not satisfy your confidentiality duty</li>
+                <li><Check size={14} /> A four-step action framework for professional trustees</li>
+              </ul>
+            </div>
+            <LeadMagnetForm />
+          </div>
+        </div>
+      </section>
 
       {/* ── CTA ── */}
       <section className="cta-section">
@@ -415,6 +363,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 function LeadMagnetForm() {
   const [form, setForm] = useState({ name: '', email: '', firm: '' });
   const [submitted, setSubmitted] = useState(false);
