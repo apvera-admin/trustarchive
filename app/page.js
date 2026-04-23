@@ -284,12 +284,10 @@ export default function HomePage() {
          <div style={{ marginTop: 24 }}>
          <Link href="/use-cases" className="btn-secondary">
           See who uses TrustArchive →
-       </Link>
-            </div>
+           </Link>
           </div>
         </div>
-        <div className="nfe-footer">
-  </section>
+      </section>
 
       {/* ── PRICING PREVIEW ── */}
       <section className="section section-bordered section-alt">
