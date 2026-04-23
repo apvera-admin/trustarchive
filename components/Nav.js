@@ -13,6 +13,7 @@ export default function Nav() {
     ['Pricing',   '/pricing'],
     ['Use Cases', '/use-cases'],
     ['Blog',      '/blog'],
+    ['Resources', '/resources'],
     ['Security',  '/security'],
   ];
 
