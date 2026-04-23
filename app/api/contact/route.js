@@ -35,7 +35,7 @@ await fetch('https://api.notion.com/v1/pages', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    parent: { database_id: 'ebc25e71f1b14c97b8f69c7c47e9ecfd' },
+    parent: { database_id: '287481f54682452da2d155a9a161c1a0' },
     properties: {
       Name: { title: [{ text: { content: name } }] },
       Email: { email: email },
