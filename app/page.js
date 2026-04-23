@@ -278,11 +278,14 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="nfe-footer">
-            <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
-          </div>
-        </div>
+        <div className="nfe-footer">
+         <p>This is not built for convenience. <span className="accent"><strong>It&apos;s built for control.</strong></span></p>
+         <div style={{ marginTop: 24 }}>
+         <Link href="/use-cases" className="btn-secondary">
+          See who uses TrustArchive →
+       </Link>
+     </div>
+   </div>
       </section>
 
       {/* ── PRICING PREVIEW ── */}
