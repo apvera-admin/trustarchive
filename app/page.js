@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import {
   Shield, FileText, Users, Briefcase, BookOpen, CheckSquare,
@@ -6,6 +8,59 @@ import {
 } from 'lucide-react';
 import AppMockup from '../components/AppMockup';
 
+function LeadMagnetForm() {
+  const [form, setForm] = React.useState({ name: '', email: '', firm: '' });
+  const [submitted, setSubmitted] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSubmit = async () => {
+    if (!form.name || !form.email) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/whitepaper', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) setSubmitted(true);
+    } catch {}
+    setLoading(false);
+  };
+
+  if (submitted) {
+    return (
+      <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: '40px', textAlign: 'center' }}>
+        <div style={{ width: 48, height: 48, background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+          <Check size={20} color="var(--accent)" />
+        </div>
+        <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Check Your Inbox</h3>
+        <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>The white paper is on its way. Check your email.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '36px' }}>
+      <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>Get the Free White Paper</h3>
+      <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20, lineHeight: 1.6 }}>We send the PDF immediately. No marketing emails.</p>
+      <div className="form-group">
+        <label className="form-label">Name</label>
+        <input className="form-input" type="text" placeholder="Your full name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+      </div>
+      <div className="form-group">
+        <label className="form-label">Work Email</label>
+        <input className="form-input" type="email" placeholder="you@yourfirm.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+      </div>
+      <div className="form-group">
+        <label className="form-label">Firm <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>(optional)</span></label>
+        <input className="form-input" type="text" placeholder="Law firm, CPA firm, trust company..." value={form.firm} onChange={e => setForm({ ...form, firm: e.target.value })} />
+      </div>
+      <button onClick={handleSubmit} disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: loading ? 0.7 : 1 }}>
+        <Download size={14} /> {loading ? 'Sending...' : 'Send Me the White Paper'}
+      </button>
+    </div>
+  );
+}
 export default function HomePage() {
   const pricingTiers = [
     { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
@@ -357,6 +412,59 @@ export default function HomePage() {
           <p className="cta-note">No accounts required · Instant activation · Your data never leaves your machine</p>
         </div>
       </section>
+    </div>
+  );
+}
+function LeadMagnetForm() {
+  const [form, setForm] = useState({ name: '', email: '', firm: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!form.name || !form.email) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/whitepaper', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) setSubmitted(true);
+    } catch {}
+    setLoading(false);
+  };
+
+  if (submitted) {
+    return (
+      <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: '40px', textAlign: 'center' }}>
+        <div style={{ width: 48, height: 48, background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+          <Check size={20} color="var(--accent)" />
+        </div>
+        <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Check Your Inbox</h3>
+        <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>The white paper is on its way. Check your email.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '36px' }}>
+      <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>Get the Free White Paper</h3>
+      <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20, lineHeight: 1.6 }}>We send the PDF immediately. No marketing emails.</p>
+      <div className="form-group">
+        <label className="form-label">Name</label>
+        <input className="form-input" type="text" placeholder="Your full name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+      </div>
+      <div className="form-group">
+        <label className="form-label">Work Email</label>
+        <input className="form-input" type="email" placeholder="you@yourfirm.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+      </div>
+      <div className="form-group">
+        <label className="form-label">Firm <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>(optional)</span></label>
+        <input className="form-input" type="text" placeholder="Law firm, CPA firm, trust company..." value={form.firm} onChange={e => setForm({ ...form, firm: e.target.value })} />
+      </div>
+      <button onClick={handleSubmit} disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: loading ? 0.7 : 1 }}>
+        <Download size={14} /> {loading ? 'Sending...' : 'Send Me the White Paper'}
+      </button>
     </div>
   );
 }
