@@ -26,6 +26,28 @@ export async function POST(request) {
       `,
     });
 
+// Log to Notion
+await fetch('https://api.notion.com/v1/pages', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+    'Notion-Version': '2022-06-01',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    parent: { database_id: 'ebc25e71f1b14c97b8f69c7c47e9ecfd' },
+    properties: {
+      Name: { title: [{ text: { content: name } }] },
+      Email: { email: email },
+      Organization: { rich_text: [{ text: { content: org || '' } }] },
+      Reason: { select: { name: reason } },
+      Message: { rich_text: [{ text: { content: message } }] },
+      Status: { select: { name: 'New' } },
+      Source: { select: { name: 'Contact Form' } },
+    },
+  }),
+});
+    
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: 'Failed to send message' }, { status: 500 });
