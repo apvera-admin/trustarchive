@@ -81,12 +81,6 @@ export async function POST(request) {
         </div>
       `,
     });
-
-// Fire nurture sequence
-await resend.events.send({
-  event: 'whitepaper.downloaded',
-  email: email,
-});
     
     await fetch('https://api.notion.com/v1/pages', {
       method: 'POST',
