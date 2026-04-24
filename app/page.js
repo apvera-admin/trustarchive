@@ -378,10 +378,13 @@ const handleSubmit = async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
+    console.log('Response status:', res.status, res.ok);
     if (res.ok) {
-      window.location.href = '/resources?downloaded=true';
+      setSubmitted(true);
     }
-  } catch {}
+  } catch (err) {
+    console.log('Error:', err);
+  }
   setLoading(false);
 };
 
