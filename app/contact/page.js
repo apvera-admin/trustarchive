@@ -219,7 +219,7 @@ const handleSubmit = async (e) => {
               </div>
               <iframe
                 src="https://calendar.app.google/NKLvEYmgeRACmBjc8"
-                style={{ width: '100%', height: 800, border: 'none', display: 'block', background: '#ffffff' }}
+                style={{ width: '100%', height: 580, border: 'none', display: 'block', background: '#ffffff' }}
                 frameBorder="0"
                 scrolling="yes"
               />
