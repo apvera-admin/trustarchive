@@ -218,7 +218,7 @@ const handleSubmit = async (e) => {
                 <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 4 }}>Pick a time that works for you</div>
               </div>
               <iframe
-                src="https://calendar.google.com/calendar/embed?src=tosborne%40trustarchive.co&ctz=America%2FNew_York"
+                src="https://calendar.app.google/NKLvEYmgeRACmBjc8"
                 style={{ width: '100%', height: 520, border: 'none', display: 'block' }}
                 frameBorder="0"
                 scrolling="no"
