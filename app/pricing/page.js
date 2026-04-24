@@ -249,10 +249,14 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <p className="small-note" style={{ marginTop: 24 }}>
-            30-day free trial on all plans · Card required · Cancel before day 30 and you won't be charged<br />
-            Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
-          </p>
+<p className="small-note" style={{ marginTop: 24 }}>
+  30-day free trial on all plans · Card required · Cancel before day 30 and you won't be charged<br />
+  Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
+</p>
+<p className="small-note" style={{ marginTop: 12 }}>
+  Have a complex situation or want to see it live first?{' '}
+  <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us before you trial →</Link>
+</p>
         </div>
       </section>
 
