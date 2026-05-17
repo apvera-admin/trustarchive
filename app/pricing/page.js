@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
 
@@ -9,6 +10,7 @@ export const metadata = {
 const plans = [
   {
     tier: 'Individual',
+    slug: 'individual',
     price: '$699',
     period: '/ year',
     limit: '1 trust',
@@ -27,6 +29,7 @@ const plans = [
   },
   {
     tier: 'Solo',
+    slug: 'solo',
     price: '$1,500',
     period: '/ year',
     limit: 'Up to 5 trusts',
@@ -44,6 +47,7 @@ const plans = [
   },
   {
     tier: 'Professional',
+    slug: 'professional',
     price: '$2,500',
     period: '/ year',
     limit: 'Up to 25 trusts',
@@ -64,6 +68,7 @@ const plans = [
   },
   {
     tier: 'Practice',
+    slug: 'practice',
     price: '$4,900',
     period: '/ year',
     limit: 'Unlimited trusts',
@@ -82,6 +87,7 @@ const plans = [
   },
   {
     tier: 'Family Office',
+    slug: 'family_office',
     price: '$9,600',
     period: '/ year',
     limit: 'Unlimited trusts',
@@ -94,7 +100,7 @@ const plans = [
       'Priority support & escalation',
       'White-glove onboarding call',
     ],
-    cta: 'Contact for Demo',
+    cta: 'Start Free Trial',
     ctaClass: 'secondary',
     href: '/contact',
     gold: true,
@@ -214,6 +220,30 @@ const faqs = [
 ];
 
 export default function PricingPage() {
+  const startTrial = async (slug, event) => {
+    const button = event.currentTarget;
+    const original = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Loading…';
+    try {
+      const res = await fetch(
+        'https://lwmbgkmzcgftnnngbyco.supabase.co/functions/v1/create-checkout-session',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tier: slug }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');
+      window.location.href = data.url;
+    } catch (err) {
+      alert('Could not start checkout: ' + err.message);
+      button.disabled = false;
+      button.textContent = original;
+    }
+  };
+
   return (
     <>
       <div style={{ paddingTop: 60 }}>
@@ -232,7 +262,7 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, price, period, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
+            {plans.map(({ tier, slug, price, period, limit, desc, features, cta, ctaClass, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
@@ -242,21 +272,27 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                <button
+                  type="button"
+                  onClick={(e) => startTrial(slug, e)}
+                  className={`pricing-cta ${ctaClass}`}
+                >
+                  {cta}
+                </button>
                 <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
-                See who this plan is for →
-               </Link>
+                  See who this plan is for →
+                </Link>
               </div>
             ))}
           </div>
-<p className="small-note" style={{ marginTop: 24 }}>
-  30-day free trial on all plans · Card required · Cancel before day 30 and you won't be charged<br />
-  Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
-</p>
-<p className="small-note" style={{ marginTop: 12 }}>
-  Have a complex situation or want to see it live first?{' '}
-  <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us before you trial →</Link>
-</p>
+          <p className="small-note" style={{ marginTop: 24 }}>
+            30-day free trial on all plans · Card required · Cancel before day 30 and you won't be charged<br />
+            Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
+          </p>
+          <p className="small-note" style={{ marginTop: 12 }}>
+            Have a complex situation or want to see it live first?{' '}
+            <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us before you trial →</Link>
+          </p>
         </div>
       </section>
 
@@ -347,29 +383,4 @@ export default function PricingPage() {
       </section>
     </>
   );
-}
-<script>
-  async function startTrial(tier, button) {
-    const original = button.textContent;
-    button.disabled = true;
-    button.textContent = 'Loading…';
-    try {
-      const res = await fetch(
-        'https://lwmbgkmzcgftnnngbyco.supabase.co/functions/v1/create-checkout-session',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tier }),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');
-      window.location.href = data.url;
-    } catch (err) {
-      alert('Could not start checkout: ' + err.message);
-      button.disabled = false;
-      button.textContent = original;
-    }
-  }
-</script>
 }
