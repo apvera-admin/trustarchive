@@ -348,3 +348,27 @@ export default function PricingPage() {
     </>
   );
 }
+<script>
+  async function startTrial(tier, button) {
+    const original = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Loading…';
+    try {
+      const res = await fetch(
+        'https://lwmbgkmzcgftnnngbyco.supabase.co/functions/v1/create-checkout-session',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tier }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');
+      window.location.href = data.url;
+    } catch (err) {
+      alert('Could not start checkout: ' + err.message);
+      button.disabled = false;
+      button.textContent = original;
+    }
+  }
+</script>
