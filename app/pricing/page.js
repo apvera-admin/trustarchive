@@ -1,6 +1,6 @@
-'use client';
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
+import StartTrialButton from './StartTrialButton';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
@@ -220,30 +220,6 @@ const faqs = [
 ];
 
 export default function PricingPage() {
-  const startTrial = async (slug, event) => {
-    const button = event.currentTarget;
-    const original = button.textContent;
-    button.disabled = true;
-    button.textContent = 'Loading…';
-    try {
-      const res = await fetch(
-        'https://lwmbgkmzcgftnnngbyco.supabase.co/functions/v1/create-checkout-session',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tier: slug }),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');
-      window.location.href = data.url;
-    } catch (err) {
-      alert('Could not start checkout: ' + err.message);
-      button.disabled = false;
-      button.textContent = original;
-    }
-  };
-
   return (
     <>
       <div style={{ paddingTop: 60 }}>
@@ -272,13 +248,9 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                <button
-                  type="button"
-                  onClick={(e) => startTrial(slug, e)}
-                  className={`pricing-cta ${ctaClass}`}
-                >
+                <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
                   {cta}
-                </button>
+                </StartTrialButton>
                 <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
                   See who this plan is for →
                 </Link>
