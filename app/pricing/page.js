@@ -10,7 +10,6 @@ export const metadata = {
 const plans = [
   {
     tier: 'Individual',
-    slug: 'individual',
     price: '$699',
     period: '/ year',
     limit: '1 trust',
@@ -29,7 +28,6 @@ const plans = [
   },
   {
     tier: 'Solo',
-    slug: 'solo',
     price: '$1,500',
     period: '/ year',
     limit: 'Up to 5 trusts',
@@ -47,13 +45,15 @@ const plans = [
   },
   {
     tier: 'Professional',
-    slug: 'professional',
     price: '$2,500',
-    period: '/ year',
-    limit: 'Up to 25 trusts',
+    period: '/ year base',
+    perSeat: '$150',
+    baseSeats: 2,
+    limit: 'Unlimited trusts',
     desc: 'For estate attorneys and CPAs with active client trust files.',
     features: [
       'Everything in Solo',
+      'Encrypted firm sync — multi-user',
       'ACTEC court-ready reports',
       'Tax prep summary — K-1 prep',
       'Distribution approval workflow',
@@ -68,14 +68,14 @@ const plans = [
   },
   {
     tier: 'Practice',
-    slug: 'practice',
     price: '$4,900',
-    period: '/ year',
+    period: '/ year base',
+    perSeat: '$125',
+    baseSeats: 5,
     limit: 'Unlimited trusts',
     desc: 'For firms requiring unlimited scale and advanced tools.',
     features: [
       'Everything in Professional',
-      'Unlimited trusts',
       'State court accounting formats',
       'Property management module',
       'Alternative asset tracking',
@@ -87,10 +87,11 @@ const plans = [
   },
   {
     tier: 'Family Office',
-    slug: 'family_office',
     price: '$9,600',
-    period: '/ year',
-    limit: 'Unlimited trusts',
+    period: '/ year base',
+    perSeat: '$200',
+    baseSeats: 5,
+    limit: 'Unlimited trusts + premium',
     desc: 'For family offices managing wealth across multiple family branches.',
     features: [
       'Everything in Practice',
@@ -100,7 +101,7 @@ const plans = [
       'Priority support & escalation',
       'White-glove onboarding call',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Contact for Demo',
     ctaClass: 'secondary',
     href: '/contact',
     gold: true,
