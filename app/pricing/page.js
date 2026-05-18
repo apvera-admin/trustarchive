@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
-import StartTrialButton from './StartTrialButton';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
@@ -123,6 +122,7 @@ const featureGroups = [
       { name: 'Cryptographic audit trail', sub: 'Immutable hash chain, export to CSV', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Administration task management', sub: 'Ticklers, due dates, workflow tasks', status: 'roadmap', ind: R, sol: R, pro: R, pra: R, fo: R },
       { name: 'Multi-trust portfolio switcher', sub: 'Per-trust data isolation', status: 'shipped', ind: N, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Encrypted firm sync — multi-user', sub: 'End-to-end encrypted, Professional and above', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Account onboarding / KYC checklist', sub: 'New trust setup workflow', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Calendar sync (opt-in)', sub: 'Privacy disclosure required', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
     ],
@@ -135,7 +135,7 @@ const featureGroups = [
       { name: 'Auto-allocation rules engine', sub: 'Pattern matching, auto-approve option', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Staging inbox & approval workflow', sub: 'Review before posting', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Distribution tracking', sub: 'Journal entry linkage, beneficiary view', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Period close / year-end locking', sub: 'Lock posted periods', status: 'shipped', ind: R, sol: R, pro: R, pra: R, fo: R },
+      { name: 'Period close / year-end locking', sub: 'Lock posted periods', status: 'roadmap', ind: R, sol: R, pro: R, pra: R, fo: R },
       { name: 'Recurring distributions', sub: 'Scheduled automatic entries', status: 'roadmap', ind: N, sol: R, pro: R, pra: R, fo: R },
       { name: 'Distribution approval workflow', sub: 'Co-trustee / attorney sign-off', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Lot-level securities tracking', sub: 'FIFO / LIFO / specific ID', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
@@ -163,7 +163,7 @@ const featureGroups = [
       { name: 'Trust accounting statement', sub: 'Principal / income receipts & disbursements', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Beneficiary distribution report', sub: 'By beneficiary, type, date range', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Asset summary with cost basis', sub: 'Including entity interests', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', status: 'shipped', ind: N, sol: N, pro: R, pra: R, fo: R },
+      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Tax prep summary — K-1 prep', sub: 'Income by character & beneficiary', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Beneficiary report package', sub: 'PDF export for beneficiary delivery', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'State court accounting formats', sub: 'CA, NY, TX, NV variants', status: 'roadmap', ind: N, sol: N, pro: N, pra: R, fo: R },
@@ -177,7 +177,7 @@ const featureGroups = [
       { name: 'Document management', sub: 'Folders, tags, entity linking', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Document generation', sub: '20 seed templates, PDF / DOCX export', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Outbound email — SMTP', sub: 'Offline send queue, threaded replies', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'eSignature integration (opt-in)', sub: 'Requires network, privacy disclosure', status: 'shipped', ind: N, sol: N, pro: R, pra: R, fo: R },
+      { name: 'eSignature integration (opt-in)', sub: 'Requires network, privacy disclosure', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
     ],
   },
   {
@@ -213,11 +213,11 @@ const featureGroups = [
 const faqs = [
   { q: 'What happens when my annual subscription renews?', a: 'Your subscription renews automatically each year. You\'ll receive email reminders 30 days and 7 days before your renewal date. Cancel any time before renewal in your billing portal — access continues until the end of your paid period.' },
   { q: 'What is included in the 30-day free trial?', a: 'The full application with all features your plan includes. Your card is charged only at the end of the trial period. Cancel any time before day 30 and you won\'t be charged.' },
-  { q: 'Does TrustArchive require an internet connection to run?', a: 'No. After the initial installation and one-time license activation, TrustArchive operates entirely offline. No internet connection is required for any feature, including the local AI assistant.' },
-  { q: 'Can I run TrustArchive on multiple machines?', a: 'Individual and Solo licenses activate on up to 2 machines. Professional on up to 3, Practice on up to 5, and Family Office on up to 10. To transfer to a new machine, deactivate from the old machine in Settings > License.' },
-  { q: 'What is the difference between Practice and Family Office?', a: 'Both support unlimited trusts. Family Office adds consolidated cross-trust reporting, investment performance analytics (TWR/IRR), a family-wide distribution dashboard, priority support, and a white-glove onboarding call — built for family offices managing wealth across multiple family branches.' },
+  { q: 'How does per-seat pricing work for Professional, Practice, and Family Office?', a: 'These tiers include a base price that covers a set number of seats — 2 for Professional, 5 for Practice and Family Office. Each additional seat beyond the base is billed at the per-seat rate for your tier ($150, $125, or $200 per seat per year). Seats map to operators in your firm. You can add or remove seats at any time and Stripe prorates the change automatically.' },
+  { q: 'Does TrustArchive require an internet connection to run?', a: 'Individual and Solo tiers operate entirely offline after activation. Professional, Practice, and Family Office tiers use encrypted firm sync to keep data current across your team — this requires an internet connection for sync, but the app continues to work locally if you go offline.' },
+  { q: 'What is the difference between Practice and Family Office?', a: 'Both support unlimited trusts and unlimited seats. Family Office adds consolidated cross-trust reporting, investment performance analytics (TWR/IRR), a family-wide distribution dashboard, priority support, and a white-glove onboarding call — built for family offices managing wealth across multiple family branches.' },
   { q: 'What operating systems are supported?', a: 'Windows 10/11 and macOS 12 (Monterey) or later. Both are included with your license.' },
-  { q: 'Is my data backed up?', a: 'TrustArchive stores all data locally and does not manage backups. We recommend backing up your encrypted database file to an external drive regularly. The application includes an export function to facilitate this.' },
+  { q: 'Is my data backed up?', a: 'TrustArchive stores all data locally and syncs encrypted data for firm-tier users. We recommend backing up your encrypted database file to an external drive regularly. The application includes an export function to facilitate this.' },
 ];
 
 export default function PricingPage() {
@@ -242,24 +242,19 @@ export default function PricingPage() {
             {plans.map(({ tier, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
-                 <div className="pricing-tier">{tier}</div>
-                 <div className="pricing-price">{price}<span> {period}</span></div>
-                   {perSeat && (
-                 <div style={{
-                      fontSize: 11, color: 'var(--text-3)',
-                        marginBottom: 4, marginTop: -4,
-                        }}>
-                  + {perSeat}/seat/yr &nbsp;·&nbsp; {baseSeats} seats included
-                </div>
+                <div className="pricing-tier">{tier}</div>
+                <div className="pricing-price">{price}<span> {period}</span></div>
+                {perSeat && (
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 4, marginTop: -4 }}>
+                    + {perSeat}/seat/yr &nbsp;·&nbsp; {baseSeats} seats included
+                  </div>
                 )}
-<div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 8 }}>{limit}</div>
-<div className="pricing-desc">{desc}</div>
+                <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 8 }}>{limit}</div>
+                <div className="pricing-desc">{desc}</div>
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
-                  {cta}
-                </StartTrialButton>
+                <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                 <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
                   See who this plan is for →
                 </Link>
@@ -291,9 +286,9 @@ export default function PricingPage() {
                   <th style={{ textAlign: 'left' }}>Feature</th>
                   <th>Individual<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$699/yr</span></th>
                   <th>Solo<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$1,500/yr</span></th>
-                  <th>Professional<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$2,500/yr</span></th>
-                  <th>Practice<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$4,900/yr</span></th>
-                  <th className="fo-col-head">Family Office<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#D4A017' }}>$9,600/yr</span></th>
+                  <th>Professional<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$2,500 + $150/seat</span></th>
+                  <th>Practice<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$4,900 + $125/seat</span></th>
+                  <th className="fo-col-head">Family Office<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#D4A017' }}>$9,600 + $200/seat</span></th>
                 </tr>
               </thead>
               <tbody>
