@@ -245,7 +245,7 @@ export default function PricingPage() {
                 <div className="pricing-tier">{tier}</div>
                 <div className="pricing-price">{price}<span> {period}</span></div>
                 {perSeat && (
-                  <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 4, marginTop: -4 }}>
+                  <div style={{ fontSize: 11, color: 'var(--text-2)', marginBottom: 4, marginTop: -4 }}>
                     + {perSeat}/seat/yr &nbsp;·&nbsp; {baseSeats} seats included
                   </div>
                 )}
