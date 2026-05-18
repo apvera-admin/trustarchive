@@ -239,13 +239,21 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, slug, price, period, limit, desc, features, cta, ctaClass, featured, badge, gold }) => (
+            {plans.map(({ tier, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
-                <div className="pricing-tier">{tier}</div>
-                <div className="pricing-price">{price}<span> {period}</span></div>
-                <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 8 }}>{limit}</div>
-                <div className="pricing-desc">{desc}</div>
+                 <div className="pricing-tier">{tier}</div>
+                 <div className="pricing-price">{price}<span> {period}</span></div>
+                   {perSeat && (
+                 <div style={{
+                      fontSize: 11, color: 'var(--text-3)',
+                        marginBottom: 4, marginTop: -4,
+                        }}>
+                  + {perSeat}/seat/yr &nbsp;·&nbsp; {baseSeats} seats included
+                </div>
+                )}
+<div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 8 }}>{limit}</div>
+<div className="pricing-desc">{desc}</div>
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
