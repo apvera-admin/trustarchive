@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
+import StartTrialButton from './StartTrialButton';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
@@ -9,6 +10,7 @@ export const metadata = {
 const plans = [
   {
     tier: 'Individual',
+    slug: 'individual',
     price: '$699',
     period: '/ year',
     limit: '1 trust',
@@ -27,6 +29,7 @@ const plans = [
   },
   {
     tier: 'Solo',
+    slug: 'solo',
     price: '$1,500',
     period: '/ year',
     limit: 'Up to 5 trusts',
@@ -44,6 +47,7 @@ const plans = [
   },
   {
     tier: 'Professional',
+    slug: 'professional',
     price: '$2,500',
     period: '/ year base',
     perSeat: '$150',
@@ -67,6 +71,7 @@ const plans = [
   },
   {
     tier: 'Practice',
+    slug: 'practice',
     price: '$4,900',
     period: '/ year base',
     perSeat: '$125',
@@ -86,6 +91,7 @@ const plans = [
   },
   {
     tier: 'Family Office',
+    slug: 'family_office',
     price: '$9,600',
     period: '/ year base',
     perSeat: '$200',
@@ -238,7 +244,7 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
+            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
@@ -253,7 +259,13 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                {slug === 'family_office' ? (
+                  <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                ) : (
+                  <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
+                    {cta}
+                  </StartTrialButton>
+                )}
                 <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
                   See who this plan is for →
                 </Link>
