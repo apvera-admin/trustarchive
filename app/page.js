@@ -60,7 +60,7 @@ export default function HomePage() {
           <div className="trust-bar-inner">
             {[
               { icon: <Lock size={15} />, label: 'SQLCipher Encrypted at Rest' },
-              { icon: <Wifi size={15} />, label: 'No Internet Required' },
+              { icon: <Wifi size={15} />, label: 'Offline-First · Encrypted Firm Sync' },
               { icon: <Shield size={15} />, label: 'Cryptographic Audit Trail' },
               { icon: <Clock size={15} />, label: 'Double-Entry Fiduciary Accounting' },
               { icon: <Monitor size={15} />, label: 'Windows & macOS' },
@@ -214,7 +214,7 @@ export default function HomePage() {
                 <Shield size={14} /> TrustArchive
               </div>
               <ul className="check-list">
-                {['Runs entirely on your local machine', 'No internet connection required after install', 'Fully encrypted at rest using SQLCipher', 'Your data never leaves your control — ever'].map(item => (
+                {['Runs entirely on your local machine', 'Fully offline for Individual & Solo tiers', 'Firm tiers sync with end-to-end encryption — we see only ciphertext', 'Your data never leaves your control — ever'].map(item => (
                   <li key={item}><Check size={15} /> {item}</li>
                 ))}
               </ul>
@@ -238,7 +238,7 @@ export default function HomePage() {
             {[
               { num: '01', icon: <CreditCard size={16} />, title: 'Purchase Your License', desc: 'Secure your license key and receive immediate download access. No account creation required.' },
               { num: '02', icon: <Download size={16} />, title: 'Download & Install', desc: 'Install on Windows or macOS. No setup servers. No cloud configuration. No dependencies.' },
-              { num: '03', icon: <Shield size={16} />, title: 'Activate Locally', desc: 'Enter your license key. Your system activates instantly — no internet required after this step.' },
+              { num: '03', icon: <Shield size={16} />, title: 'Activate Locally', desc: 'Enter your license key. Your system activates instantly — Individual & Solo activate with no internet. Firm tiers use encrypted sync — data is encrypted on your device before it leaves.' },
               { num: '04', icon: <Database size={16} />, title: 'Run Fully Local', desc: 'Your trust data, accounting, documents, and AI all run securely on your machine. Permanently.' },
             ].map(({ num, icon, title, desc }) => (
               <div key={num} className="step">
@@ -263,7 +263,7 @@ export default function HomePage() {
           <div className="compare-grid">
             <div className="compare-col">
               <div className="compare-col-title" style={{ color: 'var(--text-2)' }}>TrustArchive is not designed for:</div>
-              {['Firms that require cloud access or real-time remote collaboration', 'Teams dependent on third-party integrations and API syncing', 'Users looking for a lightweight or convenience-first tool'].map(item => (
+              {['Firms that require full cloud storage or third-party API integrations', 'Teams dependent on third-party integrations and API syncing', 'Users looking for a lightweight or convenience-first tool'].map(item => (
                 <div key={item} className="compare-item negative">
                   <X size={15} style={{ color: 'var(--text-3)' }} /> {item}
                 </div>
@@ -357,7 +357,7 @@ export default function HomePage() {
             <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> Get License</Link>
             <Link href="/contact" className="btn-secondary lg">Contact Us</Link>
           </div>
-          <p className="cta-note">No accounts required · Instant activation · Your data never leaves your machine</p>
+          <p className="cta-note">No accounts required · Instant activation · Offline-first · Firm sync is end-to-end encrypted</p>
         </div>
       </section>
     </div>
