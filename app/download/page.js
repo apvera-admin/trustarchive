@@ -8,20 +8,20 @@ export const metadata = {
 
 // ── UPDATE THESE WHEN YOU BUILD A NEW RELEASE ──────────────────────────────
 const RELEASE = {
-  version: '1.0.0',
+  version: '0.5.2',
   date: 'May 2025',
   windows: {
     filename: 'TrustArchive-1.0.0-setup.exe',
     size: '42 MB',
-    url: '/releases/TrustArchive-1.0.0-setup.exe',
-    sha256: 'PLACEHOLDER_SHA256_WINDOWS',
+    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v0.5.2/TrustArchive_0.5.2_x64_en-US.msi',
+    sha256: 'sha256:5d83fa2810099cc256e2ccc8cec4c68923def0f2b4385a99b1cf72a8f7c031a4',
     requirements: 'Windows 10 or 11 (64-bit)',
   },
   mac: {
-    filename: 'TrustArchive-1.0.0.dmg',
-    size: '48 MB',
-    url: '/releases/TrustArchive-1.0.0.dmg',
-    sha256: 'PLACEHOLDER_SHA256_MACOS',
+    filename: 'Coming Soon',
+    size: '',
+    url: '#',
+    sha256: 'macOS build in progress',
     requirements: 'macOS 12 (Monterey) or later',
   },
 };
