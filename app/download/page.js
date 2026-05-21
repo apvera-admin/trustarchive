@@ -11,7 +11,7 @@ const RELEASE = {
   version: '0.6.0',
   date: 'May 2025',
   windows: {
-    filename: ''TrustArchive_0.6.0_x64_en-US.msi'',
+    filename: 'TrustArchive_0.6.0_x64_en-US.msi',
     size: '8.7 MB',
     url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v0.6.0/TrustArchive_0.6.0_x64_en-US.msi',
     sha256: 'sha256:5d83fa2810099cc256e2ccc8cec4c68923def0f2b4385a99b1cf72a8f7c031a4',
