@@ -8,12 +8,12 @@ export const metadata = {
 
 // ── UPDATE THESE WHEN YOU BUILD A NEW RELEASE ──────────────────────────────
 const RELEASE = {
-  version: '0.5.2',
+  version: '0.6.0',
   date: 'May 2025',
   windows: {
-    filename: 'TrustArchive-1.0.0-setup.exe',
-    size: '42 MB',
-    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v0.5.2/TrustArchive_0.5.2_x64_en-US.msi',
+    filename: ''TrustArchive_0.6.0_x64_en-US.msi'',
+    size: '8.7 MB',
+    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v0.6.0/TrustArchive_0.6.0_x64_en-US.msi',
     sha256: 'sha256:5d83fa2810099cc256e2ccc8cec4c68923def0f2b4385a99b1cf72a8f7c031a4',
     requirements: 'Windows 10 or 11 (64-bit)',
   },
@@ -84,7 +84,7 @@ export default function DownloadPage() {
                 fontSize: 14,
                 textDecoration: 'none',
               }}>
-                <Download size={15} /> Download .exe
+                <Download size={15} /> Download .msi
               </a>
 
               <div style={{
