@@ -8,13 +8,13 @@ export const metadata = {
 
 // ── UPDATE THESE WHEN YOU BUILD A NEW RELEASE ──────────────────────────────
 const RELEASE = {
-  version: '0.6.0',
-  date: 'May 2025',
+  version: '1.0.4',
+  date: 'May 2026',
   windows: {
-    filename: 'TrustArchive_0.6.0_x64_en-US.msi',
-    size: '8.7 MB',
-    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v0.6.0/TrustArchive_0.6.0_x64_en-US.msi',
-    sha256: 'sha256:5d83fa2810099cc256e2ccc8cec4c68923def0f2b4385a99b1cf72a8f7c031a4',
+    filename: 'TrustArchive_1.0.4_x64_en-US.msi',
+    size: '9.4 MB',
+    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v1.0.4/TrustArchive_1.0.4_x64_en-US.msi',
+    sha256: 'sha256:03cdbd2d8829995ad43683f8921f1e32e72b8c3412975f2bc379dbfb84c6fea3',
     requirements: 'Windows 10 or 11 (64-bit)',
   },
   mac: {
