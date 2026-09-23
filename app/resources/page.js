@@ -144,7 +144,6 @@ useEffect(() => {
                   </button>
 
                   <p style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 14, lineHeight: 1.6 }}>
-                    No marketing emails. We send the PDF and that is it.
                   </p>
                 </div>
               )}
