@@ -109,7 +109,7 @@ useEffect(() => {
                     </div>
                     <div>
                       <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)', marginBottom: 3 }}>Cloud_Liability_WhitePaper.pdf</div>
-                      <div style={{ fontSize: 11, color: 'var(--text-3)' }}>TrustArchive · 5 pages · Free</div>
+                      <div style={{ fontSize: 11, color: 'var(--text-3)' }}>TrustArchive · 32 pages · Free</div>
                     </div>
                     <div style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 600, color: 'var(--accent)', background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', padding: '3px 10px', borderRadius: 99 }}>PDF</div>
                   </div>
