@@ -63,9 +63,10 @@ const plans = [
       'Lot-level securities tracking',
       'eSignature integration (opt-in)',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Contact for Demo',
     ctaClass: 'primary',
     href: '/contact',
+    demo: true,
     featured: true,
     badge: 'Most Popular',
   },
@@ -85,9 +86,10 @@ const plans = [
       'Alternative asset tracking',
       'Distribution approval committee',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Contact for Demo',
     ctaClass: 'secondary',
     href: '/contact',
+    demo: true,
   },
   {
     tier: 'Family Office',
@@ -109,6 +111,7 @@ const plans = [
     cta: 'Contact for Demo',
     ctaClass: 'secondary',
     href: '/contact',
+    demo: true,
     gold: true,
   },
 ];
@@ -242,7 +245,7 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
+            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, demo, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
@@ -257,7 +260,7 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                {slug === 'family_office' ? (
+                {demo ? (
                   <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                 ) : (
                   <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
