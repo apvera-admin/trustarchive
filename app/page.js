@@ -296,7 +296,7 @@ export default function HomePage() {
           <div className="section-header">
             <span className="section-label">Pricing</span>
             <h2>Five Tiers. One Application.</h2>
-            <p>From individual trustees to family offices. 30-day free trial on every plan.</p>
+            <p>From individual trustees to family offices. 30-day free trial on Individual and Solo. Firm plans start with a demo.</p>
           </div>
           <div className="pricing-grid-5">
             {pricingTiers.map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
@@ -318,7 +318,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="small-note" style={{ marginTop: 20 }}>
-            30-day free trial on all plans · Annual billing · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
+            30-day free trial on Individual and Solo · Demos for firm plans · Annual billing · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
           </p>
         </div>
       </section>

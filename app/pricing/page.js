@@ -4,7 +4,7 @@ import StartTrialButton from './StartTrialButton';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
-  description: 'Five license tiers for every type of trustee. 30-day free trial, annual billing, fully local software.',
+  description: 'Five license tiers for every type of trustee. 30-day free trial on Individual and Solo, demos for firm plans, annual billing, fully local software.',
 };
 
 const plans = [
@@ -63,9 +63,10 @@ const plans = [
       'Lot-level securities tracking',
       'eSignature integration (opt-in)',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Contact for Demo',
     ctaClass: 'primary',
     href: '/contact',
+    demo: true,
     featured: true,
     badge: 'Most Popular',
   },
@@ -85,9 +86,10 @@ const plans = [
       'Alternative asset tracking',
       'Distribution approval committee',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Contact for Demo',
     ctaClass: 'secondary',
     href: '/contact',
+    demo: true,
   },
   {
     tier: 'Family Office',
@@ -109,6 +111,7 @@ const plans = [
     cta: 'Contact for Demo',
     ctaClass: 'secondary',
     href: '/contact',
+    demo: true,
     gold: true,
   },
 ];
@@ -215,7 +218,7 @@ const featureGroups = [
 
 const faqs = [
   { q: 'What happens when my annual subscription renews?', a: 'Your subscription renews automatically each year. You\'ll receive email reminders 30 days and 7 days before your renewal date. Cancel any time before renewal in your billing portal — access continues until the end of your paid period.' },
-  { q: 'What is included in the 30-day free trial?', a: 'The full application with all features your plan includes. Your card is charged only at the end of the trial period. Cancel any time before day 30 and you won\'t be charged.' },
+  { q: 'Which plans include the 30-day free trial?', a: 'Individual and Solo include a 30-day free trial of the full application with all features your plan includes. Your card is charged only at the end of the trial period. Cancel any time before day 30 and you won\'t be charged. Professional, Practice, and Family Office start with a demo — contact us and we\'ll walk your team through the software and set up your firm.' },
   { q: 'How does per-seat pricing work for Professional, Practice, and Family Office?', a: 'These tiers include a base price that covers a set number of seats — 2 for Professional, 5 for Practice and Family Office. Each additional seat beyond the base is billed at the per-seat rate for your tier ($150, $125, or $200 per seat per year). Seats map to operators in your firm. You can add or remove seats at any time and Stripe prorates the change automatically.' },
   { q: 'Does TrustArchive require an internet connection to run?', a: 'Individual and Solo tiers operate entirely offline after activation. Professional, Practice, and Family Office tiers use encrypted firm sync to keep data current across your team — this requires an internet connection for sync, but the app continues to work locally if you go offline.' },
   { q: 'What is the difference between Practice and Family Office?', a: 'Both support unlimited trusts and unlimited seats. Family Office adds consolidated cross-trust reporting, investment performance analytics (TWR/IRR), a family-wide distribution dashboard, priority support, and a white-glove onboarding call — built for family offices managing wealth across multiple family branches.' },
@@ -233,7 +236,7 @@ export default function PricingPage() {
               <Shield size={11} /> Simple Licensing
             </span>
             <h1>Pricing</h1>
-            <p>Five tiers for every type of trustee. 30-day free trial on all plans. Annual billing with auto-renewal.</p>
+            <p>Five tiers for every type of trustee. 30-day free trial on Individual and Solo. Firm plans start with a demo. Annual billing with auto-renewal.</p>
           </div>
         </div>
       </div>
@@ -242,7 +245,7 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, featured, badge, gold }) => (
+            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, demo, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
@@ -257,7 +260,7 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                {slug === 'family_office' ? (
+                {demo ? (
                   <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                 ) : (
                   <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
@@ -271,7 +274,8 @@ export default function PricingPage() {
             ))}
           </div>
           <p className="small-note" style={{ marginTop: 24 }}>
-            30-day free trial on all plans · Card required · Cancel before day 30 and you won't be charged<br />
+            30-day free trial on Individual and Solo · Card required · Cancel before day 30 and you won't be charged<br />
+            Professional, Practice, and Family Office start with a demo<br />
             Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
           </p>
           <p className="small-note" style={{ marginTop: 12 }}>
@@ -358,9 +362,9 @@ export default function PricingPage() {
       <section className="cta-section">
         <div className="container">
           <h2>Ready to Get Started?</h2>
-          <p>30-day free trial. No charge until day 30. Cancel any time.</p>
+          <p>30-day free trial on Individual and Solo. Firm plans start with a demo.</p>
           <div className="cta-actions">
-            <Link href="/contact" className="btn-primary lg"><Shield size={16} /> Start Free Trial</Link>
+            <Link href="/contact" className="btn-primary lg"><Shield size={16} /> Contact for Demo</Link>
             <Link href="/features" className="btn-secondary lg">View All Features</Link>
           </div>
           <p className="cta-note">No accounts required to trial · Instant local activation · Your data never leaves your machine</p>
