@@ -45,7 +45,7 @@ export default function Nav() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Link href="/contact" className="btn-secondary" style={{ padding: '8px 16px', fontSize: 13 }}>Contact</Link>
-          <Link href="/pricing" className="btn-primary" style={{ padding: '8px 16px', fontSize: 13 }}>Get License</Link>
+          <Link href="/waitlist" className="btn-primary" style={{ padding: '8px 16px', fontSize: 13 }}>Join Waitlist</Link>
           <button
             onClick={() => setOpen(!open)}
             className="nav-hamburger"
@@ -68,7 +68,7 @@ export default function Nav() {
             </Link>
           ))}
           <div style={{ marginTop: 20 }}>
-            <Link href="/pricing" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Get License</Link>
+            <Link href="/waitlist" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Join Waitlist</Link>
           </div>
         </div>
       )}

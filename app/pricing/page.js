@@ -23,9 +23,10 @@ const plans = [
       'Rules engine & obligations',
       'Encrypted local storage',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join the Waitlist',
     ctaClass: 'secondary',
-    href: '/contact',
+    href: '/waitlist?tier=individual',
+    waitlist: true,
   },
   {
     tier: 'Solo',
@@ -41,9 +42,10 @@ const plans = [
       'Assisted rule creation (AI)',
       'Document Intelligence — RAG',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join the Waitlist',
     ctaClass: 'secondary',
-    href: '/contact',
+    href: '/waitlist?tier=solo',
+    waitlist: true,
   },
   {
     tier: 'Professional',
@@ -236,7 +238,7 @@ export default function PricingPage() {
               <Shield size={11} /> Simple Licensing
             </span>
             <h1>Pricing</h1>
-            <p>Five tiers for every type of trustee. 30-day free trial on Individual and Solo. Firm plans start with a demo. Annual billing with auto-renewal.</p>
+            <p>Five tiers for every type of trustee. TrustArchive is launching soon — join the waitlist for Individual and Solo, or contact us for a firm demo. Annual billing with auto-renewal at launch.</p>
           </div>
         </div>
       </div>
@@ -245,7 +247,7 @@ export default function PricingPage() {
       <section className="section">
         <div className="pricing-wide">
           <div className="pricing-grid-5">
-            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, demo, featured, badge, gold }) => (
+            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, demo, waitlist, featured, badge, gold }) => (
               <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
                 {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
                 <div className="pricing-tier">{tier}</div>
@@ -260,7 +262,7 @@ export default function PricingPage() {
                 <ul className="pricing-features">
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
-                {demo ? (
+                {demo || waitlist ? (
                   <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                 ) : (
                   <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
@@ -274,13 +276,13 @@ export default function PricingPage() {
             ))}
           </div>
           <p className="small-note" style={{ marginTop: 24 }}>
-            30-day free trial on Individual and Solo · Card required · Cancel before day 30 and you won't be charged<br />
-            Professional, Practice, and Family Office start with a demo<br />
-            Annual billing with auto-renewal · Cancel auto-renewal any time in your billing portal
+            Launching soon · Join the waitlist for Individual and Solo and we&apos;ll email you when they open<br />
+            A 30-day free trial will be available on Individual and Solo at launch<br />
+            Professional, Practice, and Family Office start with a demo — available now
           </p>
           <p className="small-note" style={{ marginTop: 12 }}>
-            Have a complex situation or want to see it live first?{' '}
-            <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us before you trial →</Link>
+            Want to see it live or discuss a firm rollout?{' '}
+            <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us →</Link>
           </p>
         </div>
       </section>

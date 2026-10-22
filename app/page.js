@@ -19,8 +19,28 @@ export default function HomePage() {
 
   return (
     <div>
+      {/* ── COMING SOON BANNER ── */}
+      <div style={{ marginTop: 60, background: 'var(--accent-dim)', borderBottom: '1px solid var(--accent-border)' }}>
+        <div className="container">
+          <div className="coming-soon-banner" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: 16, flexWrap: 'wrap', padding: '12px 0',
+          }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--text-1)', fontWeight: 600 }}>
+              <span className="tag" style={{ marginBottom: 0 }}>
+                <Clock size={11} /> Coming Soon
+              </span>
+              TrustArchive isn&apos;t available yet — we&apos;re almost ready.
+            </span>
+            <Link href="/waitlist" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13 }}>
+              <Shield size={13} /> Join the Waitlist
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* ── HERO ── */}
-      <section style={{ paddingTop: 60 }}>
+      <section style={{ paddingTop: 48 }}>
         <div className="container">
           <div className="hero">
             <div>
@@ -39,8 +59,8 @@ export default function HomePage() {
                 Complete control over your trust data, accounting, and audit trail.
               </p>
               <div className="hero-actions">
-                <Link href="/pricing" className="btn-primary lg">
-                  <Shield size={15} /> Get License
+                <Link href="/waitlist" className="btn-primary lg">
+                  <Shield size={15} /> Join the Waitlist
                 </Link>
                 <Link href="/features" className="btn-secondary lg">View Features →</Link>
               </div>
@@ -296,7 +316,7 @@ export default function HomePage() {
           <div className="section-header">
             <span className="section-label">Pricing</span>
             <h2>Five Tiers. One Application.</h2>
-            <p>From individual trustees to family offices. 30-day free trial on Individual and Solo. Firm plans start with a demo.</p>
+            <p>From individual trustees to family offices. Launching soon — join the waitlist for Individual and Solo, or contact us for a firm demo.</p>
           </div>
           <div className="pricing-grid-5">
             {pricingTiers.map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
@@ -318,7 +338,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="small-note" style={{ marginTop: 20 }}>
-            30-day free trial on Individual and Solo · Demos for firm plans · Annual billing · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
+            Launching soon · Join the waitlist for Individual and Solo · Demos for firm plans · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
           </p>
         </div>
       </section>
@@ -354,7 +374,7 @@ export default function HomePage() {
           <h2>Take Full Control of Your<br />Trust Infrastructure</h2>
           <p>No cloud. No exposure. No compromises.<br />Your data stays on your machine — permanently and privately.</p>
           <div className="cta-actions">
-            <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> Get License</Link>
+            <Link href="/waitlist" className="btn-primary lg"><Shield size={16} /> Join the Waitlist</Link>
             <Link href="/contact" className="btn-secondary lg">Contact Us</Link>
           </div>
           <p className="cta-note">No accounts required · Instant activation · Offline-first · Firm sync is end-to-end encrypted</p>
