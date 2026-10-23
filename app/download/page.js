@@ -1,31 +1,10 @@
 import Link from 'next/link';
-import { Shield, Download, Monitor, Key, AlertCircle, ChevronRight, Lock } from 'lucide-react';
+import { Shield, Clock, Monitor, Lock } from 'lucide-react';
 
 export const metadata = {
-  title: 'Download TrustArchive — Private Trust Administration Software',
-  description: 'Download TrustArchive for Windows or macOS. Installs locally, runs offline, no cloud dependencies.',
+  title: 'Download TrustArchive — Coming Soon',
+  description: 'TrustArchive is launching soon. Join the waitlist to be notified the moment downloads open for Windows and macOS.',
 };
-
-// ── UPDATE THESE WHEN YOU BUILD A NEW RELEASE ──────────────────────────────
-const RELEASE = {
-  version: '1.2.0',
-  date: 'August 2026',
-  windows: {
-    filename: 'TrustArchive_1.2.0_x64_en-US.msi',
-    size: '10.5 MB',
-    url: 'https://github.com/apvera-admin/trustarchive-releases/releases/download/v1.2.0/TrustArchive_1.2.0_x64_en-US.msi',
-    sha256: 'sha256:e708fbf0ad386d7d61eca7ff90c85baadfe417b8d23280fe92c139e1a87f238d',
-    requirements: 'Windows 10 or 11 (64-bit)',
-  },
-  mac: {
-    filename: 'Coming Soon',
-    size: '',
-    url: '#',
-    sha256: 'macOS build in progress',
-    requirements: 'macOS 12 (Monterey) or later',
-  },
-};
-// ───────────────────────────────────────────────────────────────────────────
 
 export default function DownloadPage() {
   return (
@@ -35,122 +14,43 @@ export default function DownloadPage() {
       <div className="page-hero">
         <div className="container">
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            <Download size={11} /> Version {RELEASE.version} — {RELEASE.date}
+            <Clock size={11} /> Downloads Open Soon
           </span>
           <h1>Download TrustArchive</h1>
           <p style={{ maxWidth: 520, margin: '0 auto' }}>
-            Installs locally on your machine. Runs completely offline after install.
-            No accounts. No cloud. No data exposure.
+            TrustArchive isn&apos;t available to download just yet. We&apos;re finishing the final
+            build for Windows and macOS. Join the waitlist and we&apos;ll email you the moment it&apos;s ready.
           </p>
         </div>
       </div>
 
-      {/* ── DOWNLOAD CARDS ── */}
+      {/* ── COMING SOON CARD ── */}
       <section className="section" style={{ paddingTop: 48 }}>
-        <div className="container" style={{ maxWidth: 720 }}>
+        <div className="container" style={{ maxWidth: 560 }}>
 
-          {/* Both platforms side by side */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 48 }}>
-
-            {/* Windows */}
+          <div style={{
+            background: 'var(--bg-surface)',
+            border: '1px solid var(--accent-border)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '40px 36px',
+            textAlign: 'center',
+            marginBottom: 32,
+          }}>
             <div style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--accent-border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 28,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 16,
+              width: 52, height: 52, margin: '0 auto 20px',
+              background: 'var(--accent-dim)', border: '1px solid var(--accent-border)',
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                  <Monitor size={18} style={{ color: 'var(--accent)' }} />
-                  <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)' }}>Windows</span>
-                </div>
-                <div style={{ fontSize: 13, color: 'var(--text-3)', marginBottom: 2 }}>{RELEASE.windows.requirements}</div>
-                <div style={{ fontSize: 12, color: 'var(--text-3)' }}>{RELEASE.windows.size}</div>
-              </div>
-
-              <a href={RELEASE.windows.url} download style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                padding: '12px 20px',
-                background: 'var(--accent)',
-                color: '#09090E',
-                borderRadius: 8,
-                fontWeight: 700,
-                fontSize: 14,
-                textDecoration: 'none',
-              }}>
-                <Download size={15} /> Download .msi
-              </a>
-
-              <div style={{
-                background: 'var(--bg-surface-2)',
-                border: '1px solid var(--border)',
-                borderRadius: 8,
-                padding: '10px 12px',
-              }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
-                  SHA-256
-                </div>
-                <div style={{ fontFamily: 'monospace', fontSize: 10, color: 'var(--text-2)', wordBreak: 'break-all', lineHeight: 1.5 }}>
-                  {RELEASE.windows.sha256}
-                </div>
-              </div>
+              <Clock size={24} style={{ color: 'var(--accent)' }} />
             </div>
-
-            {/* macOS */}
-            <div style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--accent-border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 28,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 16,
-            }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                  <Shield size={18} style={{ color: 'var(--accent)' }} />
-                  <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)' }}>macOS</span>
-                </div>
-                <div style={{ fontSize: 13, color: 'var(--text-3)', marginBottom: 2 }}>{RELEASE.mac.requirements}</div>
-                <div style={{ fontSize: 12, color: 'var(--text-3)' }}>{RELEASE.mac.size}</div>
-              </div>
-
-              <a href={RELEASE.mac.url} download style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                padding: '12px 20px',
-                background: 'var(--accent)',
-                color: '#09090E',
-                borderRadius: 8,
-                fontWeight: 700,
-                fontSize: 14,
-                textDecoration: 'none',
-              }}>
-                <Download size={15} /> Download .dmg
-              </a>
-
-              <div style={{
-                background: 'var(--bg-surface-2)',
-                border: '1px solid var(--border)',
-                borderRadius: 8,
-                padding: '10px 12px',
-              }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
-                  SHA-256
-                </div>
-                <div style={{ fontFamily: 'monospace', fontSize: 10, color: 'var(--text-2)', wordBreak: 'break-all', lineHeight: 1.5 }}>
-                  {RELEASE.mac.sha256}
-                </div>
-              </div>
-            </div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>Launching Soon</h2>
+            <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 24, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
+              Windows and macOS builds are in final preparation. Be the first to get download
+              and licensing details when we go live.
+            </p>
+            <Link href="/waitlist" className="btn-primary lg" style={{ justifyContent: 'center' }}>
+              <Shield size={15} /> Join the Waitlist
+            </Link>
           </div>
 
           {/* Trust badges */}
@@ -175,80 +75,6 @@ export default function DownloadPage() {
             ))}
           </div>
 
-          {/* ── INSTALL STEPS ── */}
-          <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 24 }}>After Downloading</h2>
-
-          {[
-            {
-              num: '01',
-              title: 'Run the Installer',
-              body: 'On Windows, double-click the .exe — click "More info" then "Run anyway" if SmartScreen appears. On macOS, open the .dmg and drag TrustArchive to your Applications folder. If Gatekeeper blocks it, go to System Settings > Privacy & Security and click "Open Anyway."',
-            },
-            {
-              num: '02',
-              title: 'Launch and Activate',
-              body: 'Open TrustArchive and enter your license key when prompted. Activation requires a one-time internet connection. After that, the application runs fully offline.',
-            },
-            {
-              num: '03',
-              title: 'Set Your Master Password',
-              body: 'Create a strong master password to encrypt your local database. This password is never transmitted or stored anywhere — keep it safe. There is no recovery option.',
-            },
-          ].map(({ num, title, body }) => (
-            <div key={num} style={{
-              display: 'flex', gap: 20, marginBottom: 24,
-              paddingBottom: 24, borderBottom: '1px solid var(--border)',
-            }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'var(--accent-subtle)',
-                border: '1px solid var(--accent-border)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 12, fontWeight: 800, color: 'var(--accent)', flexShrink: 0,
-              }}>
-                {num}
-              </div>
-              <div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-1)', marginBottom: 6 }}>{title}</div>
-                <div style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6 }}>{body}</div>
-              </div>
-            </div>
-          ))}
-
-          {/* ── LICENSE KEY CTA ── */}
-          <div style={{
-            background: 'var(--bg-surface-2)',
-            border: '1px solid var(--border-md)',
-            borderRadius: 'var(--radius-lg)',
-            padding: 28, marginBottom: 32,
-            display: 'flex', alignItems: 'center', gap: 20,
-          }}>
-            <div style={{
-              width: 44, height: 44,
-              background: 'var(--accent-subtle)',
-              border: '1px solid var(--accent-border)',
-              borderRadius: 10,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-            }}>
-              <Key size={20} style={{ color: 'var(--accent)' }} />
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-1)', marginBottom: 4 }}>Need a license key?</div>
-              <div style={{ fontSize: 13, color: 'var(--text-2)' }}>
-                Start a free 30-day trial. No charge until day 30. Your key is emailed immediately after checkout.
-              </div>
-            </div>
-            <Link href="/pricing" style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              padding: '10px 18px',
-              background: 'var(--accent)', color: '#09090E',
-              borderRadius: 8, fontWeight: 700, fontSize: 13,
-              textDecoration: 'none', flexShrink: 0, whiteSpace: 'nowrap',
-            }}>
-              Get License <ChevronRight size={14} />
-            </Link>
-          </div>
-
           {/* ── SYSTEM REQUIREMENTS ── */}
           <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>System Requirements</h2>
           <div style={{
@@ -271,27 +97,11 @@ export default function DownloadPage() {
             ))}
           </div>
 
-          {/* ── CHECKSUM NOTE ── */}
-          <div style={{
-            display: 'flex', gap: 12, padding: 16,
-            background: 'var(--bg-surface-2)', border: '1px solid var(--border)',
-            borderRadius: 10, marginBottom: 48,
-          }}>
-            <AlertCircle size={16} style={{ color: 'var(--text-3)', flexShrink: 0, marginTop: 1 }} />
-            <div style={{ fontSize: 13, color: 'var(--text-3)', lineHeight: 1.6 }}>
-              Verify the SHA-256 checksum before installing. On Windows:{' '}
-              <code style={{ fontFamily: 'monospace', fontSize: 12, background: 'var(--bg-surface)', padding: '1px 5px', borderRadius: 4 }}>Get-FileHash filename.exe</code>
-              {' '}in PowerShell. On macOS:{' '}
-              <code style={{ fontFamily: 'monospace', fontSize: 12, background: 'var(--bg-surface)', padding: '1px 5px', borderRadius: 4 }}>shasum -a 256 filename.dmg</code>
-              {' '}in Terminal.
-            </div>
-          </div>
-
           {/* ── SUPPORT ── */}
           <div style={{ textAlign: 'center', paddingBottom: 48 }}>
-            <p style={{ fontSize: 14, color: 'var(--text-3)', marginBottom: 8 }}>Having trouble installing?</p>
+            <p style={{ fontSize: 14, color: 'var(--text-3)', marginBottom: 8 }}>Questions before launch?</p>
             <Link href="/contact" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}>
-              Contact support at support@trustarchive.co →
+              Contact us at sales@trustarchive.co →
             </Link>
           </div>
 

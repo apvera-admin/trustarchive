@@ -195,7 +195,7 @@ const handleSubmit = async (e) => {
                   'The fiduciary ledger with principal and income separation',
                   'Document archive, rules engine, and audit trail',
                   'Local AI assistant querying trust data on-device',
-                  'Which plan fits your situation and how the trial works',
+                  'Which plan fits your situation and how licensing works',
                 ].map(item => (
                   <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <Check size={14} color="var(--accent)" style={{ flexShrink: 0, marginTop: 2 }} />
