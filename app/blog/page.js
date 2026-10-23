@@ -161,7 +161,7 @@ export default function BlogPage() {
           <h2>See TrustArchive in Action</h2>
           <p>The software built for trustees who take their records seriously.</p>
           <div className="cta-actions">
-            <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> Start Free Trial</Link>
+            <Link href="/waitlist" className="btn-primary lg"><Shield size={16} /> Join the Waitlist</Link>
             <Link href="/features" className="btn-secondary lg">View Features</Link>
           </div>
         </div>

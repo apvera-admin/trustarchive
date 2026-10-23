@@ -17,7 +17,7 @@ const sections = [
   },
   {
     title: '3. Subscription and Billing',
-    body: 'TrustArchive is sold as an annual subscription. Your subscription renews automatically each year unless cancelled before the renewal date. You will receive email reminders 30 and 7 days before renewal. You may cancel auto-renewal at any time through your billing portal — your access continues through the end of your paid period. A 30-day free trial is available for new subscribers. Your payment method will be charged at the end of the trial period unless you cancel before day 30.',
+    body: 'TrustArchive is sold as an annual subscription. Your subscription renews automatically each year unless cancelled before the renewal date. You will receive email reminders 30 and 7 days before renewal. You may cancel auto-renewal at any time through your billing portal — your access continues through the end of your paid period. A 30-day free trial will be available for new subscribers at launch. Your payment method will be charged at the end of the trial period unless you cancel before day 30.',
   },
   {
     title: '4. Refunds',

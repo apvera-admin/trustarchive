@@ -256,7 +256,7 @@ export default function HomePage() {
           </div>
           <div className="steps">
             {[
-              { num: '01', icon: <CreditCard size={16} />, title: 'Purchase Your License', desc: 'Secure your license key and receive immediate download access. No account creation required.' },
+              { num: '01', icon: <CreditCard size={16} />, title: 'Purchase Your License', desc: 'When TrustArchive launches, you\'ll choose your plan and receive your license key and download access. No account creation required.' },
               { num: '02', icon: <Download size={16} />, title: 'Download & Install', desc: 'Install on Windows or macOS. No setup servers. No cloud configuration. No dependencies.' },
               { num: '03', icon: <Shield size={16} />, title: 'Activate Locally', desc: 'Enter your license key. Your system activates instantly — Individual & Solo activate with no internet. Firm tiers use encrypted sync — data is encrypted on your device before it leaves.' },
               { num: '04', icon: <Database size={16} />, title: 'Run Fully Local', desc: 'Your trust data, accounting, documents, and AI all run securely on your machine. Permanently.' },

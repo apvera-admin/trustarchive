@@ -457,8 +457,8 @@ export default function BlogPostPage({ params }) {
                 <p style={{ fontSize: 14, color: 'var(--text-3)', lineHeight: 1.7, fontStyle: 'italic' }}>
                   TrustArchive is fiduciary accounting software that runs entirely on your machine. No cloud, no data exposure. Built for trustees who take their records seriously.
                 </p>
-                <Link href="/pricing" className="btn-primary" style={{ marginTop: 20, display: 'inline-flex' }}>
-                  <Shield size={14} /> Start a Free Trial
+                <Link href="/waitlist" className="btn-primary" style={{ marginTop: 20, display: 'inline-flex' }}>
+                  <Shield size={14} /> Join the Waitlist
                 </Link>
               </div>
             </article>
@@ -493,10 +493,10 @@ export default function BlogPostPage({ params }) {
               }}>
                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', marginBottom: 8 }}>TrustArchive</div>
                 <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6, marginBottom: 16 }}>
-                  Fiduciary accounting software that runs entirely on your machine. 30-day free trial.
+                  Fiduciary accounting software that runs entirely on your machine. Launching soon.
                 </p>
-                <Link href="/pricing" style={{ fontSize: 13, fontWeight: 600, color: 'var(--accent)', textDecoration: 'none' }}>
-                  See plans &rarr;
+                <Link href="/waitlist" style={{ fontSize: 13, fontWeight: 600, color: 'var(--accent)', textDecoration: 'none' }}>
+                  Join the waitlist &rarr;
                 </Link>
               </div>
             </aside>

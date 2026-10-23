@@ -298,12 +298,12 @@ export default function UseCasesPage() {
       <section className="cta-section">
         <div className="container">
           <h2>Recognize Yourself<br />in One of These?</h2>
-          <p>Start a free 30-day trial. No charge until day 30. Cancel any time.</p>
+          <p>TrustArchive is launching soon. Join the waitlist and we&apos;ll notify you the moment it&apos;s ready.</p>
           <div className="cta-actions">
-            <Link href="/pricing" className="btn-primary lg"><Shield size={16} /> See Plans &amp; Pricing</Link>
+            <Link href="/waitlist" className="btn-primary lg"><Shield size={16} /> Join the Waitlist</Link>
             <Link href="/contact" className="btn-secondary lg">Talk to Us First</Link>
           </div>
-          <p className="cta-note">No accounts required to trial · Your data never leaves your machine</p>
+          <p className="cta-note">No accounts required · Your data never leaves your machine</p>
         </div>
       </section>
     </div>
