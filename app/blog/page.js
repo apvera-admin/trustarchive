@@ -113,7 +113,7 @@ export default function BlogPage() {
           </Link>
 
           {/* Post grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }}>
+          <div className="blog-grid">
             {rest.map(post => {
               const colors = categoryColors[post.category] || categoryColors['Fiduciary Accounting'];
               return (

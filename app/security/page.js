@@ -71,14 +71,11 @@ export default function SecurityPage() {
       {/* Core commitment banner */}
       <section className="section section-bordered">
         <div className="container">
-          <div style={{
+          <div className="stat-3" style={{
             background: 'var(--bg-surface)',
             border: '1px solid var(--accent-border)',
             borderRadius: 'var(--radius-lg)',
             padding: '32px 40px',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 32,
             textAlign: 'center',
           }}>
             {[
@@ -104,9 +101,7 @@ export default function SecurityPage() {
             <h2>Security by Architecture,<br />Not by Policy</h2>
             <p>Most software promises to protect your data. TrustArchive is built so that protecting your data requires no promises — it is simply not possible for us to access it.</p>
           </div>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+          <div className="bordered-3" style={{
             gap: 1,
             background: 'var(--border)',
             border: '1px solid var(--border)',
@@ -229,9 +224,7 @@ export default function SecurityPage() {
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
             }}>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1.5fr 2fr 1.5fr',
+              <div className="lic-row lic-head" style={{
                 background: 'var(--bg-surface-2)',
                 padding: '12px 20px',
                 borderBottom: '1px solid var(--border-md)',
@@ -241,9 +234,7 @@ export default function SecurityPage() {
                 ))}
               </div>
               {licenseData.map(({ item, purpose, stored }, i) => (
-                <div key={item} style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1.5fr 2fr 1.5fr',
+                <div key={item} className="lic-row" style={{
                   padding: '14px 20px',
                   borderBottom: i < licenseData.length - 1 ? '1px solid var(--border)' : 'none',
                   background: i % 2 === 1 ? 'var(--bg-surface-2)' : 'var(--bg-surface)',

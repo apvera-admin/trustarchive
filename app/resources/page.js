@@ -43,7 +43,7 @@ useEffect(() => {
 
       <section style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', padding: '100px 0 80px' }}>
+          <div className="lead-split" style={{ padding: '100px 0 80px' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
                 <span className="tag"><FileText size={11} /> White Paper</span>

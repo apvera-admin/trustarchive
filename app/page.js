@@ -346,7 +346,7 @@ export default function HomePage() {
       {/* ── LEAD MAGNET ── */}
       <section style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', padding: '72px 0' }}>
+          <div className="lead-split" style={{ padding: '72px 0' }}>
             <div>
               <span className="tag" style={{ marginBottom: 16, display: 'inline-flex' }}>
                 <FileText size={11} /> Free White Paper

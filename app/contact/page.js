@@ -176,7 +176,7 @@ const handleSubmit = async (e) => {
       {/* ── BOOK A DEMO ── */}
       <section className="section section-bordered section-alt">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 80, alignItems: 'start' }}>
+          <div className="contact-split">
 
             {/* Left — Info */}
             <div>

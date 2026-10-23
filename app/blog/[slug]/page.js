@@ -418,7 +418,7 @@ export default function BlogPostPage({ params }) {
 
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 64, alignItems: 'start' }}>
+          <div className="article-split">
 
             {/* Article body */}
             <article>
