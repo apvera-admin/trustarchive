@@ -119,7 +119,7 @@ img { max-width: 100%; }
 .mockup-sidebar { width: 148px; background: var(--bg-surface-2); border-right: 1px solid var(--border); padding: 12px 8px; flex-shrink: 0; }
 .mockup-nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 6px; font-size: 11px; color: var(--text-3); margin-bottom: 2px; }
 .mockup-nav-item.active { background: var(--accent-dim); color: var(--accent); }
-.mockup-content { flex: 1; padding: 16px; }
+.mockup-content { flex: 1; padding: 16px; height: 300px; overflow: hidden; }
 .mockup-section-title { font-size: 14px; font-weight: 700; color: var(--text-1); margin-bottom: 12px; }
 .mockup-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
 .mockup-card { background: var(--bg-surface-3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
@@ -325,9 +325,16 @@ img { max-width: 100%; }
 .bordered-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
 .lic-row { display: grid; grid-template-columns: 1.5fr 2fr 1.5fr; }
 
+/* Stack hero earlier so the app mockup is never squeezed into a narrow column */
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; gap: 56px; padding: 100px 0 72px; }
+}
+
 /* ── Mobile (≤768px) ── */
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
+  .mockup-sidebar { width: 104px; }
+  .mockup-content { height: 400px; padding: 14px; }
   .pricing-wide { padding: 0 16px; }
 
   .hero { grid-template-columns: 1fr; gap: 48px; padding: 80px 0 60px; }
