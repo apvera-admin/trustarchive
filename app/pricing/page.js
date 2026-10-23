@@ -11,7 +11,7 @@ const plans = [
   {
     tier: 'Individual',
     slug: 'individual',
-    price: '$699',
+    price: '$999',
     period: '/ year',
     limit: '1 trust',
     desc: 'For personal trustees managing a single family trust.',
@@ -31,7 +31,7 @@ const plans = [
   {
     tier: 'Solo',
     slug: 'solo',
-    price: '$1,500',
+    price: '$1,799',
     period: '/ year',
     limit: 'Up to 5 trusts',
     desc: 'For private trustees managing a small trust portfolio.',
@@ -50,7 +50,7 @@ const plans = [
   {
     tier: 'Professional',
     slug: 'professional',
-    price: '$2,500',
+    price: '$3,499',
     period: '/ year base',
     perSeat: '$150',
     baseSeats: 2,
@@ -75,7 +75,7 @@ const plans = [
   {
     tier: 'Practice',
     slug: 'practice',
-    price: '$4,900',
+    price: '$5,499',
     period: '/ year base',
     perSeat: '$125',
     baseSeats: 5,
@@ -96,7 +96,7 @@ const plans = [
   {
     tier: 'Family Office',
     slug: 'family_office',
-    price: '$9,600',
+    price: '$9,999',
     period: '/ year base',
     perSeat: '$200',
     baseSeats: 5,
@@ -299,11 +299,11 @@ export default function PricingPage() {
               <thead>
                 <tr>
                   <th style={{ textAlign: 'left' }}>Feature</th>
-                  <th>Individual<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$699/yr</span></th>
-                  <th>Solo<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$1,500/yr</span></th>
-                  <th>Professional<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$2,500 + $150/seat</span></th>
-                  <th>Practice<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$4,900 + $125/seat</span></th>
-                  <th className="fo-col-head">Family Office<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#D4A017' }}>$9,600 + $200/seat</span></th>
+                  <th>Individual<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$999/yr</span></th>
+                  <th>Solo<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$1,799/yr</span></th>
+                  <th>Professional<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$3,499 + $150/seat</span></th>
+                  <th>Practice<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$5,499 + $125/seat</span></th>
+                  <th className="fo-col-head">Family Office<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#D4A017' }}>$9,999 + $200/seat</span></th>
                 </tr>
               </thead>
               <tbody>

@@ -10,11 +10,11 @@ import AppMockup from '../components/AppMockup';
 
 export default function HomePage() {
   const pricingTiers = [
-    { tier: 'Individual', price: '$699', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Solo', price: '$1,500', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Professional', price: '$2,500', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', gold: false, featured: true, badge: 'Most Popular' },
-    { tier: 'Practice', price: '$4,900', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Family Office', price: '$9,600', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true, featured: false, badge: null },
+    { tier: 'Individual', price: '$999', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Solo', price: '$1,799', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Professional', price: '$3,499', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', gold: false, featured: true, badge: 'Most Popular' },
+    { tier: 'Practice', price: '$5,499', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
+    { tier: 'Family Office', price: '$9,999', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true, featured: false, badge: null },
   ];
 
   return (
