@@ -1,6 +1,7 @@
 import './globals.css';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import RefCapture from '../components/RefCapture';
 
 export const metadata = {
   title: 'TrustArchive — Private Trust Administration',
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <RefCapture />
         <Nav />
         <main>{children}</main>
         <Footer />

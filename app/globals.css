@@ -239,6 +239,15 @@ img { max-width: 100%; }
 .form-textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
 .form-select { appearance: none; }
 
+/* Waitlist survey */
+.survey-group { border: none; padding: 0; margin: 0 0 28px; min-width: 0; }
+.survey-question { display: block; font-size: 15px; font-weight: 600; color: var(--text-1); margin-bottom: 12px; line-height: 1.4; padding: 0; }
+.survey-options { display: flex; flex-direction: column; gap: 8px; }
+.survey-option { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--bg-surface); border: 1px solid var(--border-md); border-radius: var(--radius-md); font-size: 14px; color: var(--text-1); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.survey-option:hover { border-color: var(--border-strong); }
+.survey-option.selected { border-color: var(--accent-border); background: var(--accent-dim); }
+.survey-option input { accent-color: var(--accent); margin: 0; flex-shrink: 0; }
+
 /* ── Features detail page ── */
 .feature-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; padding: 72px 0; border-bottom: 1px solid var(--border); }
 .feature-detail:last-child { border-bottom: none; }
@@ -318,6 +327,8 @@ img { max-width: 100%; }
 
 /* ── Responsive inline-grid replacements ── */
 .lead-split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.lead-split > * { min-width: 0; }
+.resources-title { font-size: 40px; overflow-wrap: break-word; }
 .contact-split { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; align-items: start; }
 .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .article-split { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: start; }
@@ -363,6 +374,7 @@ img { max-width: 100%; }
   .persona-grid { grid-template-columns: 1fr; gap: 40px; }
   .form-row-2 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-grid > :first-child { grid-column: 1 / -1; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
   .privacy-compare { grid-template-columns: 1fr; }
   .roadmap-cols { grid-template-columns: 1fr; gap: 0; }
@@ -372,5 +384,7 @@ img { max-width: 100%; }
   .stat-3 { grid-template-columns: 1fr; gap: 28px; }
   .bordered-3 { grid-template-columns: 1fr; }
   .lic-head { display: none; }
+  .form-card { padding: 24px 18px !important; }
+  .resources-title { font-size: 30px; }
   .lic-row { grid-template-columns: 1fr; }
 }

@@ -1,9 +1,20 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Check, Shield } from 'lucide-react';
+import { REF_STORAGE_KEY } from '../../lib/waitlist';
+
+function storedRef() {
+  try {
+    return localStorage.getItem(REF_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
 
 export default function WaitlistForm({ tier }) {
+  const router = useRouter();
   const [form, setForm] = useState({ name: '', email: '', firm: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,9 +31,14 @@ export default function WaitlistForm({ tier }) {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, tier: tier || '' }),
+        body: JSON.stringify({ ...form, tier: tier || '', source: storedRef() }),
       });
       if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (data.id) {
+          router.push(`/waitlist/thanks?id=${encodeURIComponent(data.id)}`);
+          return;
+        }
         setSubmitted(true);
       } else {
         setError('Something went wrong. Please try again.');
