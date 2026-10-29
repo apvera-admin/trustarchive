@@ -49,7 +49,7 @@ useEffect(() => {
                 <span className="tag"><FileText size={11} /> White Paper</span>
                 <span style={{ fontSize: 12, color: 'var(--text-3)', fontWeight: 500 }}>Free Download</span>
               </div>
-              <h1 style={{ fontSize: 40, fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 20 }}>
+              <h1 className="resources-title" style={{ fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 20 }}>
                 The Cloud Liability Problem in Trust Administration
               </h1>
               <p style={{ fontSize: 16, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 32, maxWidth: 460 }}>
@@ -102,13 +102,13 @@ useEffect(() => {
                   </div>
                 </div>
               ) : (
-                <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '40px', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
+                <div className="form-card" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: '40px', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
                   <div style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28 }}>
                     <div style={{ width: 44, height: 52, background: 'var(--bg-surface-3)', border: '1px solid var(--border-md)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <FileText size={20} color="var(--accent)" />
                     </div>
-                    <div>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)', marginBottom: 3 }}>Cloud_Liability_WhitePaper.pdf</div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)', marginBottom: 3, overflowWrap: 'anywhere' }}>Cloud_Liability_WhitePaper.pdf</div>
                       <div style={{ fontSize: 11, color: 'var(--text-3)' }}>TrustArchive · 32 pages · Free</div>
                     </div>
                     <div style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 600, color: 'var(--accent)', background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', padding: '3px 10px', borderRadius: 99 }}>PDF</div>
