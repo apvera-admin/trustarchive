@@ -71,8 +71,8 @@ const handleSubmit = async (e) => {
 
               <Link href="/demo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: '18px 24px', marginBottom: 24, textDecoration: 'none' }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', marginBottom: 4 }}>Evaluating TrustArchive for a firm?</div>
-                  <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.5 }}>Skip the back-and-forth — see the demo and pick a time.</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', marginBottom: 4 }}>Want to see TrustArchive in action?</div>
+                  <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.5 }}>Watch the demo for individual trustees or firms, then book a call if you have questions.</div>
                 </div>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap' }}>
                   See the Demo <ArrowRight size={14} />

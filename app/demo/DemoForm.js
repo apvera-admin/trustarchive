@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 import { REF_STORAGE_KEY } from '../../lib/waitlist';
-import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS } from '../../lib/demo';
+import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, audienceFor } from '../../lib/demo';
 
 function storedRef() {
   try {
@@ -27,24 +27,30 @@ function Select({ label, value, options, onChange }) {
 
 export default function DemoForm({ tier, tierName }) {
   const router = useRouter();
-  const [form, setForm] = useState({ name: '', email: '', firm: '', role: '', trusts_managed: '', seats: '' });
+  const [form, setForm] = useState({ name: '', email: '', role: '', trusts_managed: '', firm: '', seats: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const set = key => value => setForm(f => ({ ...f, [key]: value }));
+
+  // Firm questions appear once the answers point to the firm demo.
+  const isFirm = Boolean(form.role) && audienceFor(form.role, form.trusts_managed) === 'firm';
 
   const handleSubmit = async e => {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
+      const body = { ...form, tier: tier || '', source: storedRef() };
+      if (!isFirm) body.seats = '';
       const res = await fetch('/api/demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, tier: tier || '', source: storedRef() }),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
-        router.push('/demo/next');
+        const data = await res.json().catch(() => ({}));
+        router.push(`/demo/${data.audience === 'firm' ? 'firm' : 'individual'}`);
         return;
       }
       setError('Something went wrong. Please try again, or email sales@trustarchive.co.');
@@ -57,9 +63,9 @@ export default function DemoForm({ tier, tierName }) {
   return (
     <form onSubmit={handleSubmit} style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: 36 }}>
       <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Step 1 of 3</div>
-      <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Tell us about your firm</h3>
+      <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Tell us about yourself</h3>
       <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 24, lineHeight: 1.6 }}>
-        Takes about 30 seconds. The demo opens right after{tierName ? ` · Interested in ${tierName}` : ''}.
+        Takes about 30 seconds. We&apos;ll show you the demo that fits how you work{tierName ? ` · Interested in ${tierName}` : ''}.
       </p>
       <div className="form-row-2">
         <div className="form-group">
@@ -67,19 +73,21 @@ export default function DemoForm({ tier, tierName }) {
           <input className="form-input" type="text" placeholder="Your full name" required value={form.name} onChange={e => set('name')(e.target.value)} />
         </div>
         <div className="form-group">
-          <label className="form-label">Work email</label>
-          <input className="form-input" type="email" placeholder="you@yourfirm.com" required value={form.email} onChange={e => set('email')(e.target.value)} />
+          <label className="form-label">Email</label>
+          <input className="form-input" type="email" placeholder="you@example.com" required value={form.email} onChange={e => set('email')(e.target.value)} />
         </div>
       </div>
-      <div className="form-group">
-        <label className="form-label">Firm</label>
-        <input className="form-input" type="text" placeholder="Law firm, CPA firm, trust company, family office..." required value={form.firm} onChange={e => set('firm')(e.target.value)} />
-      </div>
-      <Select label="Your role" value={form.role} options={ROLE_OPTIONS} onChange={set('role')} />
-      <div className="form-row-2">
-        <Select label="Trusts managed" value={form.trusts_managed} options={TRUSTS_OPTIONS} onChange={set('trusts_managed')} />
-        <Select label="Users who need access" value={form.seats} options={SEATS_OPTIONS} onChange={set('seats')} />
-      </div>
+      <Select label="Which best describes you?" value={form.role} options={ROLE_OPTIONS} onChange={set('role')} />
+      <Select label="How many trusts do you manage?" value={form.trusts_managed} options={TRUSTS_OPTIONS} onChange={set('trusts_managed')} />
+      {isFirm && (
+        <div className="form-row-2">
+          <div className="form-group">
+            <label className="form-label">Firm</label>
+            <input className="form-input" type="text" placeholder="Firm or organization name" required value={form.firm} onChange={e => set('firm')(e.target.value)} />
+          </div>
+          <Select label="Users who need access" value={form.seats} options={SEATS_OPTIONS} onChange={set('seats')} />
+        </div>
+      )}
       {error && <p style={{ fontSize: 13, color: 'var(--danger)', marginBottom: 12 }}>{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: loading ? 0.7 : 1 }}>
         {loading ? 'Sending...' : <>Watch the demo <ArrowRight size={15} /></>}

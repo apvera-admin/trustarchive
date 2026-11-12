@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
 import StartTrialButton from './StartTrialButton';
-import { hasDemoVideo, DEMO_VIDEO_LENGTH } from '../../lib/demo';
+import { AUDIENCES, hasDemoVideo } from '../../lib/demo';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
@@ -268,7 +268,7 @@ export default function PricingPage() {
                     <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                     {demo && (
                       <div style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 6 }}>
-                        {hasDemoVideo() ? `Watch now · ${DEMO_VIDEO_LENGTH}` : 'Demo + follow-up call'}
+                        {hasDemoVideo('firm') ? `Watch now · ${AUDIENCES.firm.videoLength}` : 'Demo + follow-up call'}
                       </div>
                     )}
                   </>

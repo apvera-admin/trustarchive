@@ -1,14 +1,14 @@
 import { cookies } from 'next/headers';
 import { Resend } from 'resend';
 import { sanitizeRef } from '../../../lib/waitlist';
-import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, DEMO_ACCESS_COOKIE, hasDemoVideo } from '../../../lib/demo';
+import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, DEMO_ACCESS_COOKIE, audienceFor, hasDemoVideo } from '../../../lib/demo';
 import { insertDemoRequest, setDemoNotionPageId } from '../../../lib/supabase';
 import { createDemoLead, canonicalPlanInterest } from '../../../lib/notion';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const DEMO_PAGE_URL = 'https://www.trustarchive.co/demo/next';
+const SITE_URL = 'https://www.trustarchive.co';
 const ACCESS_MAX_AGE = 60 * 60 * 24 * 180; // 180 days
 
 function clean(value, max) {
@@ -37,11 +37,12 @@ async function mirrorToNotion(id, lead) {
   if (id && pageId) await setDemoNotionPageId(id, pageId);
 }
 
-async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, planInterest, source }) {
+async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, planInterest, audience, source }) {
   const firstName = escapeHtml(name.split(' ')[0]);
   // The id lets the link open the demo on any device, not just the one that filled in the form.
-  const demoUrl = id ? `${DEMO_PAGE_URL}?id=${id}` : DEMO_PAGE_URL;
-  const nextStep = hasDemoVideo()
+  const demoPage = `${SITE_URL}/demo/${audience}`;
+  const demoUrl = id ? `${demoPage}?id=${id}` : demoPage;
+  const nextStep = hasDemoVideo(audience)
     ? 'Your demo is ready to watch whenever it suits you. When you’re done, book a follow-up call for any questions.'
     : 'Your demo page is ready. Book a follow-up call there and we’ll walk you through TrustArchive.';
 
@@ -64,11 +65,11 @@ async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, p
         <div style="padding: 40px 40px 32px; background: #ffffff;">
           <p style="font-size: 15px; color: #3a3a52; line-height: 1.6; margin: 0 0 16px;">Hi ${firstName},</p>
           <p style="font-size: 15px; color: #3a3a52; line-height: 1.6; margin: 0 0 16px;">
-            Thanks for requesting a TrustArchive demo for <strong style="color: #0f0f14;">${escapeHtml(firm)}</strong>.
+            Thanks for requesting a TrustArchive demo${firm ? ` for <strong style="color: #0f0f14;">${escapeHtml(firm)}</strong>` : ''}.
           </p>
           <p style="font-size: 15px; color: #3a3a52; line-height: 1.6; margin: 0 0 24px;">${nextStep}</p>
           <a href="${demoUrl}" style="display: inline-block; background: #2DD4BF; color: #000000; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
-            ${hasDemoVideo() ? 'Watch the demo' : 'Open your demo page'} &rarr;
+            ${hasDemoVideo(audience) ? 'Watch the demo' : 'Open your demo page'} &rarr;
           </a>
           <p style="font-size: 13px; color: #6b6b85; line-height: 1.6; margin: 28px 0 0;">
             Questions? Just reply to this email.
@@ -84,7 +85,8 @@ async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, p
   });
 
   // Internal notification
-  const summary = [planInterest, trustsManaged && `${trustsManaged} trusts`, seats && `${seats} users`]
+  const audienceName = audience === 'firm' ? 'Firm demo' : 'Individual demo';
+  const summary = [audienceName, planInterest, trustsManaged && `${trustsManaged} trusts`, seats && `${seats} users`]
     .filter(Boolean).join(', ');
   const row = (label, value, shaded) => `
     <tr${shaded ? ' style="background:#f9f9f9"' : ''}><td style="padding: 8px; font-weight: bold;">${label}</td><td style="padding: 8px;">${value ? escapeHtml(value) : '—'}</td></tr>`;
@@ -92,7 +94,7 @@ async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, p
     from: 'TrustArchive <noreply@trustarchive.co>',
     to: 'sales@trustarchive.co',
     replyTo: email,
-    subject: `Demo request — ${firm}${summary ? ` (${summary})` : ''}`,
+    subject: `Demo request — ${firm || name} (${summary})`,
     html: `
       <div style="font-family: sans-serif; max-width: 500px;">
         <h2 style="color: #2DD4BF;">New Demo Request</h2>
@@ -101,10 +103,11 @@ async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, p
           ${row('Email', email, true)}
           ${row('Firm', firm)}
           ${row('Role', role, true)}
-          ${row('Trusts managed', trustsManaged)}
-          ${row('Users who need access', seats, true)}
-          ${row('Interested tier', planInterest)}
-          ${row('Source', source, true)}
+          ${row('Demo sent', audienceName)}
+          ${row('Trusts managed', trustsManaged, true)}
+          ${row('Users who need access', seats)}
+          ${row('Interested tier', planInterest, true)}
+          ${row('Source', source)}
         </table>
         <p style="color: #888; font-size: 12px; margin-top: 24px;">Reply directly to this email to respond to ${escapeHtml(name)}.</p>
       </div>
@@ -130,18 +133,27 @@ export async function POST(request) {
 
   const email = clean(body?.email, 254);
   const name = clean(body?.name, 200);
-  const firm = clean(body?.firm, 200);
-  if (!email || !EMAIL_PATTERN.test(email) || !name || !firm) {
-    return Response.json({ error: 'Name, a valid email, and firm are required' }, { status: 400 });
+  const role = option(body?.role, ROLE_OPTIONS);
+  const trustsManaged = option(body?.trusts_managed, TRUSTS_OPTIONS);
+  if (!email || !EMAIL_PATTERN.test(email) || !name || !role || !trustsManaged) {
+    return Response.json({ error: 'Name, a valid email, role, and trusts managed are required' }, { status: 400 });
+  }
+
+  // Which demo they see. Firms must name their firm; for individuals it's optional.
+  const audience = audienceFor(role, trustsManaged);
+  const firm = clean(body.firm, 200);
+  if (audience === 'firm' && !firm) {
+    return Response.json({ error: 'Firm is required' }, { status: 400 });
   }
 
   const lead = {
     email,
     name,
     firm,
-    role: option(body.role, ROLE_OPTIONS),
-    trustsManaged: option(body.trusts_managed, TRUSTS_OPTIONS),
-    seats: option(body.seats, SEATS_OPTIONS),
+    role,
+    trustsManaged,
+    seats: audience === 'firm' ? option(body.seats, SEATS_OPTIONS) : null,
+    audience,
     planInterest: canonicalPlanInterest(body.tier),
     source: sanitizeRef(body.source),
   };
@@ -157,6 +169,7 @@ export async function POST(request) {
       trusts_managed: lead.trustsManaged,
       seats: lead.seats,
       plan_interest: lead.planInterest,
+      audience: lead.audience,
       source: lead.source,
     });
   } catch (error) {
@@ -190,5 +203,5 @@ export async function POST(request) {
     maxAge: ACCESS_MAX_AGE,
   });
 
-  return Response.json(id ? { success: true, id } : { success: true });
+  return Response.json(id ? { success: true, audience, id } : { success: true, audience });
 }

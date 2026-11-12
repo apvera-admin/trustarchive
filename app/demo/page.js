@@ -1,24 +1,20 @@
 import { Shield, Check, PlayCircle } from 'lucide-react';
 import DemoForm from './DemoForm';
 import StepBar from './StepBar';
-import { hasDemoVideo, tierLabel, DEMO_VIDEO_LENGTH } from '../../lib/demo';
+import { tierLabel } from '../../lib/demo';
 
 export const metadata = {
   title: 'See the Demo — TrustArchive',
-  description: 'See TrustArchive in action for your firm. Tell us about your practice, then see the full application running with a real trust structure.',
+  description: 'See TrustArchive in action — for individual trustees, solo practitioners, and firms. Tell us how you work and watch the demo that fits.',
 };
 
 export default function DemoPage({ searchParams }) {
   const tier = typeof searchParams?.tier === 'string' ? searchParams.tier : '';
   const tierName = tierLabel(tier);
-  const video = hasDemoVideo();
-
   const nextSteps = [
-    video
-      ? `The demo opens right away — about ${DEMO_VIDEO_LENGTH}, watch at your own pace`
-      : 'Your demo page opens right away',
-    'Book a follow-up call on the same page for anything the demo didn’t answer',
-    'On the call we answer your questions and size the right plan and seats',
+    'Your demo opens right away — one for individual trustees, one for firms',
+    'Watch it at your own pace',
+    'Book a follow-up call on the same page for anything it didn’t answer',
   ];
 
   return (
@@ -28,10 +24,10 @@ export default function DemoPage({ searchParams }) {
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
             <PlayCircle size={11} /> Watch Anytime
           </span>
-          <h1>See TrustArchive for Your Firm</h1>
+          <h1>See TrustArchive in Action</h1>
           <p style={{ maxWidth: 560, margin: '0 auto' }}>
-            Tell us about your firm and the demo opens right away. Watch it on your schedule, then book a
-            follow-up call if you have questions.
+            Whether you manage one family trust or hundreds for clients, tell us how you work and we&apos;ll
+            show you the demo built for you.
           </p>
           <StepBar current={1} />
         </div>
@@ -46,8 +42,8 @@ export default function DemoPage({ searchParams }) {
                 {[
                   'How the encrypted local database works in practice',
                   'The fiduciary ledger with principal and income separation',
-                  'Encrypted firm sync across your team',
-                  'ACTEC court-ready reports and the audit trail',
+                  'Document archive, rules engine, and obligations tracking',
+                  'Court-ready reports and the cryptographic audit trail',
                   'Local AI assistant querying trust data on-device',
                 ].map(item => <li key={item}><Check size={14} /> {item}</li>)}
               </ul>
@@ -64,7 +60,7 @@ export default function DemoPage({ searchParams }) {
                   <Shield size={12} /> No sales pressure
                 </div>
                 <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6, margin: 0 }}>
-                  If TrustArchive is not the right fit for your practice we will tell you upfront.
+                  If TrustArchive is not the right fit for you, we will tell you upfront.
                 </p>
               </div>
             </div>

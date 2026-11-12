@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react';
 
-const STEPS = ['Tell us about your firm', 'Watch the demo', 'Book a follow-up call'];
+const STEPS = ['Tell us about yourself', 'Watch the demo', 'Book a follow-up call'];
 
 // Three-step progress bar shown at the top of the demo funnel pages.
 export default function StepBar({ current }) {
