@@ -268,7 +268,7 @@ export default function PricingPage() {
                     <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
                     {demo && (
                       <div style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 6 }}>
-                        {hasDemoVideo() ? `Watch now · ${DEMO_VIDEO_LENGTH}` : '30-min live walkthrough'}
+                        {hasDemoVideo() ? `Watch now · ${DEMO_VIDEO_LENGTH}` : 'Demo + follow-up call'}
                       </div>
                     )}
                   </>

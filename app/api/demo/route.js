@@ -1,13 +1,15 @@
+import { cookies } from 'next/headers';
 import { Resend } from 'resend';
 import { sanitizeRef } from '../../../lib/waitlist';
-import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, hasDemoVideo } from '../../../lib/demo';
+import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, DEMO_ACCESS_COOKIE, hasDemoVideo } from '../../../lib/demo';
 import { insertDemoRequest, setDemoNotionPageId } from '../../../lib/supabase';
 import { createDemoLead, canonicalPlanInterest } from '../../../lib/notion';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const NEXT_STEP_URL = 'https://www.trustarchive.co/demo/next';
+const DEMO_PAGE_URL = 'https://www.trustarchive.co/demo/next';
+const ACCESS_MAX_AGE = 60 * 60 * 24 * 180; // 180 days
 
 function clean(value, max) {
   if (typeof value !== 'string') return null;
@@ -35,11 +37,13 @@ async function mirrorToNotion(id, lead) {
   if (id && pageId) await setDemoNotionPageId(id, pageId);
 }
 
-async function sendEmails({ name, email, firm, role, trustsManaged, seats, planInterest, source }) {
+async function sendEmails(id, { name, email, firm, role, trustsManaged, seats, planInterest, source }) {
   const firstName = escapeHtml(name.split(' ')[0]);
+  // The id lets the link open the demo on any device, not just the one that filled in the form.
+  const demoUrl = id ? `${DEMO_PAGE_URL}?id=${id}` : DEMO_PAGE_URL;
   const nextStep = hasDemoVideo()
-    ? 'Watch the demo whenever it suits you, then book a short Q&amp;A call for any questions.'
-    : 'Pick a time for your 30-minute live walkthrough.';
+    ? 'Your demo is ready to watch whenever it suits you. When you’re done, book a follow-up call for any questions.'
+    : 'Your demo page is ready. Book a follow-up call there and we’ll walk you through TrustArchive.';
 
   // Next-step email to the prospect, in case they left before booking.
   const confirmation = resend.emails.send({
@@ -63,11 +67,11 @@ async function sendEmails({ name, email, firm, role, trustsManaged, seats, planI
             Thanks for requesting a TrustArchive demo for <strong style="color: #0f0f14;">${escapeHtml(firm)}</strong>.
           </p>
           <p style="font-size: 15px; color: #3a3a52; line-height: 1.6; margin: 0 0 24px;">${nextStep}</p>
-          <a href="${NEXT_STEP_URL}" style="display: inline-block; background: #2DD4BF; color: #000000; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
-            ${hasDemoVideo() ? 'Watch the demo' : 'Pick a time'} &rarr;
+          <a href="${demoUrl}" style="display: inline-block; background: #2DD4BF; color: #000000; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
+            ${hasDemoVideo() ? 'Watch the demo' : 'Open your demo page'} &rarr;
           </a>
           <p style="font-size: 13px; color: #6b6b85; line-height: 1.6; margin: 28px 0 0;">
-            Already booked? You're all set — a calendar invite is on its way. Questions before then? Just reply to this email.
+            Questions? Just reply to this email.
           </p>
         </div>
         <div style="padding: 20px 40px; border-top: 1px solid #e0e0e8;">
@@ -162,7 +166,7 @@ export async function POST(request) {
   // 2. Notion mirror and emails run side by side. Neither can fail the request.
   const [notionResult, emailResult] = await Promise.allSettled([
     mirrorToNotion(id, lead),
-    sendEmails(lead),
+    sendEmails(id, lead),
   ]);
   if (notionResult.status === 'rejected') {
     console.error('[demo] Notion mirror failed:', notionResult.reason?.message);
@@ -177,5 +181,14 @@ export async function POST(request) {
     return Response.json({ error: 'Failed to process request' }, { status: 500 });
   }
 
-  return Response.json({ success: true });
+  // Unlock the demo video for this browser.
+  cookies().set(DEMO_ACCESS_COOKIE, id || 'granted', {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    path: '/demo',
+    maxAge: ACCESS_MAX_AGE,
+  });
+
+  return Response.json(id ? { success: true, id } : { success: true });
 }

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 import { REF_STORAGE_KEY } from '../../lib/waitlist';
-import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, hasDemoVideo } from '../../lib/demo';
+import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS } from '../../lib/demo';
 
 function storedRef() {
   try {
@@ -59,7 +59,7 @@ export default function DemoForm({ tier, tierName }) {
       <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Step 1 of 3</div>
       <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Tell us about your firm</h3>
       <p style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 24, lineHeight: 1.6 }}>
-        Takes about 30 seconds{tierName ? ` · Interested in ${tierName}` : ''}.
+        Takes about 30 seconds. The demo opens right after{tierName ? ` · Interested in ${tierName}` : ''}.
       </p>
       <div className="form-row-2">
         <div className="form-group">
@@ -82,7 +82,7 @@ export default function DemoForm({ tier, tierName }) {
       </div>
       {error && <p style={{ fontSize: 13, color: 'var(--danger)', marginBottom: 12 }}>{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: loading ? 0.7 : 1 }}>
-        {loading ? 'Sending...' : <>{hasDemoVideo() ? 'Continue to the demo' : 'Continue to pick a time'} <ArrowRight size={15} /></>}
+        {loading ? 'Sending...' : <>Watch the demo <ArrowRight size={15} /></>}
       </button>
       <p style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 12, textAlign: 'center', lineHeight: 1.5 }}>
         We use this only to prepare for your demo.

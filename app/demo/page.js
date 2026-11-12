@@ -13,30 +13,25 @@ export default function DemoPage({ searchParams }) {
   const tierName = tierLabel(tier);
   const video = hasDemoVideo();
 
-  const nextSteps = video
-    ? [
-        `Watch the full demo right away — about ${DEMO_VIDEO_LENGTH}, at your own pace`,
-        'Book a short Q&A call for anything the demo didn’t answer',
-        'We size the right plan and seats for your firm',
-      ]
-    : [
-        'Pick a time for a 30-minute live screen share',
-        'We prepare using your firm’s details, so the call is about your trusts',
-        'On the call we answer questions and size the right plan and seats',
-      ];
+  const nextSteps = [
+    video
+      ? `The demo opens right away — about ${DEMO_VIDEO_LENGTH}, watch at your own pace`
+      : 'Your demo page opens right away',
+    'Book a follow-up call on the same page for anything the demo didn’t answer',
+    'On the call we answer your questions and size the right plan and seats',
+  ];
 
   return (
     <div style={{ paddingTop: 60 }}>
       <div className="page-hero">
         <div className="container">
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            <PlayCircle size={11} /> {video ? 'Watch Anytime' : 'Live Walkthrough'}
+            <PlayCircle size={11} /> Watch Anytime
           </span>
           <h1>See TrustArchive for Your Firm</h1>
           <p style={{ maxWidth: 560, margin: '0 auto' }}>
-            {video
-              ? 'Three quick steps: tell us about your firm, watch the demo, then book a Q&A call if you want one.'
-              : 'Three quick steps: tell us about your firm, pick a time, and we’ll walk you through the full application live.'}
+            Tell us about your firm and the demo opens right away. Watch it on your schedule, then book a
+            follow-up call if you have questions.
           </p>
           <StepBar current={1} />
         </div>
