@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
 import StartTrialButton from './StartTrialButton';
+import { hasDemoVideo, DEMO_VIDEO_LENGTH } from '../../lib/demo';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
@@ -65,9 +66,9 @@ const plans = [
       'Lot-level securities tracking',
       'eSignature integration (opt-in)',
     ],
-    cta: 'Contact for Demo',
+    cta: 'See the Demo',
     ctaClass: 'primary',
-    href: '/contact',
+    href: '/demo?tier=professional',
     demo: true,
     featured: true,
     badge: 'Most Popular',
@@ -88,9 +89,9 @@ const plans = [
       'Alternative asset tracking',
       'Distribution approval committee',
     ],
-    cta: 'Contact for Demo',
+    cta: 'See the Demo',
     ctaClass: 'secondary',
-    href: '/contact',
+    href: '/demo?tier=practice',
     demo: true,
   },
   {
@@ -110,9 +111,9 @@ const plans = [
       'Priority support & escalation',
       'White-glove onboarding call',
     ],
-    cta: 'Contact for Demo',
+    cta: 'See the Demo',
     ctaClass: 'secondary',
-    href: '/contact',
+    href: '/demo?tier=family_office',
     demo: true,
     gold: true,
   },
@@ -220,7 +221,7 @@ const featureGroups = [
 
 const faqs = [
   { q: 'What happens when my annual subscription renews?', a: 'Your subscription renews automatically each year. You\'ll receive email reminders 30 days and 7 days before your renewal date. Cancel any time before renewal in your billing portal — access continues until the end of your paid period.' },
-  { q: 'Which plans include the 30-day free trial?', a: 'TrustArchive is launching soon. At launch, Individual and Solo will include a 30-day free trial of the full application with all features your plan includes — your card is charged only at the end of the trial period, and you can cancel any time before day 30. For now, join the waitlist and we\'ll email you the moment it\'s available. Professional, Practice, and Family Office start with a demo — contact us and we\'ll walk your team through the software and set up your firm.' },
+  { q: 'Which plans include the 30-day free trial?', a: 'TrustArchive is launching soon. At launch, Individual and Solo will include a 30-day free trial of the full application with all features your plan includes — your card is charged only at the end of the trial period, and you can cancel any time before day 30. For now, join the waitlist and we\'ll email you the moment it\'s available. Professional, Practice, and Family Office start with a demo — tell us about your firm on the demo page, then book a walkthrough and we\'ll help you set up your team.' },
   { q: 'How does per-seat pricing work for Professional, Practice, and Family Office?', a: 'These tiers include a base price that covers a set number of seats — 2 for Professional, 5 for Practice and Family Office. Each additional seat beyond the base is billed at the per-seat rate for your tier ($150, $125, or $200 per seat per year). Seats map to operators in your firm. You can add or remove seats at any time and Stripe prorates the change automatically.' },
   { q: 'Does TrustArchive require an internet connection to run?', a: 'Individual and Solo tiers operate entirely offline after activation. Professional, Practice, and Family Office tiers use encrypted firm sync to keep data current across your team — this requires an internet connection for sync, but the app continues to work locally if you go offline.' },
   { q: 'What is the difference between Practice and Family Office?', a: 'Both support unlimited trusts and unlimited seats. Family Office adds consolidated cross-trust reporting, investment performance analytics (TWR/IRR), a family-wide distribution dashboard, priority support, and a white-glove onboarding call — built for family offices managing wealth across multiple family branches.' },
@@ -238,7 +239,7 @@ export default function PricingPage() {
               <Shield size={11} /> Simple Licensing
             </span>
             <h1>Pricing</h1>
-            <p>Five tiers for every type of trustee. TrustArchive is launching soon — join the waitlist for Individual and Solo, or contact us for a firm demo. Annual billing with auto-renewal at launch.</p>
+            <p>Five tiers for every type of trustee. TrustArchive is launching soon — join the waitlist for Individual and Solo, or see the firm demo. Annual billing with auto-renewal at launch.</p>
           </div>
         </div>
       </div>
@@ -263,7 +264,14 @@ export default function PricingPage() {
                   {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
                 </ul>
                 {demo || waitlist ? (
-                  <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                  <>
+                    <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
+                    {demo && (
+                      <div style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 6 }}>
+                        {hasDemoVideo() ? `Watch now · ${DEMO_VIDEO_LENGTH}` : '30-min live walkthrough'}
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
                     {cta}
@@ -364,10 +372,10 @@ export default function PricingPage() {
       <section className="cta-section">
         <div className="container">
           <h2>Ready to Get Started?</h2>
-          <p>Launching soon. Join the waitlist for Individual and Solo, or contact us for a firm demo.</p>
+          <p>Launching soon. Join the waitlist for Individual and Solo, or see the firm demo.</p>
           <div className="cta-actions">
             <Link href="/waitlist" className="btn-primary lg"><Shield size={16} /> Join the Waitlist</Link>
-            <Link href="/contact" className="btn-secondary lg">Contact for Demo</Link>
+            <Link href="/demo" className="btn-secondary lg">See the Demo</Link>
           </div>
           <p className="cta-note">No accounts required · Instant local activation · Your data never leaves your machine</p>
         </div>

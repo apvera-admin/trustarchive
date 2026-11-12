@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Shield, Check, Mail, MessageSquare, Clock } from 'lucide-react';
+import { Shield, Check, Mail, MessageSquare, Clock, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -68,6 +68,16 @@ const handleSubmit = async (e) => {
                   </div>
                 ))}
               </div>
+
+              <Link href="/demo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, background: 'var(--accent-dim)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: '18px 24px', marginBottom: 24, textDecoration: 'none' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', marginBottom: 4 }}>Evaluating TrustArchive for a firm?</div>
+                  <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.5 }}>Skip the back-and-forth — see the demo and pick a time.</div>
+                </div>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap' }}>
+                  See the Demo <ArrowRight size={14} />
+                </span>
+              </Link>
 
               <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', padding: 24 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 12 }}>What makes TrustArchive different:</div>
@@ -173,61 +183,6 @@ const handleSubmit = async (e) => {
         </div>
       </section>
 
-      {/* ── BOOK A DEMO ── */}
-      <section className="section section-bordered section-alt">
-        <div className="container">
-          <div className="contact-split">
-
-            {/* Left — Info */}
-            <div>
-              <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-                <Clock size={11} /> Book a Demo
-              </span>
-              <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
-                See TrustArchive Live
-              </h2>
-              <p style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 28 }}>
-                Pick a time for a 30-minute screen share. We will show you the full application running with a real trust structure.
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 32 }}>
-                {[
-                  'How the encrypted local database works in practice',
-                  'The fiduciary ledger with principal and income separation',
-                  'Document archive, rules engine, and audit trail',
-                  'Local AI assistant querying trust data on-device',
-                  'Which plan fits your situation and how licensing works',
-                ].map(item => (
-                  <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Check size={14} color="var(--accent)" style={{ flexShrink: 0, marginTop: 2 }} />
-                    <span style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-md)', padding: '16px 20px' }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>Good to know</div>
-                <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6, margin: 0 }}>
-                  No sales pressure. If TrustArchive is not the right fit for your practice we will tell you upfront. No follow-up sequence if you decide it is not for you.
-                </p>
-              </div>
-            </div>
-
-            {/* Right — Calendar */}
-            <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-md)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
-              <div style={{ background: 'var(--bg-surface-2)', padding: '16px 24px', borderBottom: '1px solid var(--border)' }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)' }}>TrustArchive Product Walk-Through — 30 min</div>
-                <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 4 }}>Pick a time that works for you</div>
-              </div>
-              <iframe
-                src="https://calendar.app.google/NKLvEYmgeRACmBjc8"
-                style={{ width: '100%', height: 580, border: 'none', display: 'block', background: '#ffffff' }}
-                frameBorder="0"
-                scrolling="yes"
-              />
-            </div>
-
-          </div>
-        </div>
-      </section>
     </>
   );
 }

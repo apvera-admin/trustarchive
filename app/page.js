@@ -316,7 +316,7 @@ export default function HomePage() {
           <div className="section-header">
             <span className="section-label">Pricing</span>
             <h2>Five Tiers. One Application.</h2>
-            <p>From individual trustees to family offices. Launching soon — join the waitlist for Individual and Solo, or contact us for a firm demo.</p>
+            <p>From individual trustees to family offices. Launching soon — join the waitlist for Individual and Solo, or see the firm demo.</p>
           </div>
           <div className="pricing-grid-5">
             {pricingTiers.map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
@@ -338,7 +338,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="small-note" style={{ marginTop: 20 }}>
-            Launching soon · Join the waitlist for Individual and Solo · Demos for firm plans · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
+            Launching soon · Join the waitlist for Individual and Solo · <Link href="/demo" style={{ color: 'var(--accent)' }}>See the firm demo</Link> · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
           </p>
         </div>
       </section>
