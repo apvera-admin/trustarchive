@@ -1,123 +1,17 @@
 import Link from 'next/link';
 import { Shield, Check } from 'lucide-react';
-import StartTrialButton from './StartTrialButton';
-import { AUDIENCES, hasDemoVideo } from '../../lib/demo';
+import PlanCard from '../../components/PlanCard';
+import { PLANS, plansFor, shortPrice, PRICING_FAQS, faqsFor } from '../../lib/plans';
 
 export const metadata = {
   title: 'Pricing — TrustArchive',
-  description: 'Five license tiers for every type of trustee. Launching soon — join the waitlist for Individual and Solo, demos for firm plans, annual billing, fully local software.',
+  description: 'Plans for individual trustees and solo practitioners, and for firms and family offices. Launching soon — join the waitlist or see the firm demo. Annual billing, fully local software.',
 };
 
-const plans = [
-  {
-    tier: 'Individual',
-    slug: 'individual',
-    price: '$999',
-    period: '/ year',
-    limit: '1 trust',
-    desc: 'For personal trustees managing a single family trust.',
-    features: [
-      'Full fiduciary accounting',
-      'Document management & generation',
-      'Local AI assistant (fully offline)',
-      'Cryptographic audit trail',
-      'Rules engine & obligations',
-      'Encrypted local storage',
-    ],
-    cta: 'Join the Waitlist',
-    ctaClass: 'secondary',
-    href: '/waitlist?tier=individual',
-    waitlist: true,
-  },
-  {
-    tier: 'Solo',
-    slug: 'solo',
-    price: '$1,799',
-    period: '/ year',
-    limit: 'Up to 5 trusts',
-    desc: 'For private trustees managing a small trust portfolio.',
-    features: [
-      'Everything in Individual',
-      'Multi-trust portfolio switcher',
-      'Recurring distributions',
-      'Assisted rule creation (AI)',
-      'Document Intelligence — RAG',
-    ],
-    cta: 'Join the Waitlist',
-    ctaClass: 'secondary',
-    href: '/waitlist?tier=solo',
-    waitlist: true,
-  },
-  {
-    tier: 'Professional',
-    slug: 'professional',
-    price: '$3,499',
-    period: '/ year base',
-    perSeat: '$150',
-    baseSeats: 2,
-    limit: 'Unlimited trusts',
-    desc: 'For estate attorneys and CPAs with active client trust files.',
-    features: [
-      'Everything in Solo',
-      'Encrypted firm sync — multi-user',
-      'ACTEC court-ready reports',
-      'Tax prep summary — K-1 prep',
-      'Distribution approval workflow',
-      'Lot-level securities tracking',
-      'eSignature integration (opt-in)',
-    ],
-    cta: 'See the Demo',
-    ctaClass: 'primary',
-    href: '/demo?tier=professional',
-    demo: true,
-    featured: true,
-    badge: 'Most Popular',
-  },
-  {
-    tier: 'Practice',
-    slug: 'practice',
-    price: '$5,499',
-    period: '/ year base',
-    perSeat: '$125',
-    baseSeats: 5,
-    limit: 'Unlimited trusts',
-    desc: 'For firms requiring unlimited scale and advanced tools.',
-    features: [
-      'Everything in Professional',
-      'State court accounting formats',
-      'Property management module',
-      'Alternative asset tracking',
-      'Distribution approval committee',
-    ],
-    cta: 'See the Demo',
-    ctaClass: 'secondary',
-    href: '/demo?tier=practice',
-    demo: true,
-  },
-  {
-    tier: 'Family Office',
-    slug: 'family_office',
-    price: '$9,999',
-    period: '/ year base',
-    perSeat: '$200',
-    baseSeats: 5,
-    limit: 'Unlimited trusts + premium',
-    desc: 'For family offices managing wealth across multiple family branches.',
-    features: [
-      'Everything in Practice',
-      'Consolidated cross-trust reporting',
-      'Investment performance TWR / IRR',
-      'Cross-trust distribution summary',
-      'Priority support & escalation',
-      'White-glove onboarding call',
-    ],
-    cta: 'See the Demo',
-    ctaClass: 'secondary',
-    href: '/demo?tier=family_office',
-    demo: true,
-    gold: true,
-  },
-];
+const VIEWS = {
+  individual: { label: 'For Individuals', heading: 'For individuals & solo practitioners', sub: 'Managing one trust or a handful — your own or your clients\'. Join the waitlist; a 30-day free trial is available at launch.', gridClass: 'pricing-grid-2' },
+  firm: { label: 'For Firms', heading: 'For firms & family offices', sub: 'Trust administration across a team, with per-seat pricing. Start with the demo, then a follow-up call to size your plan.', gridClass: 'pricing-grid-3' },
+};
 
 const S = <Check size={14} className="feat-check" />;
 const N = <span className="feat-no">—</span>;
@@ -219,17 +113,12 @@ const featureGroups = [
   },
 ];
 
-const faqs = [
-  { q: 'What happens when my annual subscription renews?', a: 'Your subscription renews automatically each year. You\'ll receive email reminders 30 days and 7 days before your renewal date. Cancel any time before renewal in your billing portal — access continues until the end of your paid period.' },
-  { q: 'Which plans include the 30-day free trial?', a: 'TrustArchive is launching soon. At launch, Individual and Solo will include a 30-day free trial of the full application with all features your plan includes — your card is charged only at the end of the trial period, and you can cancel any time before day 30. For now, join the waitlist and we\'ll email you the moment it\'s available. Professional, Practice, and Family Office start with a demo — tell us about your firm on the demo page, then book a walkthrough and we\'ll help you set up your team.' },
-  { q: 'How does per-seat pricing work for Professional, Practice, and Family Office?', a: 'These tiers include a base price that covers a set number of seats — 2 for Professional, 5 for Practice and Family Office. Each additional seat beyond the base is billed at the per-seat rate for your tier ($150, $125, or $200 per seat per year). Seats map to operators in your firm. You can add or remove seats at any time and Stripe prorates the change automatically.' },
-  { q: 'Does TrustArchive require an internet connection to run?', a: 'Individual and Solo tiers operate entirely offline after activation. Professional, Practice, and Family Office tiers use encrypted firm sync to keep data current across your team — this requires an internet connection for sync, but the app continues to work locally if you go offline.' },
-  { q: 'What is the difference between Practice and Family Office?', a: 'Both support unlimited trusts and unlimited seats. Family Office adds consolidated cross-trust reporting, investment performance analytics (TWR/IRR), a family-wide distribution dashboard, priority support, and a white-glove onboarding call — built for family offices managing wealth across multiple family branches.' },
-  { q: 'What operating systems are supported?', a: 'Windows 10/11 and macOS 12 (Monterey) or later. Both are included with your license.' },
-  { q: 'Is my data backed up?', a: 'TrustArchive stores all data locally and syncs encrypted data for firm-tier users. We recommend backing up your encrypted database file to an external drive regularly. The application includes an export function to facilitate this.' },
-];
+export default function PricingPage({ searchParams }) {
+  const view = VIEWS[searchParams?.for] ? searchParams.for : null;
+  const groups = view ? [view] : ['individual', 'firm'];
+  const faqs = view ? faqsFor(view) : PRICING_FAQS;
+  const tabs = [[null, 'All plans'], ['individual', VIEWS.individual.label], ['firm', VIEWS.firm.label]];
 
-export default function PricingPage() {
   return (
     <>
       <div style={{ paddingTop: 60 }}>
@@ -239,57 +128,35 @@ export default function PricingPage() {
               <Shield size={11} /> Simple Licensing
             </span>
             <h1>Pricing</h1>
-            <p>Five tiers for every type of trustee. TrustArchive is launching soon — join the waitlist for Individual and Solo, or see the firm demo. Annual billing with auto-renewal at launch.</p>
+            <p>One application, priced for how you work. TrustArchive is launching soon — individuals can join the waitlist, firms can see the demo today.</p>
+            <div className="audience-tabs" role="tablist" aria-label="Show plans for">
+              {tabs.map(([key, label]) => (
+                <Link key={label} href={key ? `/pricing?for=${key}` : '/pricing'} scroll={false} role="tab" aria-selected={view === key} className={`audience-tab${view === key ? ' active' : ''}`}>
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Pricing cards */}
+      {/* Pricing cards, one group per audience */}
       <section className="section">
         <div className="pricing-wide">
-          <div className="pricing-grid-5">
-            {plans.map(({ tier, slug, price, period, perSeat, baseSeats, limit, desc, features, cta, ctaClass, href, demo, waitlist, featured, badge, gold }) => (
-              <div key={tier} className={`pricing-card${featured ? ' featured' : ''}${gold ? ' pricing-card-fo' : ''}`}>
-                {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
-                <div className="pricing-tier">{tier}</div>
-                <div className="pricing-price">{price}<span> {period}</span></div>
-                {perSeat && (
-                  <div style={{ fontSize: 11, color: 'var(--text-2)', marginBottom: 4, marginTop: -4 }}>
-                    + {perSeat}/seat/yr &nbsp;·&nbsp; {baseSeats} seats included
-                  </div>
-                )}
-                <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 8 }}>{limit}</div>
-                <div className="pricing-desc">{desc}</div>
-                <ul className="pricing-features">
-                  {features.map(f => <li key={f}><Check size={13} /> {f}</li>)}
-                </ul>
-                {demo || waitlist ? (
-                  <>
-                    <Link href={href} className={`pricing-cta ${ctaClass}`}>{cta}</Link>
-                    {demo && (
-                      <div style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 6 }}>
-                        {hasDemoVideo('firm') ? `Watch now · ${AUDIENCES.firm.videoLength}` : 'Demo + follow-up call'}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <StartTrialButton slug={slug} className={`pricing-cta ${ctaClass}`}>
-                    {cta}
-                  </StartTrialButton>
-                )}
-                <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
-                  See who this plan is for →
-                </Link>
+          {groups.map((key, i) => (
+            <div key={key} style={{ marginTop: i ? 64 : 0 }}>
+              <div style={{ textAlign: 'center', marginBottom: 28 }}>
+                <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 8 }}>{VIEWS[key].heading}</h2>
+                <p style={{ fontSize: 14, color: 'var(--text-2)', maxWidth: 560, margin: '0 auto', lineHeight: 1.6 }}>{VIEWS[key].sub}</p>
               </div>
-            ))}
-          </div>
-          <p className="small-note" style={{ marginTop: 24 }}>
-            Launching soon · Join the waitlist for Individual and Solo and we&apos;ll email you when they open<br />
-            A 30-day free trial will be available on Individual and Solo at launch<br />
-            Professional, Practice, and Family Office start with a demo — available now
-          </p>
-          <p className="small-note" style={{ marginTop: 12 }}>
-            Want to see it live or discuss a firm rollout?{' '}
+              <div className={VIEWS[key].gridClass}>
+                {plansFor(key).map(plan => <PlanCard key={plan.slug} plan={plan} showAudienceLink />)}
+              </div>
+            </div>
+          ))}
+          <p className="small-note" style={{ marginTop: 32 }}>
+            Annual billing with auto-renewal at launch · Cancel auto-renewal any time in your billing portal<br />
+            Have a question first?{' '}
             <Link href="/contact" style={{ color: 'var(--accent)' }}>Talk to us →</Link>
           </p>
         </div>
@@ -305,13 +172,19 @@ export default function PricingPage() {
           <div className="feat-table-wrap">
             <table className="feat-table">
               <thead>
+                <tr className="feat-group-row">
+                  <th />
+                  <th colSpan={plansFor('individual').length}>Individuals</th>
+                  <th colSpan={plansFor('firm').length}>Firms</th>
+                </tr>
                 <tr>
                   <th style={{ textAlign: 'left' }}>Feature</th>
-                  <th>Individual<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$999/yr</span></th>
-                  <th>Solo<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$1,799/yr</span></th>
-                  <th>Professional<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$3,499 + $150/seat</span></th>
-                  <th>Practice<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>$5,499 + $125/seat</span></th>
-                  <th className="fo-col-head">Family Office<br /><span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#D4A017' }}>$9,999 + $200/seat</span></th>
+                  {PLANS.map(plan => (
+                    <th key={plan.slug} className={plan.gold ? 'fo-col-head' : undefined}>
+                      {plan.tier}<br />
+                      <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: plan.gold ? '#D4A017' : undefined }}>{shortPrice(plan)}</span>
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -372,10 +245,10 @@ export default function PricingPage() {
       <section className="cta-section">
         <div className="container">
           <h2>Ready to Get Started?</h2>
-          <p>Launching soon. Join the waitlist for Individual and Solo, or see the firm demo.</p>
+          <p>Launching soon. Individuals: join the waitlist. Firms: see the demo.</p>
           <div className="cta-actions">
             <Link href="/waitlist" className="btn-primary lg"><Shield size={16} /> Join the Waitlist</Link>
-            <Link href="/demo" className="btn-secondary lg">See the Demo</Link>
+            <Link href="/demo?for=firm" className="btn-secondary lg">See the Firm Demo</Link>
           </div>
           <p className="cta-note">No accounts required · Instant local activation · Your data never leaves your machine</p>
         </div>

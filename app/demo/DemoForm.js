@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 import { REF_STORAGE_KEY } from '../../lib/waitlist';
-import { ROLE_OPTIONS, TRUSTS_OPTIONS, SEATS_OPTIONS, audienceFor } from '../../lib/demo';
+import { ROLES, TRUSTS_OPTIONS, SEATS_OPTIONS, audienceFor } from '../../lib/demo';
 
 function storedRef() {
   try {
@@ -25,7 +25,14 @@ function Select({ label, value, options, onChange }) {
   );
 }
 
-export default function DemoForm({ tier, tierName }) {
+// Roles for the audience the visitor came from are listed first; 'Other' stays last.
+function roleOptions(lead) {
+  if (!lead) return ROLES.map(r => r.label);
+  const rank = r => (r.audience === lead ? 0 : r.audience ? 1 : 2);
+  return [...ROLES].sort((a, b) => rank(a) - rank(b)).map(r => r.label);
+}
+
+export default function DemoForm({ tier, tierName, lead }) {
   const router = useRouter();
   const [form, setForm] = useState({ name: '', email: '', role: '', trusts_managed: '', firm: '', seats: '' });
   const [loading, setLoading] = useState(false);
@@ -77,7 +84,7 @@ export default function DemoForm({ tier, tierName }) {
           <input className="form-input" type="email" placeholder="you@example.com" required value={form.email} onChange={e => set('email')(e.target.value)} />
         </div>
       </div>
-      <Select label="Which best describes you?" value={form.role} options={ROLE_OPTIONS} onChange={set('role')} />
+      <Select label="Which best describes you?" value={form.role} options={roleOptions(lead)} onChange={set('role')} />
       <Select label="How many trusts do you manage?" value={form.trusts_managed} options={TRUSTS_OPTIONS} onChange={set('trusts_managed')} />
       {isFirm && (
         <div className="form-row-2">

@@ -1,7 +1,8 @@
 import { Shield, Check, PlayCircle } from 'lucide-react';
 import DemoForm from './DemoForm';
 import StepBar from './StepBar';
-import { tierLabel } from '../../lib/demo';
+import { tierLabel, isAudience } from '../../lib/demo';
+import { planBySlug } from '../../lib/plans';
 
 export const metadata = {
   title: 'See the Demo — TrustArchive',
@@ -11,6 +12,8 @@ export const metadata = {
 export default function DemoPage({ searchParams }) {
   const tier = typeof searchParams?.tier === 'string' ? searchParams.tier : '';
   const tierName = tierLabel(tier);
+  // Which group of roles to list first: from ?for=, or from the plan they clicked.
+  const lead = isAudience(searchParams?.for) ? searchParams.for : planBySlug(tier)?.audience || null;
   const nextSteps = [
     'Your demo opens right away — one for individual trustees, one for firms',
     'Watch it at your own pace',
@@ -64,7 +67,7 @@ export default function DemoPage({ searchParams }) {
                 </p>
               </div>
             </div>
-            <DemoForm tier={tierName ? tier : ''} tierName={tierName} />
+            <DemoForm tier={tierName ? tier : ''} tierName={tierName} lead={lead} />
           </div>
         </div>
       </section>

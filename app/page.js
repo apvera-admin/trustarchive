@@ -4,19 +4,12 @@ import Link from 'next/link';
 import {
   Shield, FileText, Users, Briefcase, BookOpen, CheckSquare,
   Bot, Lock, Wifi, Monitor, CreditCard, Download, Check, X,
-  Clock, Database
+  Clock, Database, ArrowRight, Building2
 } from 'lucide-react';
 import AppMockup from '../components/AppMockup';
+import { plansFor } from '../lib/plans';
 
 export default function HomePage() {
-  const pricingTiers = [
-    { tier: 'Individual', price: '$999', limit: '1 trust', points: ['Full fiduciary accounting', 'Local AI assistant', 'Offline, encrypted', 'Audit trail'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Solo', price: '$1,799', limit: 'Up to 5 trusts', points: ['All Individual features', 'Multi-trust portfolio', 'Recurring distributions', 'Document Intelligence'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Professional', price: '$3,499', limit: 'Up to 25 trusts', points: ['All Solo features', 'ACTEC court-ready reports', 'K-1 prep summary', 'Distribution approval'], ctaClass: 'primary', gold: false, featured: true, badge: 'Most Popular' },
-    { tier: 'Practice', price: '$5,499', limit: 'Unlimited trusts', points: ['All Professional features', 'Firm-scale tools', 'State court formats', 'Committee approvals'], ctaClass: 'secondary', gold: false, featured: false, badge: null },
-    { tier: 'Family Office', price: '$9,999', limit: 'Unlimited + premium', points: ['All Practice features', 'Cross-trust reporting', 'TWR / IRR analytics', 'Priority onboarding'], ctaClass: 'secondary', gold: true, featured: false, badge: null },
-  ];
-
   return (
     <div>
       {/* ── COMING SOON BANNER ── */}
@@ -58,11 +51,25 @@ export default function HomePage() {
                 Fiduciary software that runs entirely on your machine. No cloud. No data exposure.
                 Complete control over your trust data, accounting, and audit trail.
               </p>
-              <div className="hero-actions">
-                <Link href="/waitlist" className="btn-primary lg">
-                  <Shield size={15} /> Join the Waitlist
+              {/* Audience chooser: sends each visitor down their own path */}
+              <div className="hero-chooser-label">Which describes you?</div>
+              <div className="hero-chooser">
+                <Link href="/individuals" className="hero-choice">
+                  <span className="hero-choice-icon"><Users size={18} /></span>
+                  <span>
+                    <span className="hero-choice-title">I&apos;m a trustee or solo practitioner</span>
+                    <span className="hero-choice-desc">One trust or a handful — your own or your clients&apos;.</span>
+                  </span>
+                  <ArrowRight size={16} className="hero-choice-arrow" />
                 </Link>
-                <Link href="/features" className="btn-secondary lg">View Features →</Link>
+                <Link href="/firms" className="hero-choice">
+                  <span className="hero-choice-icon"><Building2 size={18} /></span>
+                  <span>
+                    <span className="hero-choice-title">I&apos;m at a firm or family office</span>
+                    <span className="hero-choice-desc">Trust administration across a team.</span>
+                  </span>
+                  <ArrowRight size={16} className="hero-choice-arrow" />
+                </Link>
               </div>
               <div className="hero-trust">
                 <span className="hero-trust-dot" />
@@ -310,35 +317,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PRICING PREVIEW ── */}
+      {/* ── TWO PATHS ── */}
       <section className="section section-bordered section-alt">
-        <div className="pricing-wide">
+        <div className="container">
           <div className="section-header">
-            <span className="section-label">Pricing</span>
-            <h2>Five Tiers. One Application.</h2>
-            <p>From individual trustees to family offices. Launching soon — join the waitlist for Individual and Solo, or see the firm demo.</p>
+            <span className="section-label">Built for two kinds of trustee</span>
+            <h2>One Application. Two Ways to Use It.</h2>
+            <p>The same private, local system — set up for how you actually work.</p>
           </div>
-          <div className="pricing-grid-5">
-            {pricingTiers.map(({ tier, price, limit, points, ctaClass, featured, badge, gold }) => (
-              <div key={tier} className={'pricing-card' + (featured ? ' featured' : '') + (gold ? ' pricing-card-fo' : '')}>
-                {badge && <div className="pricing-badge-wrap"><span className="pricing-badge">{badge}</span></div>}
-                <div className="pricing-tier">{tier}</div>
-                <div className="pricing-price">{price}<span> / yr</span></div>
-                <div style={{ fontSize: 11, color: gold ? '#D4A017' : 'var(--accent)', fontWeight: 600, marginBottom: 12 }}>{limit}</div>
-                <ul className="pricing-features">
-                  {points.map(p => (
-                    <li key={p}><Check size={13} /> {p}</li>
-                  ))}
+          <div className="paths-grid">
+            {[
+              {
+                href: '/individuals', icon: <Users size={20} />, title: 'For individuals & solo practitioners',
+                desc: 'Family trustees, private trustees, and solo attorneys or CPAs managing one trust or a handful.',
+                points: ['Runs fully offline on your computer', 'Plain-English AI assistant', 'Reports your attorney and beneficiaries can read'],
+                from: plansFor('individual')[0], cta: 'Explore for individuals',
+              },
+              {
+                href: '/firms', icon: <Building2 size={20} />, title: 'For firms & family offices',
+                desc: 'Estate law and CPA firms, professional trustees, and family offices administering trusts for clients.',
+                points: ['Encrypted firm sync and role-based access', 'ACTEC court-ready reports', 'Unlimited trusts, per-seat pricing'],
+                from: plansFor('firm')[0], cta: 'Explore for firms',
+              },
+            ].map(({ href, icon, title, desc, points, from, cta }) => (
+              <Link key={href} href={href} className="path-card">
+                <span className="hero-choice-icon">{icon}</span>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+                <ul className="check-list">
+                  {points.map(point => <li key={point}><Check size={14} /> {point}</li>)}
                 </ul>
-                <Link href="/pricing" className={'pricing-cta ' + ctaClass}>See plan details</Link>
-                <Link href="/use-cases" style={{ display: 'block', textAlign: 'center', fontSize: 12, color: 'var(--text-3)', marginTop: 10, textDecoration: 'none' }}>
-                  See who this plan is for →
-                </Link>
-              </div>
+                <div className="path-card-foot">
+                  <span>From {from.price}{from.perSeat ? ' / year base' : ' / year'}</span>
+                  <span className="path-card-cta">{cta} <ArrowRight size={14} /></span>
+                </div>
+              </Link>
             ))}
           </div>
-          <p className="small-note" style={{ marginTop: 20 }}>
-            Launching soon · Join the waitlist for Individual and Solo · <Link href="/demo" style={{ color: 'var(--accent)' }}>See the firm demo</Link> · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See full feature comparison →</Link>
+          <p className="small-note" style={{ marginTop: 24 }}>
+            Launching soon · <Link href="/pricing" style={{ color: 'var(--accent)' }}>See all plans and compare features →</Link>
           </p>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Shield, Users, Briefcase, BookOpen, Check } from 'lucide-react';
+import { planBySlug, shortPrice } from '../../lib/plans';
 
 export const metadata = {
   title: 'Who Uses TrustArchive — Use Cases',
@@ -26,9 +27,7 @@ const personas = [
       'Annual accounting reports her attorney can actually read',
       'Local AI answers questions about balances and compliance in plain English',
     ],
-    plan: 'Individual',
-    planDesc: '$999/year · 1 trust',
-    planHref: '/pricing',
+    plan: 'individual',
     gold: false,
   },
   {
@@ -50,9 +49,7 @@ const personas = [
       'Distribution approval workflow for co-trustee sign-off before posting',
       'Audit trail exportable to CSV for court filings or beneficiary accountings',
     ],
-    plan: 'Professional',
-    planDesc: '$3,499/year · up to 25 trusts',
-    planHref: '/pricing',
+    plan: 'professional',
     gold: false,
   },
   {
@@ -74,9 +71,7 @@ const personas = [
       'Property management module for trusts holding real estate (on roadmap)',
       'Alternative asset tracking for PE, hedge fund, and capital call positions (on roadmap)',
     ],
-    plan: 'Practice',
-    planDesc: '$5,499/year · unlimited trusts',
-    planHref: '/pricing',
+    plan: 'practice',
     gold: false,
   },
   {
@@ -98,9 +93,7 @@ const personas = [
       'White-glove onboarding call to configure the full portfolio structure',
       'Priority support with a dedicated escalation path',
     ],
-    plan: 'Family Office',
-    planDesc: '$9,999/year · unlimited trusts + premium',
-    planHref: '/pricing',
+    plan: 'family_office',
     gold: true,
   },
 ];
@@ -156,7 +149,10 @@ export default function UseCasesPage() {
       </section>
 
       {/* Persona sections */}
-      {personas.map(({ slug, tag, icon, headline, subheadline, body, scenario, howItHelps, plan, planDesc, planHref, gold }, index) => (
+      {personas.map(({ slug, tag, icon, headline, subheadline, body, scenario, howItHelps, plan: planSlug, gold }, index) => {
+        const plan = planBySlug(planSlug);
+        const isFirm = plan.audience === 'firm';
+        return (
         <section
           key={slug}
           id={slug}
@@ -215,11 +211,11 @@ export default function UseCasesPage() {
                   <div>
                     <div style={{ fontSize: 12, fontWeight: 700, color: gold ? '#D4A017' : 'var(--accent)', marginBottom: 2 }}>Recommended plan</div>
                     <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-1)' }}>
-                      {plan} <span style={{ fontWeight: 400, color: 'var(--text-2)', fontSize: 13 }}>— {planDesc}</span>
+                      {plan.tier} <span style={{ fontWeight: 400, color: 'var(--text-2)', fontSize: 13 }}>— {shortPrice(plan)} · {plan.limit.toLowerCase()}</span>
                     </div>
                   </div>
-                  <Link href={planHref} style={{ fontSize: 13, fontWeight: 600, color: gold ? '#D4A017' : 'var(--accent)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-                    See plan &rarr;
+                  <Link href={isFirm ? '/firms' : '/individuals'} style={{ fontSize: 13, fontWeight: 600, color: gold ? '#D4A017' : 'var(--accent)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                    {isFirm ? 'TrustArchive for firms' : 'TrustArchive for individuals'} &rarr;
                   </Link>
                 </div>
               </div>
@@ -260,7 +256,8 @@ export default function UseCasesPage() {
             </div>
           </div>
         </section>
-      ))}
+        );
+      })}
 
       {/* Not a fit section */}
       <section className="section section-bordered">

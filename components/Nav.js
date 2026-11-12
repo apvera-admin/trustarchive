@@ -8,12 +8,14 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  // The two audience pages come first: they're the main way into the site.
   const links = [
-    ['Features',  '/features'],
-    ['Pricing',   '/pricing'],
-    ['Blog',      '/blog'],
-    ['Resources', '/resources'],
-    ['Security',  '/security'],
+    ['For Individuals', '/individuals'],
+    ['For Firms',       '/firms'],
+    ['Features',        '/features'],
+    ['Pricing',         '/pricing'],
+    ['Security',        '/security'],
+    ['Resources',       '/resources'],
   ];
 
   return (

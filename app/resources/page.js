@@ -77,6 +77,9 @@ useEffect(() => {
                 <Lock size={12} color="var(--text-3)" />
                 <span style={{ fontSize: 12, color: 'var(--text-3)' }}>We send the PDF immediately.</span>
               </div>
+              <Link href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 24, fontSize: 14, fontWeight: 600, color: 'var(--accent)', textDecoration: 'none' }}>
+                Read the TrustArchive blog →
+              </Link>
             </div>
 
             <div>
