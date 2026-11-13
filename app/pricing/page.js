@@ -66,7 +66,7 @@ const featureGroups = [
       { name: 'Trust accounting statement', sub: 'Principal / income receipts & disbursements', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Beneficiary distribution report', sub: 'By beneficiary, type, date range', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
       { name: 'Asset summary with cost basis', sub: 'Including entity interests', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Tax prep summary — K-1 prep', sub: 'Income by character & beneficiary', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'Beneficiary report package', sub: 'PDF export for beneficiary delivery', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
       { name: 'State court accounting formats', sub: 'CA, NY, TX, NV variants', status: 'roadmap', ind: N, sol: N, pro: N, pra: R, fo: R },

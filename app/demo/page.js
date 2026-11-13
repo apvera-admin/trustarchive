@@ -46,7 +46,7 @@ export default function DemoPage({ searchParams }) {
                   'How the encrypted local database works in practice',
                   'The fiduciary ledger with principal and income separation',
                   'Document archive, rules engine, and obligations tracking',
-                  'Court-ready reports and the cryptographic audit trail',
+                  'Trust accounting reports and the cryptographic audit trail',
                   'Local AI assistant querying trust data on-device',
                 ].map(item => <li key={item}><Check size={14} /> {item}</li>)}
               </ul>

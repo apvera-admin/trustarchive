@@ -336,7 +336,7 @@ export default function HomePage() {
               {
                 href: '/firms', icon: <Building2 size={20} />, title: 'For firms & family offices',
                 desc: 'Estate law and CPA firms, professional trustees, and family offices administering trusts for clients.',
-                points: ['Encrypted firm sync and role-based access', 'ACTEC court-ready reports', 'Unlimited trusts, per-seat pricing'],
+                points: ['Encrypted firm sync and role-based access', 'Trust accounting and beneficiary reports', 'Per-seat pricing, up to unlimited trusts'],
                 from: plansFor('firm')[0], cta: 'Explore for firms',
               },
             ].map(({ href, icon, title, desc, points, from, cta }) => (
