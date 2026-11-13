@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, AlertCircle } from 'lucide-react';
+import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, AlertCircle, TrendingUp, ScanText, FileSignature } from 'lucide-react';
 import AgentMockup from '../../components/AgentMockup';
 
 export const metadata = {
@@ -34,6 +34,9 @@ export default function FeaturesPage() {
               { icon: <CheckSquare size={18} />, title: 'Rules Engine', desc: '21 seed templates covering common trust compliance scenarios. Event-condition-action pattern with approval workflows, recurring obligation schedules, and overdue alerts.' },
               { icon: <Bot size={18} />, title: 'Local AI Assistant', desc: 'Ollama-powered inference running entirely on your device. 12 read-only tools that query your ledger, assets, beneficiaries, and obligations. Document Intelligence via RAG searches across uploaded trust documents.' },
               { icon: <Shield size={18} />, title: 'Audit Trail', desc: 'Every action logged, timestamped, and cryptographically sealed in an immutable hash chain. Export to CSV for court filings, mediations, or beneficiary accounting.' },
+              { icon: <TrendingUp size={18} />, title: 'Lot-Level Securities', desc: 'Track securities by tax lot with FIFO, LIFO, or specific identification. Handles splits, dividends, and spinoffs. Professional plan and above.' },
+              { icon: <ScanText size={18} />, title: 'PDF Statement OCR', desc: 'Pull transactions straight out of PDF bank statements into the staging inbox for review — no retyping. Professional plan and above.' },
+              { icon: <FileSignature size={18} />, title: 'eSignature (Opt-In)', desc: 'Send documents for signature from inside TrustArchive. Uses the network only when you turn it on, with a clear privacy disclosure. Professional plan and above.' },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="feature-card">
                 <div className="feature-icon">{icon}</div>
@@ -209,8 +212,6 @@ export default function FeaturesPage() {
                 'ACTEC Formal Account report',
                 'Tax prep summary for K-1 prep',
                 'Distribution approval workflow',
-                'Lot-level securities tracking',
-                'PDF bank statement OCR',
                 'Administration task management',
               ].map(item => (
                 <li key={item} style={{ color: 'var(--text-2)' }}>
@@ -221,10 +222,8 @@ export default function FeaturesPage() {
             <ul className="check-list">
               {[
                 'State court accounting formats (CA, NY, TX, NV)',
-                'eSignature integration (opt-in)',
                 'Consolidated cross-trust reporting (Family Office)',
                 'Investment performance TWR / IRR (Family Office)',
-                'Property management module',
                 'Alternative asset tracking',
               ].map(item => (
                 <li key={item} style={{ color: 'var(--text-2)' }}>

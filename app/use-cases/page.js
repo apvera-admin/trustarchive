@@ -68,7 +68,6 @@ const personas = [
       'Operator profiles with per-trust permission flags for each staff member',
       'State court accounting formats for CA, NY, TX, NV when ready (on roadmap)',
       'Multi-party distribution approval committee workflow (on roadmap)',
-      'Property management module for trusts holding real estate (on roadmap)',
       'Alternative asset tracking for PE, hedge fund, and capital call positions (on roadmap)',
     ],
     plan: 'practice',
