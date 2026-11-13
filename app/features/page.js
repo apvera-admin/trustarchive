@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, AlertCircle, TrendingUp, ScanText, FileSignature } from 'lucide-react';
+import { Shield, FileText, Users, Briefcase, BookOpen, CheckSquare, Bot, Check, Lock, TrendingUp, ScanText, FileSignature } from 'lucide-react';
 import AgentMockup from '../../components/AgentMockup';
 
 export const metadata = {
@@ -194,47 +194,47 @@ export default function FeaturesPage() {
   </div>
 </section>
                     
-      {/* Roadmap callout */}
+      {/* More included features */}
       <section className="section section-bordered section-alt">
         <div className="container">
           <div className="section-header">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 16 }}>
-              <AlertCircle size={18} color="var(--warn)" />
-              <span className="section-label" style={{ marginBottom: 0 }}>Active Roadmap</span>
+              <Briefcase size={18} color="var(--accent)" />
+              <span className="section-label" style={{ marginBottom: 0 }}>Also Included</span>
             </div>
-            <h2>More Coming. No Extra Charge.</h2>
-            <p>Every roadmap feature ships to your plan tier at no additional cost. No surprise upsells, no feature unlocks to purchase.</p>
+            <h2>Built for Professional Trust Work.</h2>
+            <p>Reporting, approvals, and analytics for firms and family offices — included in the plan, with no add-ons to buy.</p>
           </div>
 
           <div className="roadmap-cols">
             <ul className="check-list">
               {[
-                'ACTEC Formal Account report',
-                'Tax prep summary for K-1 prep',
-                'Distribution approval workflow',
-                'Administration task management',
+                'ACTEC Formal Account report (Professional and above)',
+                'Tax prep summary for K-1 prep (Professional and above)',
+                'Distribution approval workflow (Professional and above)',
+                'Administration task management (all plans)',
               ].map(item => (
                 <li key={item} style={{ color: 'var(--text-2)' }}>
-                  <Check size={14} style={{ color: 'var(--warn)', flexShrink: 0, marginTop: 2 }} /> {item}
+                  <Check size={14} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 2 }} /> {item}
                 </li>
               ))}
             </ul>
             <ul className="check-list">
               {[
-                'State court accounting formats (CA, NY, TX, NV)',
+                'State court accounting formats — CA, NY, TX, NV (Practice and above)',
+                'Alternative asset tracking (Practice and above)',
                 'Consolidated cross-trust reporting (Family Office)',
                 'Investment performance TWR / IRR (Family Office)',
-                'Alternative asset tracking',
               ].map(item => (
                 <li key={item} style={{ color: 'var(--text-2)' }}>
-                  <Check size={14} style={{ color: 'var(--warn)', flexShrink: 0, marginTop: 2 }} /> {item}
+                  <Check size={14} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 2 }} /> {item}
                 </li>
               ))}
             </ul>
           </div>
 
           <p style={{ fontSize: 13, color: 'var(--text-3)', textAlign: 'center', marginTop: 32 }}>
-            Roadmap features are included in your plan tier when they ship. Family Office features are exclusive to the Family Office plan.<br />
+            Family Office features are exclusive to the Family Office plan.<br />
             <Link href="/pricing" style={{ color: 'var(--accent)' }}>See which features are on which plan →</Link>
           </p>
         </div>

@@ -76,13 +76,10 @@ export default function AudienceLanding({ audience, hero, personas, problems, fe
             <h2>{features.title}</h2>
           </div>
           <div className="audience-feature-grid">
-            {features.items.map(({ icon, title, desc, roadmap }) => (
+            {features.items.map(({ icon, title, desc }) => (
               <div key={title} className="audience-card">
                 <div className="audience-card-icon">{icon}</div>
-                <h3>
-                  {title}
-                  {roadmap && <span className="feat-badge feat-badge-roadmap" style={{ marginLeft: 8, verticalAlign: 'middle' }}>Roadmap</span>}
-                </h3>
+                <h3>{title}</h3>
                 <p>{desc}</p>
               </div>
             ))}

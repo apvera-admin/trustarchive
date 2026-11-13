@@ -5,7 +5,7 @@ import AudienceLanding from '../../components/AudienceLanding';
 
 export const metadata = {
   title: 'For Firms & Family Offices — TrustArchive',
-  description: 'Trust administration software for estate law firms, CPA firms, professional trustees, and family offices. Fiduciary reporting, role-based access, and encrypted firm sync. See the demo.',
+  description: 'Trust administration software for estate law firms, CPA firms, professional trustees, and family offices. Court-ready reports, role-based access, and encrypted firm sync. See the demo.',
 };
 
 export default function FirmsPage() {
@@ -16,7 +16,7 @@ export default function FirmsPage() {
         tag: 'For Firms & Family Offices',
         tagIcon: <Building2 size={11} />,
         title: 'Trust Administration for Your Whole Practice.',
-        sub: 'Every client trust isolated, every action on a defensible audit trail, and trust accountings on demand — with your team working from the same records and client data encrypted on your own machines.',
+        sub: 'Every client trust isolated, every action on a defensible audit trail, and court-ready accountings on demand — with your team working from the same records and client data encrypted on your own machines.',
         primary: { label: 'See the Demo', href: '/demo?for=firm' },
         secondary: { label: 'Talk to Us', href: '/contact' },
         note: 'Per-seat pricing · Up to 25 trusts on Professional, unlimited on Practice · End-to-end encrypted firm sync',
@@ -47,7 +47,7 @@ export default function FirmsPage() {
       problems={{
         title: 'Replace the spreadsheets — and the liability questions',
         items: [
-          { problem: 'Client files in spreadsheets that can’t produce a formal accounting', answer: 'Trust accounting statements now; ACTEC-format court accountings on the roadmap' },
+          { problem: 'Client files in spreadsheets that can’t produce a formal accounting', answer: 'ACTEC-format formal account reports, ready for court' },
           { problem: 'Client financial data sitting in a vendor’s cloud', answer: 'Data stays encrypted on your firm’s machines; sync is end-to-end encrypted' },
           { problem: 'Staff need access, but not to everything', answer: 'Operator profiles with role-based access across trustee, attorney, and staff' },
           { problem: 'Hours lost keying in statements', answer: 'Bank statement import, including PDF statements via OCR' },
@@ -58,11 +58,11 @@ export default function FirmsPage() {
         title: 'Built for the way firms administer trusts',
         items: [
           { icon: <RefreshCw size={18} />, title: 'Encrypted firm sync', desc: 'Your team works from the same records. Data is encrypted on each device before it leaves.' },
-          { icon: <FileCheck size={18} />, title: 'Fiduciary reporting', desc: 'Trust accounting statements, beneficiary distribution reports, and trial balance. ACTEC formal accounts are on the roadmap.' },
+          { icon: <FileCheck size={18} />, title: 'Court-ready reporting', desc: 'ACTEC formal account reports, trust accounting statements, and beneficiary distribution reports.' },
           { icon: <Users size={18} />, title: 'Roles & seats', desc: 'Operator profiles for trustees, attorneys, co-trustees, and staff. Add seats as your team grows.' },
           { icon: <Upload size={18} />, title: 'Faster data entry', desc: 'Import CSV, OFX, QFX, and QBO files, plus PDF bank statement OCR, with rules that sort transactions.' },
           { icon: <TrendingUp size={18} />, title: 'Securities & entities', desc: 'Lot-level securities tracking (FIFO, LIFO, specific ID) and entity interests with a basis ledger.' },
-          { icon: <CheckSquare size={18} />, title: 'Distribution approvals', desc: 'Co-trustee and attorney sign-off before a distribution posts, with a full approval record.', roadmap: true },
+          { icon: <CheckSquare size={18} />, title: 'Distribution approvals', desc: 'Co-trustee and attorney sign-off before a distribution posts, with a full approval record.' },
         ],
       }}
       finalCta={{

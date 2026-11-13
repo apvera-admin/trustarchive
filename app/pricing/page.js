@@ -15,100 +15,99 @@ const VIEWS = {
 
 const S = <Check size={14} className="feat-check" />;
 const N = <span className="feat-no">—</span>;
-const R = <span className="feat-soon">Soon</span>;
 const FO = <span className="feat-fo">FO only</span>;
 
 const featureGroups = [
   {
     label: 'Core Platform',
     rows: [
-      { name: 'Trust Overview Dashboard', sub: 'KPI strip, action panel, recent activity', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Encrypted local storage — SQLCipher', sub: 'Fully offline, no cloud', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Operator profiles & role-based access', sub: 'Trustee, attorney, grantor, co-trustee, beneficiary', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Cryptographic audit trail', sub: 'Immutable hash chain, export to CSV', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Administration task management', sub: 'Ticklers, due dates, workflow tasks', status: 'roadmap', ind: R, sol: R, pro: R, pra: R, fo: R },
-      { name: 'Multi-trust portfolio switcher', sub: 'Per-trust data isolation', status: 'shipped', ind: N, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Encrypted firm sync — multi-user', sub: 'End-to-end encrypted, Professional and above', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
-      { name: 'Account onboarding / KYC checklist', sub: 'New trust setup workflow', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
-      { name: 'Calendar sync (opt-in)', sub: 'Privacy disclosure required', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
+      { name: 'Trust Overview Dashboard', sub: 'KPI strip, action panel, recent activity', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Encrypted local storage — SQLCipher', sub: 'Fully offline, no cloud', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Operator profiles & role-based access', sub: 'Trustee, attorney, grantor, co-trustee, beneficiary', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Cryptographic audit trail', sub: 'Immutable hash chain, export to CSV', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Administration task management', sub: 'Ticklers, due dates, workflow tasks', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Multi-trust portfolio switcher', sub: 'Per-trust data isolation', ind: N, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Encrypted firm sync — multi-user', sub: 'End-to-end encrypted, Professional and above', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Account onboarding / KYC checklist', sub: 'New trust setup workflow', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Calendar sync (opt-in)', sub: 'Privacy disclosure required', ind: N, sol: N, pro: S, pra: S, fo: S },
     ],
   },
   {
     label: 'Financial Ledger',
     rows: [
-      { name: 'Double-entry bookkeeping', sub: 'Principal / income separation', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Bank statement import', sub: 'CSV, OFX, QFX, QBO', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Auto-allocation rules engine', sub: 'Pattern matching, auto-approve option', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Staging inbox & approval workflow', sub: 'Review before posting', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Distribution tracking', sub: 'Journal entry linkage, beneficiary view', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Period close / year-end locking', sub: 'Lock posted periods', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Recurring distributions', sub: 'Scheduled automatic entries', status: 'shipped', ind: N, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Distribution approval workflow', sub: 'Co-trustee / attorney sign-off', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
-      { name: 'Lot-level securities tracking', sub: 'FIFO / LIFO / specific ID', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
-      { name: 'Non-cash transaction types', sub: 'Splits, dividends, spinoffs', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
-      { name: 'PDF bank statement OCR', sub: 'Extract transactions from PDF', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
-      { name: 'Distribution approval committee', sub: 'Multi-party approval, audit trail', status: 'roadmap', ind: N, sol: N, pro: N, pra: R, fo: R },
+      { name: 'Double-entry bookkeeping', sub: 'Principal / income separation', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Bank statement import', sub: 'CSV, OFX, QFX, QBO', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Auto-allocation rules engine', sub: 'Pattern matching, auto-approve option', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Staging inbox & approval workflow', sub: 'Review before posting', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Distribution tracking', sub: 'Journal entry linkage, beneficiary view', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Period close / year-end locking', sub: 'Lock posted periods', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Recurring distributions', sub: 'Scheduled automatic entries', ind: N, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Distribution approval workflow', sub: 'Co-trustee / attorney sign-off', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Lot-level securities tracking', sub: 'FIFO / LIFO / specific ID', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Non-cash transaction types', sub: 'Splits, dividends, spinoffs', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'PDF bank statement OCR', sub: 'Extract transactions from PDF', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Distribution approval committee', sub: 'Multi-party approval, audit trail', ind: N, sol: N, pro: N, pra: S, fo: S },
     ],
   },
   {
     label: 'Asset Management',
     rows: [
-      { name: 'Asset catalog', sub: 'Real estate, personal property', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Entity interest tracking', sub: 'LLC, LP, corp with basis ledger', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Precious metals, crypto, pegged currency', sub: 'Manual price refresh', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Alternative asset tracking', sub: 'PE / hedge fund, capital calls', status: 'roadmap', ind: N, sol: N, pro: N, pra: R, fo: R },
+      { name: 'Asset catalog', sub: 'Real estate, personal property', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Entity interest tracking', sub: 'LLC, LP, corp with basis ledger', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Precious metals, crypto, pegged currency', sub: 'Manual price refresh', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Alternative asset tracking', sub: 'PE / hedge fund, capital calls', ind: N, sol: N, pro: N, pra: S, fo: S },
     ],
   },
   {
     label: 'Reporting',
     rows: [
-      { name: 'Trial balance & general ledger detail', sub: 'As-of-date, running balance', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Trust accounting statement', sub: 'Principal / income receipts & disbursements', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Beneficiary distribution report', sub: 'By beneficiary, type, date range', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Asset summary with cost basis', sub: 'Including entity interests', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
-      { name: 'Tax prep summary — K-1 prep', sub: 'Income by character & beneficiary', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
-      { name: 'Beneficiary report package', sub: 'PDF export for beneficiary delivery', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
-      { name: 'State court accounting formats', sub: 'CA, NY, TX, NV variants', status: 'roadmap', ind: N, sol: N, pro: N, pra: R, fo: R },
-      { name: 'Consolidated cross-trust reporting', sub: 'Family-wide portfolio view', status: 'roadmap', ind: N, sol: N, pro: N, pra: N, fo: FO },
-      { name: 'Investment performance TWR / IRR', sub: 'Time-weighted & internal rate of return', status: 'roadmap', ind: N, sol: N, pro: N, pra: N, fo: FO },
+      { name: 'Trial balance & general ledger detail', sub: 'As-of-date, running balance', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Trust accounting statement', sub: 'Principal / income receipts & disbursements', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Beneficiary distribution report', sub: 'By beneficiary, type, date range', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Asset summary with cost basis', sub: 'Including entity interests', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'ACTEC Formal Account report', sub: 'Court-ready fiduciary format', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Tax prep summary — K-1 prep', sub: 'Income by character & beneficiary', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Beneficiary report package', sub: 'PDF export for beneficiary delivery', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'State court accounting formats', sub: 'CA, NY, TX, NV variants', ind: N, sol: N, pro: N, pra: S, fo: S },
+      { name: 'Consolidated cross-trust reporting', sub: 'Family-wide portfolio view', ind: N, sol: N, pro: N, pra: N, fo: FO },
+      { name: 'Investment performance TWR / IRR', sub: 'Time-weighted & internal rate of return', ind: N, sol: N, pro: N, pra: N, fo: FO },
     ],
   },
   {
     label: 'Documents & Communications',
     rows: [
-      { name: 'Document management', sub: 'Folders, tags, entity linking', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Document generation', sub: '20 seed templates, PDF / DOCX export', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Outbound email — SMTP', sub: 'Offline send queue, threaded replies', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'eSignature integration (opt-in)', sub: 'Requires network, privacy disclosure', status: 'shipped', ind: N, sol: N, pro: S, pra: S, fo: S },
+      { name: 'Document management', sub: 'Folders, tags, entity linking', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Document generation', sub: '20 seed templates, PDF / DOCX export', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Outbound email — SMTP', sub: 'Offline send queue, threaded replies', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'eSignature integration (opt-in)', sub: 'Requires network, privacy disclosure', ind: N, sol: N, pro: S, pra: S, fo: S },
     ],
   },
   {
     label: 'Workflow & Automation',
     rows: [
-      { name: 'Rules engine', sub: '21 seed templates, event-condition-action', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Obligations tracking', sub: 'Due dates, recurring, overdue alerts', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Beneficiary management', sub: 'Profiles, distributions, history', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Rules engine', sub: '21 seed templates, event-condition-action', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Obligations tracking', sub: 'Due dates, recurring, overdue alerts', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Beneficiary management', sub: 'Profiles, distributions, history', ind: S, sol: S, pro: S, pra: S, fo: S },
     ],
   },
   {
     label: 'AI Assistant',
     rows: [
-      { name: 'Agent Assistant — local AI', sub: 'Ollama, fully offline, no data leaves device', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: '12 read-only AI tools', sub: 'Query ledger, assets, beneficiaries, obligations', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Document Intelligence — RAG', sub: 'Semantic search across trust documents', status: 'shipped', ind: S, sol: S, pro: S, pra: S, fo: S },
-      { name: 'Assisted rule creation', sub: 'AI translates trust provisions into rules', status: 'roadmap', ind: N, sol: R, pro: R, pra: R, fo: R },
-      { name: 'Write-operation AI tools', sub: 'AI data entry with trustee review', status: 'roadmap', ind: N, sol: N, pro: R, pra: R, fo: R },
+      { name: 'Agent Assistant — local AI', sub: 'Ollama, fully offline, no data leaves device', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: '12 read-only AI tools', sub: 'Query ledger, assets, beneficiaries, obligations', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Document Intelligence — RAG', sub: 'Semantic search across trust documents', ind: S, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Assisted rule creation', sub: 'AI translates trust provisions into rules', ind: N, sol: S, pro: S, pra: S, fo: S },
+      { name: 'Write-operation AI tools', sub: 'AI data entry with trustee review', ind: N, sol: N, pro: S, pra: S, fo: S },
     ],
   },
   {
     label: 'Family Office Premium',
     rows: [
-      { name: 'Consolidated cross-trust view', sub: 'Single dashboard across entire portfolio', status: 'roadmap', ind: N, sol: N, pro: N, pra: N, fo: FO },
-      { name: 'Investment performance analytics', sub: 'TWR / IRR, benchmark comparison', status: 'roadmap', ind: N, sol: N, pro: N, pra: N, fo: FO },
-      { name: 'Cross-trust distribution summary', sub: 'Family-wide beneficiary totals', status: 'roadmap', ind: N, sol: N, pro: N, pra: N, fo: FO },
-      { name: 'Priority support & escalation', sub: 'Dedicated response path', status: 'included', ind: N, sol: N, pro: N, pra: N, fo: S },
-      { name: 'White-glove onboarding call', sub: 'Setup session with your team', status: 'included', ind: N, sol: N, pro: N, pra: N, fo: S },
+      { name: 'Consolidated cross-trust view', sub: 'Single dashboard across entire portfolio', ind: N, sol: N, pro: N, pra: N, fo: FO },
+      { name: 'Investment performance analytics', sub: 'TWR / IRR, benchmark comparison', ind: N, sol: N, pro: N, pra: N, fo: FO },
+      { name: 'Cross-trust distribution summary', sub: 'Family-wide beneficiary totals', ind: N, sol: N, pro: N, pra: N, fo: FO },
+      { name: 'Priority support & escalation', sub: 'Dedicated response path', ind: N, sol: N, pro: N, pra: N, fo: S },
+      { name: 'White-glove onboarding call', sub: 'Setup session with your team', ind: N, sol: N, pro: N, pra: N, fo: S },
     ],
   },
 ];
@@ -167,7 +166,7 @@ export default function PricingPage({ searchParams }) {
         <div className="container">
           <div className="section-header">
             <h2>Compare Plans</h2>
-            <p>Every feature, every tier. Shipped features are available now. Roadmap features are included in your plan when they ship — no additional charge.</p>
+            <p>Every feature, every tier.</p>
           </div>
           <div className="feat-table-wrap">
             <table className="feat-table">
@@ -196,12 +195,7 @@ export default function PricingPage({ searchParams }) {
                     {group.rows.map(row => (
                       <tr key={row.name}>
                         <td>
-                          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 4 }}>
-                            {row.name}
-                            <span className={`feat-badge ${row.status === 'shipped' || row.status === 'included' ? 'feat-badge-shipped' : 'feat-badge-roadmap'}`}>
-                              {row.status === 'shipped' || row.status === 'included' ? 'Shipped' : 'Roadmap'}
-                            </span>
-                          </div>
+                          <div>{row.name}</div>
                           {row.sub && <div className="feat-sub">{row.sub}</div>}
                         </td>
                         <td>{row.ind}</td>
@@ -217,7 +211,7 @@ export default function PricingPage({ searchParams }) {
             </table>
           </div>
           <p className="small-note">
-            "Soon" = on the active roadmap, included in your plan tier when shipped · "FO only" = Family Office plan exclusive
+            "FO only" = Family Office plan exclusive
           </p>
         </div>
       </section>

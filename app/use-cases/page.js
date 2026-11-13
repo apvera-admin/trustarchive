@@ -45,7 +45,7 @@ const personas = [
       'Multi-trust portfolio — each client trust fully isolated in its own data scope',
       'Role-based operator profiles — add paralegals or co-trustees with scoped permissions',
       'Bank statement import eliminates manual data entry across all trust accounts',
-      'ACTEC-format formal account reports when ready (on roadmap)',
+      'ACTEC-format formal account reports, ready for court',
       'Distribution approval workflow for co-trustee sign-off before posting',
       'Audit trail exportable to CSV for court filings or beneficiary accountings',
     ],
@@ -66,9 +66,9 @@ const personas = [
     howItHelps: [
       'Unlimited trusts — no per-trust pricing, no tier upgrades as caseload grows',
       'Operator profiles with per-trust permission flags for each staff member',
-      'State court accounting formats for CA, NY, TX, NV when ready (on roadmap)',
-      'Multi-party distribution approval committee workflow (on roadmap)',
-      'Alternative asset tracking for PE, hedge fund, and capital call positions (on roadmap)',
+      'State court accounting formats for CA, NY, TX, NV',
+      'Multi-party distribution approval committee workflow',
+      'Alternative asset tracking for PE, hedge fund, and capital call positions',
     ],
     plan: 'practice',
     gold: false,
@@ -228,28 +228,13 @@ export default function UseCasesPage() {
                 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>How TrustArchive helps</div>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                    {howItHelps.map(item => {
-                      const isRoadmap = item.indexOf('roadmap') !== -1;
-                      return (
-                        <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, lineHeight: 1.6 }}>
-                          <Check
-                            size={14}
-                            style={{
-                              color: isRoadmap ? 'var(--warn)' : (gold ? '#D4A017' : 'var(--accent)'),
-                              flexShrink: 0,
-                              marginTop: 2,
-                            }}
-                          />
-                          <span style={{ color: isRoadmap ? 'var(--text-3)' : 'var(--text-2)' }}>{item}</span>
-                        </li>
-                      );
-                    })}
+                    {howItHelps.map(item => (
+                      <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, lineHeight: 1.6 }}>
+                        <Check size={14} style={{ color: gold ? '#D4A017' : 'var(--accent)', flexShrink: 0, marginTop: 2 }} />
+                        <span style={{ color: 'var(--text-2)' }}>{item}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--border)' }}>
-                    <p style={{ fontSize: 12, color: 'var(--text-3)', margin: 0 }}>
-                      Items marked in amber are on the active roadmap and included in your plan when they ship — no additional charge.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
